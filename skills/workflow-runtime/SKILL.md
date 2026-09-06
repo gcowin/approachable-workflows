@@ -7,7 +7,6 @@ capabilities: [execute, validate, execution-reporting, mermaid-chart, governance
 inputs: [workflow-spec, mode]
 outputs: [workflow-execution-report-html]
 model: claude-sonnet-4.5
-temperature: 0.1
 ---
 
 # Workflow Runtime

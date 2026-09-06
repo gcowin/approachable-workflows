@@ -4,15 +4,20 @@
 
 Approachable-Workflows lets you specify complex, production-ready workflows in natural language that anyone can read, edit, and understand. No YAML. No JSON. No code. Just clear, structured English that analysts can write, prompt engineers can enjoy, and AI agents can execute.
 
-**What it really is:** Graph engineering in natural language. Critics said it couldn't be done in LLMs. Evaluation score says otherwise.  **[See why it works →](docs/explanation/why-it-works.md)**  
+**What it really is:** Graph engineering in natural language. Critics said it couldn't be done in LLMs. Evaluation score says otherwise.
+
+  
+**[See example workflow run →](examples/legal-review-analysis/cases/vantek-ostrow/runs/Vantek-v-Ostrow-Halcyon-VDI-2025-0503-20260906-012531/chat-log.md)** 
+
+
+**[Using Example Workflow →](examples/legal-review-analysis/legal-review-analysis.txt)**
 
 ---
 
 ## What is it?
 
-A workflow is a sequence of named activities, each with a role, purpose, inputs, outputs, checks, and a clear next step when something succeeds, fails, or remains unclear. Workflow execution reports capture feedback from each activity for auditing and monitoring.
-
-
+A workflow is a sequence of named activities, each with a role, purpose, inputs, outputs, checks, and a clear next step when something succeeds, fails, or remains unclear. Workflow execution reports capture feedback from each activity for auditing and monitoring. 
+**[See why it works →](docs/explanation/why-it-works.md)**  
 
 ## Quick Example
 
@@ -35,6 +40,34 @@ Make Decision
 Core pattern: Research → Analyze → Verify → Approve → Execute.
 
 **[See full tutorial →](docs/tutorials/first-workflow.md)** — Build your first workflow in 10 minutes.
+
+
+## Why Approachable-Workflows?
+
+Plain language meets production power. Business analysts write workflows. AI engineers extend them. Everyone reads them.
+
+Built-in quality gates (`Verify:` conditions), execution reports with activity feedback, and full audit trails without extra work.
+
+**Progressive Formalization:** Start with 10 lines. Add detail only when you need it.
+
+---
+
+## Workflow Runtime Skill Modes
+
+The workflow-runtime skill provides three operational modes:
+
+**🚀 Execute Mode**  
+`"Execute this workflow"` → Runs the workflow, captures activity feedback, generates HTML execution report with mermaid chart and recommendations.
+
+**✅ Validate Mode**  
+`"Validate this workflow"` → Checks structure and 3-law governance (Truth Preservation, Authorization, Confirmation) without executing. Reports critical issues, warnings, and suggestions.
+
+**🔍 Analyze Mode**  
+`"Analyze this workflow"` → Evaluates complexity, risk, bottlenecks, and governance compliance. Provides recommendations without executing.
+
+[See full workflow-runtime documentation →](skills/workflow-runtime/SKILL.md)
+
+---
 
 ## Documentation
 
@@ -62,33 +95,6 @@ Choose your path based on what you need:
 **Production example:** [Legal Discovery Review](examples/legal-review-analysis/) — 20+ activities, 99.5/100 evaluation score  
 **Templates:** [standard-template.md](templates/standard-template.md) — Copy and adapt  
 **More examples:** [examples/examples.md](examples/examples.md) — Real-world workflows
-
----
-
-## Why Approachable-Workflows?
-
-Plain language meets production power. Business analysts write workflows. AI engineers extend them. Everyone reads them.
-
-Built-in quality gates (`Verify:` conditions), execution reports with activity feedback, and full audit trails without extra work.
-
-**Progressive Formalization:** Start with 10 lines. Add detail only when you need it.
-
----
-
-## Workflow Runtime Skill Modes
-
-The workflow-runtime skill provides three operational modes:
-
-**🚀 Execute Mode**  
-`"Execute this workflow"` → Runs the workflow, captures activity feedback, generates HTML execution report with mermaid chart and recommendations.
-
-**✅ Validate Mode**  
-`"Validate this workflow"` → Checks structure and 3-law governance (Truth Preservation, Authorization, Confirmation) without executing. Reports critical issues, warnings, and suggestions.
-
-**🔍 Analyze Mode**  
-`"Analyze this workflow"` → Evaluates complexity, risk, bottlenecks, and governance compliance. Provides recommendations without executing.
-
-[See full workflow-runtime documentation →](skills/workflow-runtime/SKILL.md)
 
 ---
 
