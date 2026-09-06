@@ -1,0 +1,86 @@
+# Operating System
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Editors & IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Backup files
+*.backup
+*.bak
+*.orig
+*~
+.#*
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+tmp/
+temp/
+
+# Build artifacts & Generated files
+dist/
+build/
+*.html
+*.pdf
+!examples/**/*.html
+!docs/**/*.html
+
+# Language-specific (if tooling added later)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.so
+.venv/
+venv/
+ENV/
+
+# IDE & Tool Configuration
+.claude/
+.cursor/
+
+# Logs
+*.log
+logs/
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+test-results/
+
+# Documentation build artifacts (if using tools like Sphinx, MkDocs)
+site/
+_build/
+.doctrees/
+
+# Local development
+.env
+.env.local
+*.local
+
+# Output from workflow executions
+runs/*/
+!examples/legal-review-analysis/cases/*/runs/
