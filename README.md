@@ -4,7 +4,7 @@
 
 Approachable-Workflows lets you specify complex, production-ready workflows in natural language that anyone can read, edit, and understand. No YAML. No JSON. No code. Just clear, structured English that analysts can write, prompt engineers can enjoy, and AI agents can execute.
 
-**What it really is:** Graph engineering in natural language. Critics said it couldn't be done in LLMs. Evaluation score says otherwise.  
+**What it really is:** Graph engineering in natural language. Critics said it couldn't be done in LLMs. Evaluation score says otherwise.  **[See why it works →](docs/explanation/why-it-works.md)**  
 
 ---
 
@@ -12,7 +12,7 @@ Approachable-Workflows lets you specify complex, production-ready workflows in n
 
 A workflow is a sequence of named activities, each with a role, purpose, inputs, outputs, checks, and a clear next step when something succeeds, fails, or remains unclear. Workflow execution reports capture feedback from each activity for auditing and monitoring.
 
-**[See why it works →](docs/explanation/why-it-works.md)** — 99.5/100 evaluation proves graph engineering in LLMs is production-ready.
+
 
 ## Quick Example
 
