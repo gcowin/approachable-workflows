@@ -75,6 +75,23 @@ Built-in quality gates (`Verify:` conditions), execution reports with activity f
 
 ---
 
+## 🎯 Workflow Runtime Skill Modes
+
+The workflow-runtime skill provides three operational modes:
+
+**🚀 Execute Mode**  
+`"Execute this workflow"` → Runs the workflow, captures activity feedback, generates HTML execution report with mermaid chart and recommendations.
+
+**✅ Validate Mode**  
+`"Validate this workflow"` → Checks structure and 3-law governance (Truth Preservation, Authorization, Confirmation) without executing. Reports critical issues, warnings, and suggestions.
+
+**🔍 Analyze Mode**  
+`"Analyze this workflow"` → Evaluates complexity, risk, bottlenecks, and governance compliance. Provides recommendations without executing.
+
+[See full workflow-runtime documentation →](skills/workflow-runtime/SKILL.md)
+
+---
+
 ## Project Structure
 
 **Documentation:** [tutorials/](docs/tutorials/) · [how-to/](docs/how-to/) · [explanation/](docs/explanation/) · [reference/](docs/reference/) · [examples/](examples/) · [templates/](templates/)
