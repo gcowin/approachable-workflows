@@ -242,17 +242,16 @@ You now have a production-ready workflow with:
 
 **Learn more techniques:**
 - [How to Add Parallel Execution](../how-to/parallel-execution.md) — Run activities concurrently
-- [How to Handle Loops](../how-to/repeat-activities.md) — Process collections
-- [How to Add State Tracking](../how-to/state-management.md) — Track workflow state
+- [Step-by-Step Tutorial](step-by-step.md) — Complete guide with advanced features
 
 **See real examples:**
-- [Simple to Standard Tutorial](simple-to-standard.md) — Evolve a workflow through complexity levels
-- [Legal Discovery Walkthrough](legal-review-walkthrough.md) — Complete real-world example
+- [Example Workflows](../../examples/examples.md) — Real-world workflows
+- [Legal Discovery Review](../../examples/legal-review-analysis/legal-review-analysis.txt) — Production workflow (99.5/100 evaluation)
 
 **Understand the concepts:**
 - [The Activity Model](../explanation/activity-model.md) — How activities work
-- [The Role System](../explanation/role-system.md) — Why roles matter
+- [Why It Works](../explanation/why-it-works.md) — Graph engineering evidence
 
 **Look up syntax:**
 - [Field Reference](../reference/fields.md) — All fields explained
-- [Activity Kinds Reference](../reference/activity-kinds.md) — Work, Choice, Approval, etc.
+- [Spec for Humans](../reference/spec-for-humans.md) — Complete specification

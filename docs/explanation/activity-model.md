@@ -383,14 +383,14 @@ When a workflow runs:
 ## See Also
 
 **Learn more concepts:**
-- [The Role System](role-system.md) — Why roles matter
-- [Governance Model](governance-model.md) — 3-law enforcement
-- [Evidence System](evidence-system.md) — Automatic capture
+- [Overview](overview.md) — Complete workflow concepts
+- [Philosophy](philosophy.md) — Design principles
+- [Why It Works](why-it-works.md) — Graph engineering evidence
 
 **See it in action:**
 - [Tutorial: Your First Workflow](../tutorials/first-workflow.md)
-- [Why It Works](why-it-works.md) — Graph engineering evidence
+- [Step-by-Step Guide](../tutorials/step-by-step.md) — Complete learning guide
 
 **Look up syntax:**
 - [Field Reference](../reference/fields.md) — All fields explained
-- [Activity Kinds Reference](../reference/activity-kinds.md) — Each Kind detailed
+- [Spec for Humans](../reference/spec-for-humans.md) — Complete specification

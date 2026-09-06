@@ -337,13 +337,10 @@ Retrieve Data
 
 ## Next Steps
 
-**Learn more patterns:**
-- [How to Handle Loops](repeat-activities.md) — Process collections
-- [How to Add State Tracking](state-management.md) — Track workflow state
-
-**Understand the execution:**
-- [Parallel Execution Model](../explanation/parallel-execution-model.md) — How it works
+**Learn more:**
+- [Activity Model](../explanation/activity-model.md) — Understanding activities and roles
+- [Step-by-Step Tutorial](../tutorials/step-by-step.md) — Advanced features including Repeat
 
 **See examples:**
-- [Pattern Reference: Parallel Execution](../reference/patterns.md#parallel-execution)
 - [Visual Patterns: Do Together](../reference/visual-patterns.md#pattern-5-parallel-execution)
+- [Example Workflows](../../examples/examples.md) — Real-world workflows

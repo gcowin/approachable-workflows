@@ -307,4 +307,4 @@ The language **assists** you in creating complete workflows without **demanding*
 **See also:**
 - [Why It Works](why-it-works.md) — Evidence that graph engineering in LLMs is production-ready
 - [The Activity Model](activity-model.md) — How activities compile to graph nodes
-- [Comparison to Other Workflow Languages](../reference/comparisons.md) — Detailed feature comparison
+- [Overview](overview.md) — Complete workflow concepts

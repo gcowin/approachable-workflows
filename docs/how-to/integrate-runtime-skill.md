@@ -194,13 +194,10 @@ Create `.claude/workflow-settings.json`:
 
 **Learn more workflow features:**
 - [How to Add Parallel Execution](parallel-execution.md)
-- [How to Handle Failures](handle-failures.md)
-- [How to Capture Custom Evidence](evidence-capture.md)
+- [Activity Model](../explanation/activity-model.md) — Understanding roles and activity kinds
+- [Overview](../explanation/overview.md) — Complete workflow concepts
 
-**Understand what's happening:**
-- [Governance Model](../explanation/governance-model.md) — 3-law enforcement
-- [Evidence System](../explanation/evidence-system.md) — Automatic capture
-
-**Advanced configuration:**
-- [Runtime Skill Reference](../reference/runtime-skill-api.md)
-- [Tool Integration Patterns](../reference/tool-patterns.md)
+**Understand the specification:**
+- [Spec for Humans](../reference/spec-for-humans.md) — Complete language specification
+- [Fields Reference](../reference/fields.md) — A-Z field reference
+- [Quick Reference](../reference/quick-reference.md) — One-page cheatsheet

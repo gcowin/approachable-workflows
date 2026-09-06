@@ -2,7 +2,7 @@
 
 This tutorial teaches business architects, process owners, prompt engineers, and AI engineers how to describe accountable work using the Approachable-Workflows Core Activity Model.
 
-It is a companion to [spec-for-humans.md](spec-for-humans.md), which is the canonical specification for the language. Use the specification as the source of truth; this tutorial explains how to apply it in practice.
+It is a companion to [spec-for-humans.md](../reference/spec-for-humans.md), which is the canonical specification for the language. Use the specification as the source of truth; this tutorial explains how to apply it in practice.
 
 ## Quick Start: Create a Simple Workflow in 5 Minutes
 

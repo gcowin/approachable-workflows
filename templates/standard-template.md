@@ -181,11 +181,11 @@ Submit (Repeat: max 3 attempts) → Confirm → Done
 
 ## Need More Help?
 
-- **Quick Reference**: [quick-reference.md](quick-reference.md) - One-page cheatsheet
-- **Visual Patterns**: [visual-patterns.md](visual-patterns.md) - Mermaid diagrams
-- **Full Spec**: [spec-for-humans.md](spec-for-humans.md) - Complete specification
-- **Common Mistakes**: [spec-for-humans.md](spec-for-humans.md#part-ii-common-mistakes--how-to-avoid-them) - What to avoid
-- **Tutorial**: [tutorial.md](tutorial.md) - Step-by-step guide
+- **Quick Reference**: [quick-reference.md](../docs/reference/quick-reference.md) - One-page cheatsheet
+- **Visual Patterns**: [visual-patterns.md](../docs/reference/visual-patterns.md) - Mermaid diagrams
+- **Full Spec**: [spec-for-humans.md](../docs/reference/spec-for-humans.md) - Complete specification
+- **Common Mistakes**: [spec-for-humans.md](../docs/reference/spec-for-humans.md#part-ii-common-mistakes--how-to-avoid-them) - What to avoid
+- **Step-by-Step Guide**: [step-by-step.md](../docs/tutorials/step-by-step.md) - Complete learning guide
 
 ---
 

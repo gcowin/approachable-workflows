@@ -464,7 +464,7 @@ Review Request
 
 ## See Also
 
-- [Activity Kinds Reference](activity-kinds.md) — Detailed explanation of each Kind
-- [Role Reference](roles.md) — When to use each role
-- [Tutorial: Your First Workflow](../tutorials/first-workflow.md) — Learn by building
 - [Spec for Humans](spec-for-humans.md) — Complete language specification
+- [Activity Model](../explanation/activity-model.md) — Understanding activities and roles
+- [Tutorial: Your First Workflow](../tutorials/first-workflow.md) — Learn by building
+- [Quick Reference](quick-reference.md) — One-page cheatsheet

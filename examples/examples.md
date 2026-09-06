@@ -2,7 +2,7 @@
 
 This document shows real workflows using the Approachable-Workflows Core Activity Model.
 
-These examples are written to align with the canonical rules in [../spec-for-humans.md](../spec-for-humans.md). If a wording difference appears, the specification in that document governs the meaning.
+These examples are written to align with the canonical rules in [spec-for-humans.md](../docs/reference/spec-for-humans.md). If a wording difference appears, the specification in that document governs the meaning.
 
 Each example demonstrates Activities in action—no pattern declarations, just clear workflow descriptions.
 
@@ -330,6 +330,6 @@ These examples demonstrate common workflow patterns:
 - Repeat: Processing collections and retry logic
 - Events: Handling exceptional conditions
 
-For more pattern examples and guidance, see [Pattern Examples.md](Pattern Examples.md).
+For more pattern examples and guidance, see [pattern-examples.md](pattern-examples.md).
 
 These examples align with the Approachable-Workflows Core Specification.
