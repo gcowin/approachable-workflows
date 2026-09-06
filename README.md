@@ -4,7 +4,7 @@
 
 Approachable-Workflows lets you specify complex, production-ready workflows in natural language that anyone can read, edit, and understand. No YAML. No JSON. No code. Just clear, structured English that analysts can write, prompt engineers can enjoy, and AI agents can execute.
 
-**What it really is:** Graph engineering in natural language. Critics said it couldn't be done in LLMs. 99.5/100 evaluation score says otherwise. **[Why it works →](docs/explanation/why-it-works.md)**
+**What it really is:** Graph engineering in natural language. Critics said it couldn't be done in LLMs. Evaluation score says otherwise.  
 
 ---
 
