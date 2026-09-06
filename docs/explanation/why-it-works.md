@@ -6,7 +6,7 @@ Critics claim LLMs can't handle true graph engineering — the directed graphs, 
 
 ## Production-Ready Evidence
 
-Our [legal discovery review evaluation](../../examples/legal-review-analysis/cases/vantek-ostrow/evals/EVAL_REPORT_20260906-012531.md) demonstrates **99.5/100 production-ready performance** on a 25-document corpus with:
+Our **legal discovery review evaluation**  demonstrates **production-ready performance** on a 25-document corpus with:
 
 - ✅ **Complex graph traversal**: 20+ activities with conditional branching, privilege review gates, and evidence collection
 - ✅ **State propagation**: Propagates and tracks state across workflow nodes
@@ -34,7 +34,7 @@ The LLM doesn't just execute prompts — it **traverses a formal workflow graph*
 - State transitions between activities
 - Conditional branching based on verification results
 
-## See the Proof
+## See the Workflow Run and Eval
 
 **Evaluation Report**: [EVAL_REPORT_20260906-012531.md](../../examples/legal-review-analysis/cases/vantek-ostrow/evals/EVAL_REPORT_20260906-012531.md)
 - Every zero-tolerance gate passed
