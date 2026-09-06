@@ -40,7 +40,7 @@ Core pattern: Research → Analyze → Verify → Approve → Execute.
 
 Choose your path based on what you need:
 
-📚 **New to workflows?** → **[Your First Workflow](docs/tutorials/first-workflow.md)** (10 min tutorial)
+**New to workflows?** → **[Your First Workflow](docs/tutorials/first-workflow.md)** (10 min tutorial)
 
 🔧 **Need to accomplish something?**
 - [How to Integrate the Runtime Skill](docs/how-to/integrate-runtime-skill.md)
@@ -75,7 +75,7 @@ Built-in quality gates (`Verify:` conditions), execution reports with activity f
 
 ---
 
-## 🎯 Workflow Runtime Skill Modes
+## Workflow Runtime Skill Modes
 
 The workflow-runtime skill provides three operational modes:
 
