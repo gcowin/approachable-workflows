@@ -44,7 +44,7 @@ Core pattern: Research → Analyze → Verify → Approve → Execute.
 
 ## Why Approachable-Workflows?
 
-Plain language meets production power. Business analysts write workflows. AI engineers extend them. Everyone reads them.
+Plain language meets production power. Business analysts, prompt engineers, and AI engineers write workflows. Everyone reads them.
 
 Built-in quality gates (`Verify:` conditions), execution reports with activity feedback, and full audit trails without extra work.
 
