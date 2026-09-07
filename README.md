@@ -67,8 +67,8 @@ Activity: Research Policy
 
 **Why this matters:**
 
-**1. Prevents hallucination propagation**  
-An unverified AI "finding" cascades through your workflow, producing confident but incorrect results. Verify: stops it at each step.
+**1. Prevents error propagation**  
+Activity 1: AI "finds" a policy clause that doesn't exist. Activity 2: Uses that fake clause to justify a recommendation. Activity 3: Approver reviews reasoning based on fake clause. Activity 4: System executes based on false premise. **One unverified output poisons the entire workflow.** Verify: catches the error at Activity 1 before it cascades.
 
 **2. Forces explicit success criteria**  
 AI produces plausible outputs that might not meet your requirements. Verify: makes requirements testable, not just believable.
@@ -88,7 +88,7 @@ Activity: Analyze Request
   Do: Determine if customer qualifies
   Next: Approve or Reject
 ```
-→ AI might hallucinate qualifications, cite non-existent policies, or miss critical details.
+→ AI might invent qualifications, cite non-existent policies, or miss critical details.
 
 **Example with Verify** (safe):
 ```text
@@ -139,7 +139,7 @@ The workflow-runtime skill provides three operational modes:
 **🔍 Analyze Mode**  
 `"Analyze this workflow"` → Evaluates complexity, risk, bottlenecks, and governance compliance. Provides recommendations without executing.
 
-[See full workflow-runtime skill →](skills/workflow-runtime/SKILL.md)
+[See workflow-runtime skill →](skills/workflow-runtime/SKILL.md)
 
 ---
 
