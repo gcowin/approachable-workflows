@@ -77,7 +77,7 @@ All workflows are valid regardless of formalization level. Add structure only wh
 **Production-ready:** Legal Discovery Review workflow achieved 99.5/100 evaluation score.
 
 **Key evidence:**
-- `examples/legal-review-analysis/legal-review-analysis.txt` — Production workflow (20+ activities)
+- `examples/legal-review-analysis/legal-review-workflow.txt` — Production workflow (20+ activities)
 - `examples/legal-review-analysis/cases/vantek-ostrow/evals/EVAL_REPORT_*.md` — Detailed evaluation
 - `examples/legal-review-analysis/cases/vantek-ostrow/runs/.../chat-log.md` — Graph execution trace
 - `docs/explanation/why-it-works.md` — Complete analysis

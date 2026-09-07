@@ -4,13 +4,13 @@
 
 Approachable-Workflows lets you specify complex, production-ready workflows in natural language that anyone can read, edit, and understand. No YAML. No JSON. No code. Just clear, structured English that analysts can write, prompt engineers can enjoy, and AI agents can execute.
 
-**What it really is:** Graph engineering in natural language. Critics said it couldn't be done in LLMs. Evaluation score says otherwise.
+**What it really is:** Graph engineering in natural language—workflows execute as directed graphs with conditional branching, state management, and parallel execution. When LLM agents execute these graphs, built-in quality gates (Verify:) prevent error propagation and enforce governance at every step.
 
   
 **[See example workflow run →](examples/legal-review-analysis/cases/vantek-ostrow/runs/Vantek-v-Ostrow-Halcyon-VDI-2025-0503-20260906-012531/chat-log.md)** 
 
 
-**[Using Example Workflow →](examples/legal-review-analysis/legal-review-analysis.txt)**
+**[Using Example Workflow →](examples/legal-review-analysis/legal-review-workflow.txt)**
 
 ---
 

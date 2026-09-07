@@ -246,7 +246,7 @@ You now have a production-ready workflow with:
 
 **See real examples:**
 - [Example Workflows](../../examples/examples.md) — Real-world workflows
-- [Legal Discovery Review](../../examples/legal-review-analysis/legal-review-analysis.txt) — Production workflow (99.5/100 evaluation)
+- [Legal Discovery Review](../../examples/legal-review-analysis/legal-review-workflow.txt) — Production workflow (99.5/100 evaluation)
 
 **Understand the concepts:**
 - [The Activity Model](../explanation/activity-model.md) — How activities work
