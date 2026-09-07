@@ -71,13 +71,13 @@ Activity: Research Policy
 Activity 1: LLM "finds" a policy clause that doesn't exist. Activity 2: Uses that fake clause to justify a recommendation. Activity 3: Approver reviews reasoning based on fake clause. Activity 4: System executes based on false premise. **One unverified output poisons the entire workflow.** Verify: catches the error at Activity 1 before it cascades.
 
 **2. Forces explicit success criteria**  
-LLMs produce plausible outputs that might not meet your requirements. Verify: makes requirements testable, not just believable.
+LLMs can produce plausible outputs that might not meet your requirements. Verify: makes requirements testable, not just believable.
 
 **3. Creates audit checkpoints**  
 When things fail, you know *which* verification failed and *why* — not just "the LLM was wrong."
 
 **4. Enables uncertainty routing**  
-LLMs produce ambiguous results. Verify: + If Unclear routes uncertain states to human review instead of forcing false confidence.
+LLMs can produce ambiguous results. Verify: + If Unclear routes uncertain states to human review instead of forcing false confidence.
 
 **5. Governance by design**  
 Each Verify: becomes a logged assertion in execution reports. Auditors see what was *checked*, not just what was *claimed*.
@@ -116,7 +116,7 @@ With Verify: The same workflow catches incomplete analysis in Activity 2, routes
 
 ## workflow-runtime Skill
 
-The **workflow-runtime skill** is a harness skill that executes, validates, and analyzes workflows written in Approachable-Workflows format. Think of it as the "engine" that turns your plain-English workflow specification into actual execution with governance enforcement, activity feedback capture, and audit trail generation.
+The **workflow-runtime skill** is an agent harness skill that executes, validates, and analyzes workflows written in Approachable-Workflows format. Think of it as the "engine" that turns your plain-English workflow specification into actual execution with governance enforcement, activity feedback capture, and audit trail generation.
 
 **Capabilities:**
 - Execute workflows with automatic quality gates and evidence collection
