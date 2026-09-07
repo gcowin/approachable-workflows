@@ -155,6 +155,7 @@ Choose your path based on what you need:
 - [All how-to guides →](docs/how-to/)
 
 💡 **Want to understand how it works?**
+- [Overview](docs/explanation/overview.md) — Complete concepts + sophisticated example
 - [Why It Works](docs/explanation/why-it-works.md) — 99.5/100 evaluation
 - [Design Philosophy](docs/explanation/philosophy.md) — Why plain language?
 - [The Activity Model](docs/explanation/activity-model.md) — How activities work
