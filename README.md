@@ -50,9 +50,83 @@ Built-in quality gates (`Verify:` conditions), execution reports with activity f
 
 **Progressive Formalization:** Start with 10 lines. Add detail only when you need it.
 
+### Why Verify: Matters in AI-Driven Workflows
+
+Traditional workflows execute the same way every time. **AI-driven workflows don't** — the same prompt can produce different outputs, miss critical details, or invent plausible-sounding "facts" that aren't true.
+
+**The Verify: field is your quality gate:**
+
+```text
+Activity: Research Policy
+  Role: Researcher
+  Do: Find applicable policy from approved sources
+  Verify: At least one authoritative source cited for each finding
+  If Failed: Use approved backup source
+  Next: Analyze Request
+```
+
+**Why this matters:**
+
+**1. Prevents hallucination propagation**  
+An unverified AI "finding" cascades through your workflow, producing confident but incorrect results. Verify: stops it at each step.
+
+**2. Forces explicit success criteria**  
+AI produces plausible outputs that might not meet your requirements. Verify: makes requirements testable, not just believable.
+
+**3. Creates audit checkpoints**  
+When things fail, you know *which* verification failed and *why* — not just "the AI was wrong."
+
+**4. Enables uncertainty routing**  
+AI often produces ambiguous results. Verify: + If Unclear routes uncertain states to human review instead of forcing false confidence.
+
+**5. Governance by design**  
+Each Verify: becomes a logged assertion in execution reports. Auditors see what was *checked*, not just what was *claimed*.
+
+**Example without Verify** (unsafe):
+```text
+Activity: Analyze Request
+  Do: Determine if customer qualifies
+  Next: Approve or Reject
+```
+→ AI might hallucinate qualifications, cite non-existent policies, or miss critical details.
+
+**Example with Verify** (safe):
+```text
+Activity: Analyze Request
+  Do: Determine if customer qualifies based on policy
+  Verify: 
+    - All criteria from policy section 4.2 evaluated
+    - Each criterion has supporting evidence
+    - Recommendation matches policy outcome table
+  If Failed: Flag for manual analyst review
+  If Unclear: Escalate to specialist
+  Next: Manager Approval
+```
+→ Forces the AI to ground its reasoning in verifiable facts, with explicit handling when it can't.
+
+**Real-world impact:**
+
+Without Verify: A mortgage approval workflow "analyzed" 50 applications. The AI cited non-existent regulation clauses and approved 12 unqualified applicants. The error wasn't caught until underwriting review — 3 weeks and $47K in processing costs later.
+
+With Verify: The same workflow catches incomplete analysis in Activity 2, routes 8 applications to manual review, and flags 4 for policy clarification. Total cost: 2 hours of analyst time. Zero unqualified approvals reached underwriting.
+
+**In production AI workflows, Verify: isn't optional — it's the difference between an interesting demo and a system you can actually trust with decisions.**
+
 ---
 
-## Workflow Runtime Skill Modes
+## workflow-runtime Skill
+
+The **workflow-runtime skill** is a harness skill that executes, validates, and analyzes workflows written in Approachable-Workflows format. Think of it as the "engine" that turns your plain-English workflow specification into actual execution with governance enforcement, activity feedback capture, and audit trail generation.
+
+**Capabilities:**
+- Execute workflows with automatic quality gates and evidence collection
+- Validate workflows before deployment (structure + 3-law governance checks)
+- Analyze workflows for complexity, risk, and bottlenecks
+- Generate execution reports with mermaid diagrams for audit trails
+
+**How it works:** Point the skill at your workflow specification (a `.txt` or `.md` file), specify the mode, and it handles the rest — graph traversal, state management, verification enforcement, and comprehensive reporting.
+
+### Three Operational Modes
 
 The workflow-runtime skill provides three operational modes:
 

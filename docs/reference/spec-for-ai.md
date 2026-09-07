@@ -8,7 +8,7 @@ Source: [spec-for-humans.md](spec-for-humans.md) (canonical)
 
 1. Execute workflows per specification below
 2. Keep track of each activity and results from verify: section as evidence. Prepare mermaid chart of actual flow when completed
-3. Recommend improvements to improve the workflow when the workflow is completed as a part of evidence.
+3. Recommend improvements to improve the workflow when the workflow is completed as a part of workflow report.
 
 ## Core Model
 
