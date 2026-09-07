@@ -1,17 +1,17 @@
 ---
 name: workflow-runtime
-version: 2.0.0
-description: Execute and govern Approachable-Workflows with automatic execution reporting and 3-law compliance
-tags: [workflow, governance, audit, validation]
-capabilities: [execute, validate, analyze, execution-reporting, mermaid-chart, governance-enforcement]
-inputs: [workflow-spec, mode]
-outputs: [workflow-execution-report-html]
+version: 2.1.0
+description: Create, execute, and govern Approachable-Workflows with automatic execution reporting and 3-law compliance
+tags: [workflow, governance, audit, validation, creation]
+capabilities: [create, execute, validate, analyze, execution-reporting, mermaid-chart, governance-enforcement]
+inputs: [workflow-spec, mode, requirements]
+outputs: [workflow-execution-report-html, workflow-specification]
 model: claude-sonnet-4.5
 ---
 
 # Workflow Runtime 
 
-Execute, validate, and govern workflows per Approachable-Workflows specification.
+Create, execute, validate, and govern workflows per Approachable-Workflows specification.
 
 **Output**: Workflow Execution Report (HTML) with activity log, mermaid chart, recommendations
 
@@ -146,6 +146,28 @@ External = database writes, API calls, emails, transactions, file changes
 ---
 
 # Execution Protocol
+
+## Mode: Create
+
+Generate new workflow from requirements:
+
+1. **Clarify Requirements**
+   - Ask about business process, roles, decision points, external systems
+   - Identify success criteria and error conditions
+
+2. **Build with Progressive Formalization**
+   - Start minimal: Activity names, Do, Next
+   - Add governance: Role, Verify, If Failed/If Unclear
+   - Add detail as needed: Needs/Creates, Configuration
+
+3. **Validate 3-Law Compliance**
+   - Truth Preservation: If Unclear paths for ambiguity
+   - Authorization: Approvers before high-risk Executors
+   - Confirmation: Observers after external actions
+
+4. **Output Plain-Text Specification**
+   - Goal, Handles, activities per spec
+   - Suggest validation or execution as next step
 
 ## Mode: Execute
 

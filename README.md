@@ -123,12 +123,16 @@ The **workflow-runtime skill** is an agent harness skill that executes, validate
 - Validate workflows before deployment (structure + 3-law governance checks)
 - Analyze workflows for complexity, risk, and bottlenecks
 - Generate execution reports with diagrams for audit trails
+- Create new workflows
 
-**How it works:** Point the skill at your workflow specification, specify the mode, and it handles the rest — graph traversal, state management, verification enforcement, and comprehensive reporting.
+**How it works:** Point the skill at your workflow specification or have it create, execute, analyze, or recommend workflows;  and it handles the rest — graph traversal, state management, verification enforcement, and comprehensive reporting.
 
-### Three Operational Modes
+### Four Operational Modes
 
-The workflow-runtime skill provides three operational modes:
+The workflow-runtime skill provides four operational modes:
+
+**✨ Create Mode**  
+`"Create a workflow for [business process]"` → Generates a new workflow specification from your requirements. Asks clarifying questions, applies progressive formalization, ensures governance by design.
 
 **🚀 Execute Mode**  
 `"Execute this workflow"` → Runs the workflow, captures activity feedback, generates HTML execution report with mermaid chart and recommendations.
