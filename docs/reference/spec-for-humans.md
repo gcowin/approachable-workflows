@@ -272,7 +272,7 @@ Analyze Refund Request
 
 Events provide a clear way to handle exceptional conditions without cluttering the main workflow logic.
 
-## Part II: Core Activity Model
+## Core Activity Model
 
 ### 3. Why Activities need limited formalism
 
@@ -409,6 +409,11 @@ Performs work multiple times over a collection or until a condition is met.
 
 **Example - Processing a collection**:
 
+```text
+Workflow: Invoice Processing
+Goal: Validate all line items in an invoice
+Handles: Each supplier invoice
+
 Activity: Process Invoice Line Items
   Kind: Repeat
   Role: Analyst
@@ -432,8 +437,14 @@ Activity: Process Invoice Line Items
   
   If Failed:
     - Continue to Manual Line Item Review
+```
 
 **Example - Retry with backoff**:
+
+```text
+Workflow: Payment Processing
+Goal: Submit payment transaction with retry logic
+Handles: Payment transaction
 
 Activity: Call External Payment System
   Kind: Repeat
@@ -450,10 +461,16 @@ Activity: Call External Payment System
   
   If All Attempts Fail:
     - Continue to Payment System Unavailable
+```
 
 #### 5A.2 Do Together
 
 Execute multiple Activities at the same time and wait for results.
+
+```text
+Workflow: Refund Processing
+Goal: Validate refund request with parallel checks
+Handles: Customer refund request
 
 Activity: Validate Refund Request
   Kind: Do Together
@@ -472,8 +489,14 @@ Activity: Validate Refund Request
     - If all passed: Continue to Analyze Request
     - If any failed: Continue to Escalate the request
     - If time expired: Continue to Escalate the request
+```
 
 **Alternative - First to respond**:
+
+```text
+Workflow: Policy Retrieval
+Goal: Get policy document with failover
+Handles: Policy lookup request
 
 Activity: Get Policy from Multiple Sources
   Kind: Do Together
@@ -489,10 +512,16 @@ Activity: Get Policy from Multiple Sources
   Needs: The response from whichever completes first
   
   Next: Apply Policy Rules
+```
 
 #### 5A.3 Run Workflow
 
 Call another workflow as part of this workflow.
+
+```text
+Workflow: Order Processing
+Goal: Process customer order with credit verification
+Handles: Customer order
 
 Activity: Perform Credit Check
   Kind: Run Workflow
@@ -514,6 +543,7 @@ Activity: Perform Credit Check
     - If Credit decision is Approved: Continue to Process Order
     - If Credit decision is Rejected: Continue to Reject Request
     - Otherwise: Continue to Manual Credit Review
+```
 
 Invoking workflows promotes reuse and maintains consistency across business processes.
 
@@ -598,303 +628,48 @@ A failed attempt must not partially update shared working information.
 
 An Approval Activity succeeds only after an authorized decision is recorded. A Wait Activity succeeds only after its stated event, condition, or time is reached. A Choice Activity succeeds only after exactly one route is selected.
 
-## Part II: Common Mistakes & How to Avoid Them
-
-This section identifies common mistakes when writing workflows and shows how to fix them.
-
-### Mistake 1: Using Approval when you mean Verify
-
-**❌ Wrong:**
-Activity: Check Amount
-  Kind: Approval
-  Role: Analyst
-  Do: Verify amount is within limits
-
-**Problem**: Approval is for human authorization, not condition checking.
-
-**✅ Correct:**
-Activity: Check Amount
-  Kind: Work
-  Role: Analyst
-  Do: Check amount is within limits
-  Verify: Amount ≤ $10,000
-  If Failed: Reject Request
-  Next: Process Request
-
-**Rule**: Use Verify: for condition checks. Use Kind: Approval only when a human must authorize.
-
----
-
-### Mistake 2: Missing If Failed paths on critical activities
-
-**❌ Wrong:**
-Activity: Process Payment
-  Role: Executor
-  Do: Submit payment to external system
-  Verify: System confirms transaction
-  Next: Send Confirmation
-
-**Problem**: No failure handling. What happens if payment fails?
-
-**✅ Correct:**
-Activity: Process Payment
-  Role: Executor
-  Do: Submit payment to external system
-  Verify: System confirms transaction
-  If Failed: Log Error and Notify Finance
-  If Unclear: Manual Review
-  Next: Send Confirmation
-
-**Rule**: Always define If Failed paths for external actions, approvals, and critical verification.
-
----
-
-### Mistake 3: Choice without Otherwise
-
-**❌ Wrong:**
-Activity: Route Request
-  Kind: Choice
-  Conditions:
-    1. If amount > $1000 → Senior Approval
-    2. If amount > $500 → Manager Approval
-
-**Problem**: What happens if amount is ≤ $500? Undefined behavior.
-
-**✅ Correct:**
-Activity: Route Request
-  Kind: Choice
-  Conditions:
-    1. If amount > $1000 → Senior Approval
-    2. If amount > $500 → Manager Approval
-    3. Otherwise → Auto Approve
-
-**Rule**: Every Choice must end with Otherwise unless no-match is intentionally a failure.
-
----
-
-### Mistake 4: Unbounded loops
-
-**❌ Wrong:**
-Activity: Retry Submit
-  Kind: Repeat
-  Repeat Until: System responds successfully
-  Do: Submit transaction
-
-**Problem**: Could retry forever if system is down.
-
-**✅ Correct:**
-Activity: Retry Submit
-  Kind: Repeat
-  Repeat Until: System responds successfully
-  Maximum Attempts: 3
-  Wait Between Attempts: 5s, 15s, 45s
-  Do: Submit transaction
-  If Successful: Confirm Result
-  If All Attempts Fail: System Unavailable
-
-**Rule**: Every loop must have Maximum or Maximum Attempts to bound execution.
-
----
-
-### Mistake 5: External actions without Observer confirmation
-
-**❌ Wrong:**
-Activity: Execute Refund
-  Role: Executor
-  Do: Process refund in payment system
-  Verify: Transaction ID returned
-  Next: Completed
-
-**Problem**: You have a transaction ID, but did the refund actually happen? No independent confirmation.
-
-**✅ Correct:**
-Activity: Execute Refund
-  Role: Executor
-  Do: Process refund in payment system
-  Verify: Transaction ID returned
-  Next: Confirm Refund
-
-Activity: Confirm Refund
-  Role: Observer
-  Do: Verify refund appears in external system
-  Verify: Refund status matches expected outcome
-  If Failed: Escalate Reconciliation
-  Next: Completed
-
-**Rule**: External actions (especially financial) should be followed by Observer confirmation (Governance Law #3).
-
----
-
-### Mistake 6: Forcing unclear to clear
-
-**❌ Wrong:**
-Activity: Analyze Request
-  Role: Analyst
-  Do: Review request and make recommendation
-  Verify: Recommendation is clear and complete
-  If Unclear: Retry analysis with more data
-
-**Problem**: Forcing clarity when uncertainty is legitimate. Violates Truth Preservation law.
-
-**✅ Correct:**
-Activity: Analyze Request
-  Role: Analyst
-  Do: Review request and make recommendation
-  Verify: All available data reviewed
-  If Unclear: Escalate to Specialist Review
-  Next: Verification
-
-**Rule**: If something is genuinely unclear, preserve that state. Route to human review (Governance Law #1: Truth Preservation).
-
----
-
-### Mistake 7: Missing role specification
-
-**❌ Wrong:**
-Activity: Review Documents
-  Do: Check all documents for completeness
-  Next: Approve
-
-**Problem**: No accountability. Who is responsible?
-
-**✅ Correct:**
-Activity: Review Documents
-  Role: Analyst
-  Do: Check all documents for completeness
-  Verify: All required documents present
-  Next: Approve
-
-**Rule**: Every activity in production workflows should have a Role for accountability.
-
----
-
-### Mistake 8: Vague verification conditions
-
-**❌ Wrong:**
-Activity: Process Application
-  Role: Executor
-  Do: Submit application
-  Verify: Looks good
-  Next: Complete
-
-**Problem**: "Looks good" is not verifiable. Subjective and untestable.
-
-**✅ Correct:**
-Activity: Process Application
-  Role: Executor
-  Do: Submit application to processing system
-  Verify: 
-    - System returns application ID
-    - Status is "Accepted" or "Pending"
-    - All required fields acknowledged
-  Next: Complete
-
-**Rule**: Verification conditions must be objective and testable.
-
----
-
-### Mistake 9: No evidence for authorization
-
-**❌ Wrong:**
-Activity: Manager Approval
-  Role: Approver
-  Do: Approve or reject request
-  Next: Process
-
-**Problem**: No activity feedback captured. Who approved? When? What was reviewed?
-
-**✅ Correct:**
-Activity: Manager Approval
-  Kind: Approval
-  Role: Approver
-  Needs:
-    - Request details
-    - Analysis results
-    - Risk assessment
-    - Evidence package
-  Do: Review evidence and approve or reject
-  Next: 
-    - Approve → Process Request
-    - Reject → Rejected
-
-**Rule**: Approvals automatically capture evidence (decision, identity, timestamp, comments). Use Kind: Approval and specify Needs to document what the approver reviews.
-
----
-
-### Mistake 10: Wait without timeout
-
-**❌ Wrong:**
-Activity: Wait for Documents
-  Kind: Wait
-  Do: Wait for customer to upload documents
-  Next: Review Documents
-
-**Problem**: Could wait forever. No expiry behavior.
-
-**✅ Correct:**
-Activity: Wait for Documents
-  Kind: Wait
-  Role: Coordinator
-  Do: Wait for customer to upload documents
-  Time Limit: 48 hours
-  Next:
-    - Documents received → Review Documents
-    - Timeout → Request Expired
-
-**Rule**: Every Wait must have Time Limit and define what happens on timeout.
-
----
-
-### Mistake 11: Self-verification confusion
-
-**❌ Wrong:**
-Activity: Analyze Request
-  Role: Analyst
-  Do: Form recommendation
-  Verify: Analyst independently verifies their own work
-
-**Problem**: Confusing the Verify field with requiring a separate verification activity. The same Analyst can do both analysis and verification.
-
-**✅ Correct Option 1** (Combined):
-Activity: Analyze Request
-  Role: Analyst
-  Do: Form and verify recommendation
-  Verify: 
-    - All criteria addressed
-    - Evidence supports recommendation
-  Next: Approval
-
-**✅ Correct Option 2** (Separate):
-Activity: Analyze Request
-  Role: Analyst
-  Do: Form recommendation
-  Verify: All criteria addressed
-  Next: Verify Recommendation
-
-Activity: Verify Recommendation
-  Role: Analyst
-  Do: Check evidence supports recommendation
-  Verify: All conclusions traceable to evidence
-  Next: Approval
-
-**Rule**: Verify: is just a condition check, not requiring a separate person. If you need thorough checking, create a separate verification activity.
-
----
-
-### Quick Checklist: Avoid These Mistakes
-
-Before finalizing your workflow, check:
-
-- [ ] ✅ Every Kind: Choice ends with Otherwise
-- [ ] ✅ Every Kind: Wait has Time Limit and timeout behavior
-- [ ] ✅ Every Kind: Repeat has Maximum or Maximum Attempts
-- [ ] ✅ Critical activities have If Failed paths
-- [ ] ✅ External actions followed by Observer confirmation
-- [ ] ✅ Verify conditions are objective and testable
-- [ ] ✅ Roles are specified (Standard/Extended)
-- [ ] ✅ Approvals use Kind: Approval not just Verify
-- [ ] ✅ Unclear states route to human review, not forced to clear
-- [ ] ✅ Every activity has a Next (unless it's an Outcome)
+## Quick Tips & Common Pitfalls
+
+### Essential Rules
+
+**Structure:**
+- Every Choice must end with Otherwise (or intend no-match = fail)
+- Every Wait must have Time Limit + timeout behavior
+- Every Repeat must have Maximum or Maximum Attempts
+- Every activity needs Next (unless Outcome)
+
+**Quality Gates:**
+- Use Verify: for condition checks, not Kind: Approval
+- Verify conditions must be objective and testable (not "looks good")
+- Critical activities need If Failed paths
+- Unclear results need If Unclear paths → route to human review
+
+**Governance:**
+- High-risk Executor → preceded by Approver (Law 2: Authorization)
+- External actions → followed by Observer (Law 3: Confirmation)
+- Never force unclear to clear (Law 1: Truth Preservation)
+
+**Accountability:**
+- Specify Role for production workflows (who is responsible?)
+- Approvals automatically capture feedback (decision, identity, timestamp)
+- Use Kind: Approval + Needs to document what approver reviews
+
+**Verification:**
+- Verify: is a condition check, same role can do analysis + verification
+- For thorough checking, create separate verification activity
+
+### Before Finalizing
+
+- [ ] Every Choice ends with Otherwise
+- [ ] Every Wait has Time Limit + timeout path
+- [ ] Every Repeat is bounded (Maximum/Maximum Attempts)
+- [ ] Critical activities have If Failed paths
+- [ ] External Executor followed by Observer
+- [ ] Verify conditions are objective
+- [ ] Roles specified for accountability
+- [ ] Approvals use Kind: Approval
+- [ ] Unclear → human review, not forced clear
+- [ ] Every activity has Next (unless Outcome)
 
 ---
 
@@ -903,7 +678,7 @@ Before finalizing your workflow, check:
 - [Quick Reference](quick-reference.md) for field requirements
 - [Step-by-Step Guide](../tutorials/step-by-step.md) for complete learning guide
 
-## Part III: One-Page Core Authoring Template
+## Part II: One-Page Core Authoring Template
 
 **See [standard-template.md](../../templates/standard-template.md) for the complete one-page template** with field reference, role guide, activity kinds, common patterns, and examples.
 
@@ -928,7 +703,7 @@ Activity: [Name]
   If Failed: [Failure path]
   Next: [Next activity]
 
-## Part IV: Core Conformance
+## Part III: Core Conformance
 
 ### 17. Conformance
 

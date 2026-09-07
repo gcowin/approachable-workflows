@@ -45,6 +45,7 @@ The patterns below serve as **templates and reference examples** — use them to
 **Use for**: Straightforward processes with no branching
 
 ```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#2E7D32','primaryTextColor':'#fff','primaryBorderColor':'#1B5E20','lineColor':'#666','secondaryColor':'#1565C0','tertiaryColor':'#F57C00'}}}%%
 graph TD
     Start([Start]) --> A[Receive Request<br/>Coordinator]
     A --> B[Review Request<br/>Analyst]
@@ -52,12 +53,12 @@ graph TD
     C --> D[Notify Customer<br/>Communicator]
     D --> End([Completed])
     
-    style Start fill:#87CEEB
-    style A fill:#90EE90
-    style B fill:#90EE90
-    style C fill:#90EE90
-    style D fill:#90EE90
-    style End fill:#87CEEB
+    style Start fill:#1565C0,stroke:#0D47A1,color:#fff
+    style A fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style B fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style C fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style D fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style End fill:#1565C0,stroke:#0D47A1,color:#fff
 ```
 
 **Workflow:**
@@ -75,6 +76,7 @@ Receive Request → Review Request → Process Request → Notify Customer → C
 **Use for**: Decisions requiring evidence, analysis, and authorization
 
 ```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#2E7D32','primaryTextColor':'#fff','primaryBorderColor':'#1B5E20','lineColor':'#666'}}}%%
 graph TD
     Start([Start]) --> A[Research Policy<br/>Researcher]
     A --> B[Analyze Request<br/>Analyst]
@@ -87,16 +89,16 @@ graph TD
     F --> G[Confirm Result<br/>Observer]
     G --> End2([Completed])
     
-    style Start fill:#87CEEB
-    style A fill:#90EE90
-    style B fill:#90EE90
-    style C fill:#90EE90
-    style D fill:#FFD700
-    style E fill:#DDA0DD
-    style F fill:#90EE90
-    style G fill:#90EE90
-    style End1 fill:#FFB6C6
-    style End2 fill:#87CEEB
+    style Start fill:#1565C0,stroke:#0D47A1,color:#fff
+    style A fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style B fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style C fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style D fill:#F57C00,stroke:#E65100,color:#fff
+    style E fill:#7B1FA2,stroke:#4A148C,color:#fff
+    style F fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style G fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style End1 fill:#C62828,stroke:#B71C1C,color:#fff
+    style End2 fill:#1565C0,stroke:#0D47A1,color:#fff
 ```
 
 **Key Activities:**
@@ -114,6 +116,7 @@ graph TD
 **Use for**: Routing based on conditions
 
 ```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#2E7D32','primaryTextColor':'#fff','lineColor':'#666'}}}%%
 graph TD
     Start([Start]) --> A[Check Request<br/>Analyst]
     A --> B{Route Decision<br/>Choice}
@@ -125,14 +128,14 @@ graph TD
     E --> F
     F --> End([Completed])
     
-    style Start fill:#87CEEB
-    style A fill:#90EE90
-    style B fill:#FFD700
-    style C fill:#DDA0DD
-    style D fill:#DDA0DD
-    style E fill:#90EE90
-    style F fill:#90EE90
-    style End fill:#87CEEB
+    style Start fill:#1565C0,stroke:#0D47A1,color:#fff
+    style A fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style B fill:#F57C00,stroke:#E65100,color:#fff
+    style C fill:#7B1FA2,stroke:#4A148C,color:#fff
+    style D fill:#7B1FA2,stroke:#4A148C,color:#fff
+    style E fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style F fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style End fill:#1565C0,stroke:#0D47A1,color:#fff
 ```
 
 **Workflow:**
@@ -152,6 +155,7 @@ Activity: Route Decision
 **Use for**: External systems that may be temporarily unavailable
 
 ```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#EF6C00','primaryTextColor':'#fff','lineColor':'#666'}}}%%
 graph TD
     Start([Start]) --> A[Submit to API<br/>Executor<br/>Repeat]
     A -->|Attempt 1: 5s wait| B{Success?}
@@ -161,12 +165,12 @@ graph TD
     B -->|All Failed| D([System Unavailable])
     C --> E([Completed])
     
-    style Start fill:#87CEEB
-    style A fill:#FFA500
-    style B fill:#FFD700
-    style C fill:#90EE90
-    style D fill:#FFB6C6
-    style E fill:#87CEEB
+    style Start fill:#1565C0,stroke:#0D47A1,color:#fff
+    style A fill:#EF6C00,stroke:#E65100,color:#fff
+    style B fill:#F57C00,stroke:#E65100,color:#fff
+    style C fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style D fill:#C62828,stroke:#B71C1C,color:#fff
+    style E fill:#1565C0,stroke:#0D47A1,color:#fff
 ```
 
 **Workflow:**
@@ -189,6 +193,7 @@ Activity: Submit to API
 **Use for**: Independent tasks that can run concurrently
 
 ```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#EF6C00','primaryTextColor':'#fff','lineColor':'#666'}}}%%
 graph TD
     Start([Start]) --> A[Validate Request<br/>Do Together]
     A --> B[Check Customer<br/>Researcher]
@@ -201,15 +206,15 @@ graph TD
     E -->|Any Failed| G([Validation Failed])
     F --> H([Completed])
     
-    style Start fill:#87CEEB
-    style A fill:#FFA500
-    style B fill:#90EE90
-    style C fill:#90EE90
-    style D fill:#90EE90
-    style E fill:#FFD700
-    style F fill:#90EE90
-    style G fill:#FFB6C6
-    style H fill:#87CEEB
+    style Start fill:#1565C0,stroke:#0D47A1,color:#fff
+    style A fill:#EF6C00,stroke:#E65100,color:#fff
+    style B fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style C fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style D fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style E fill:#F57C00,stroke:#E65100,color:#fff
+    style F fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style G fill:#C62828,stroke:#B71C1C,color:#fff
+    style H fill:#1565C0,stroke:#0D47A1,color:#fff
 ```
 
 **Workflow:**
@@ -237,6 +242,7 @@ Activity: Validate Request
 **Use for**: Workflows that pause for human input or external triggers
 
 ```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#2E7D32','primaryTextColor':'#fff','lineColor':'#666'}}}%%
 graph TD
     Start([Start]) --> A[Request Documents<br/>Communicator]
     A --> B[Wait for Upload<br/>Coordinator<br/>Wait]
@@ -246,13 +252,13 @@ graph TD
     C -->|Invalid| A
     E --> F([Completed])
     
-    style Start fill:#87CEEB
-    style A fill:#90EE90
-    style B fill:#FFFFE0
-    style C fill:#90EE90
-    style D fill:#FFB6C6
-    style E fill:#90EE90
-    style F fill:#87CEEB
+    style Start fill:#1565C0,stroke:#0D47A1,color:#fff
+    style A fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style B fill:#F9A825,stroke:#F57F17,color:#000
+    style C fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style D fill:#C62828,stroke:#B71C1C,color:#fff
+    style E fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style F fill:#1565C0,stroke:#0D47A1,color:#fff
 ```
 
 **Workflow:**
@@ -275,6 +281,7 @@ Activity: Wait for Upload
 **Use for**: Production workflows needing robust error handling
 
 ```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#2E7D32','primaryTextColor':'#fff','lineColor':'#666'}}}%%
 graph TD
     Start([Start]) --> A[Process Payment<br/>Executor]
     A -->|✓ Success| B[Send Confirmation<br/>Communicator]
@@ -284,14 +291,14 @@ graph TD
     C --> End2([Failed])
     D --> End3([Needs Review])
     
-    style Start fill:#87CEEB
-    style A fill:#90EE90
-    style B fill:#90EE90
-    style C fill:#FFB6C6
-    style D fill:#FFFFE0
-    style End1 fill:#87CEEB
-    style End2 fill:#FFB6C6
-    style End3 fill:#FFFFE0
+    style Start fill:#1565C0,stroke:#0D47A1,color:#fff
+    style A fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style B fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style C fill:#C62828,stroke:#B71C1C,color:#fff
+    style D fill:#F9A825,stroke:#F57F17,color:#000
+    style End1 fill:#1565C0,stroke:#0D47A1,color:#fff
+    style End2 fill:#C62828,stroke:#B71C1C,color:#fff
+    style End3 fill:#F9A825,stroke:#F57F17,color:#000
 ```
 
 **Workflow:**
@@ -313,6 +320,7 @@ Activity: Process Payment
 **Use for**: Processing multiple items (documents, requests, line items)
 
 ```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#EF6C00','primaryTextColor':'#fff','lineColor':'#666'}}}%%
 graph TD
     Start([Start]) --> A[Process Each Document<br/>Analyst<br/>Repeat]
     A --> B[Classify Document]
@@ -325,15 +333,15 @@ graph TD
     F -->|No| G[Summarize Results<br/>Analyst]
     G --> End([Completed])
     
-    style Start fill:#87CEEB
-    style A fill:#FFA500
-    style B fill:#90EE90
-    style C fill:#FFD700
-    style D fill:#90EE90
-    style E fill:#FFFFE0
-    style F fill:#FFD700
-    style G fill:#90EE90
-    style End fill:#87CEEB
+    style Start fill:#1565C0,stroke:#0D47A1,color:#fff
+    style A fill:#EF6C00,stroke:#E65100,color:#fff
+    style B fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style C fill:#F57C00,stroke:#E65100,color:#fff
+    style D fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style E fill:#F9A825,stroke:#F57F17,color:#000
+    style F fill:#F57C00,stroke:#E65100,color:#fff
+    style G fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style End fill:#1565C0,stroke:#0D47A1,color:#fff
 ```
 
 **Workflow:**
@@ -359,6 +367,7 @@ Activity: Process Each Document
 **Use for**: Reusable workflows called from other workflows
 
 ```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#2E7D32','primaryTextColor':'#fff','lineColor':'#666'}}}%%
 graph TD
     Start([Start]) --> A[Validate Customer<br/>Analyst]
     A --> B[Run Workflow:<br/>Credit Check]
@@ -367,13 +376,13 @@ graph TD
     C -->|Declined| E([Declined])
     D --> F([Completed])
     
-    style Start fill:#87CEEB
-    style A fill:#90EE90
-    style B fill:#DDA0DD
-    style C fill:#FFD700
-    style D fill:#90EE90
-    style E fill:#FFB6C6
-    style F fill:#87CEEB
+    style Start fill:#1565C0,stroke:#0D47A1,color:#fff
+    style A fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style B fill:#7B1FA2,stroke:#4A148C,color:#fff
+    style C fill:#F57C00,stroke:#E65100,color:#fff
+    style D fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style E fill:#C62828,stroke:#B71C1C,color:#fff
+    style F fill:#1565C0,stroke:#0D47A1,color:#fff
 ```
 
 **Workflow:**
@@ -398,6 +407,7 @@ Activity: Run Credit Check
 **Use for**: Complex, mission-critical workflows with state tracking
 
 ```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#2E7D32','primaryTextColor':'#fff','lineColor':'#666'}}}%%
 graph TD
     Start([Start]) --> A[Submit Request<br/>Coordinator]
     A --> B[Research<br/>Researcher]
@@ -417,20 +427,20 @@ graph TD
     C -.->|Unclear| J
     J --> End3([Needs Review])
     
-    style Start fill:#87CEEB
-    style A fill:#90EE90
-    style B fill:#90EE90
-    style C fill:#90EE90
-    style D fill:#FFD700
-    style E fill:#DDA0DD
-    style F fill:#DDA0DD
-    style G fill:#90EE90
-    style H fill:#90EE90
-    style I fill:#FF6B6B,stroke:#8B0000,stroke-width:3px
-    style J fill:#FFA500,stroke:#FF8C00,stroke-width:3px
-    style End1 fill:#87CEEB
-    style End2 fill:#FFB6C6
-    style End3 fill:#FFFFE0
+    style Start fill:#1565C0,stroke:#0D47A1,color:#fff
+    style A fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style B fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style C fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style D fill:#F57C00,stroke:#E65100,color:#fff
+    style E fill:#7B1FA2,stroke:#4A148C,color:#fff
+    style F fill:#7B1FA2,stroke:#4A148C,color:#fff
+    style G fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style H fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style I fill:#D32F2F,stroke:#B71C1C,stroke-width:3px,color:#fff
+    style J fill:#EF6C00,stroke:#E65100,stroke-width:3px,color:#fff
+    style End1 fill:#1565C0,stroke:#0D47A1,color:#fff
+    style End2 fill:#C62828,stroke:#B71C1C,color:#fff
+    style End3 fill:#F9A825,stroke:#F57F17,color:#000
 ```
 
 **Workflow with State & Events:**
@@ -475,6 +485,7 @@ Activities:
 ## Legend
 
 ```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#2E7D32','primaryTextColor':'#fff','lineColor':'#666'}}}%%
 graph LR
     A[Work Activity<br/>Role] 
     B{Choice<br/>Decision}
@@ -487,26 +498,28 @@ graph LR
     I[Failed Activity]
     J[Unclear Activity]
     
-    style A fill:#90EE90
-    style B fill:#FFD700
-    style C fill:#DDA0DD
-    style D fill:#FFFFE0
-    style E fill:#FFA500
-    style F fill:#FFA500
-    style G fill:#DDA0DD
-    style H fill:#87CEEB
-    style I fill:#FFB6C6
-    style J fill:#FFFFE0
+    style A fill:#2E7D32,stroke:#1B5E20,color:#fff
+    style B fill:#F57C00,stroke:#E65100,color:#fff
+    style C fill:#7B1FA2,stroke:#4A148C,color:#fff
+    style D fill:#F9A825,stroke:#F57F17,color:#000
+    style E fill:#EF6C00,stroke:#E65100,color:#fff
+    style F fill:#EF6C00,stroke:#E65100,color:#fff
+    style G fill:#7B1FA2,stroke:#4A148C,color:#fff
+    style H fill:#1565C0,stroke:#0D47A1,color:#fff
+    style I fill:#C62828,stroke:#B71C1C,color:#fff
+    style J fill:#F9A825,stroke:#F57F17,color:#000
 ```
 
-**Colors:**
-- 🟢 **Green** (#90EE90): Successful Work activities
-- 🟡 **Yellow** (#FFD700): Choice/Decision points
-- 🟣 **Purple** (#DDA0DD): Approval activities
-- 🟡 **Light Yellow** (#FFFFE0): Wait activities or Unclear states
-- 🟠 **Orange** (#FFA500): Repeat or Do Together activities
-- 🔵 **Blue** (#87CEEB): Outcomes (start/end)
-- 🔴 **Red** (#FFB6C6): Failed states
+**Colors (Optimized for Light & Dark Mode):**
+- 🟢 **Dark Green** (#2E7D32): Successful Work activities
+- 🟠 **Dark Orange** (#F57C00): Choice/Decision points
+- 🟣 **Purple** (#7B1FA2): Approval activities & Run Workflow
+- 🟡 **Dark Yellow** (#F9A825): Wait activities or Unclear states
+- 🟠 **Darker Orange** (#EF6C00): Repeat or Do Together activities
+- 🔵 **Dark Blue** (#1565C0): Outcomes (start/end)
+- 🔴 **Dark Red** (#C62828): Failed states
+
+**Theme:** All diagrams use the base theme with dark mode compatible colors and high contrast borders
 
 ---
 
