@@ -34,7 +34,7 @@ The LLM doesn't just execute prompts — it **traverses a formal workflow graph*
 - State transitions between activities
 - Conditional branching based on verification results
 
-## See the Workflow Run and Eval
+## See a sophisticated Workflow Run and Eval
 
 **Evaluation Report**: [EVAL_REPORT_20260906-012531.md](../../examples/legal-review-analysis/cases/vantek-ostrow/evals/EVAL_REPORT_20260906-012531.md)
 - Every zero-tolerance gate passed

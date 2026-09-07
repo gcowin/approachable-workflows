@@ -71,13 +71,13 @@ Activity: Research Policy
 Activity 1: AI "finds" a policy clause that doesn't exist. Activity 2: Uses that fake clause to justify a recommendation. Activity 3: Approver reviews reasoning based on fake clause. Activity 4: System executes based on false premise. **One unverified output poisons the entire workflow.** Verify: catches the error at Activity 1 before it cascades.
 
 **2. Forces explicit success criteria**  
-AI produces plausible outputs that might not meet your requirements. Verify: makes requirements testable, not just believable.
+AI can produce plausible outputs that might not meet your requirements. Verify: makes requirements testable, not just believable.
 
 **3. Creates audit checkpoints**  
 When things fail, you know *which* verification failed and *why* — not just "the AI was wrong."
 
 **4. Enables uncertainty routing**  
-AI often produces ambiguous results. Verify: + If Unclear routes uncertain states to human review instead of forcing false confidence.
+AI can produce ambiguous results. Verify: + If Unclear routes uncertain states to human review instead of forcing false confidence.
 
 **5. Governance by design**  
 Each Verify: becomes a logged assertion in execution reports. Auditors see what was *checked*, not just what was *claimed*.
