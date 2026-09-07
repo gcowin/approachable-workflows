@@ -1,12 +1,146 @@
 # Field Reference
 
-**Complete A-Z reference for all Approachable-Workflows fields.**
+**Complete reference for all Approachable-Workflows fields.**
+
+This reference is organized workflow-first: start with workflow-level fields, then common activity fields, then specialized fields for specific activity kinds.
 
 ---
 
-## Activity Definition Fields
+## Part I: Workflow-Level Fields
 
-### Activity Name (Required)
+These fields define the workflow itself and appear at the top of your workflow specification.
+
+### Workflow (Required)
+
+```text
+Workflow: Customer Refund Review
+```
+
+**Purpose:** Names the workflow.
+
+**Rules:**
+- Clear, descriptive name
+- Used in execution reports and documentation
+
+---
+
+### Version (Optional)
+
+```text
+Version: 1.0
+```
+
+**Purpose:** Tracks workflow versions for change management.
+
+---
+
+### Goal (Required)
+
+```text
+Goal: Approve or reject refund requests
+```
+
+**Purpose:** Describes the business result to achieve.
+
+**Rules:**
+- Focus on outcome, not implementation
+- One clear sentence
+
+---
+
+### Handles (Optional)
+
+```text
+Handles: Each refund request
+```
+
+**Purpose:** Describes what each workflow execution processes (the business subject).
+
+**Examples:**
+- `Each customer refund request`
+- `Individual supplier invoices`
+- `Security incident`
+
+---
+
+### Provided (Optional)
+
+```text
+Provided:
+  - Refund request
+  - Customer record
+  - Policy document
+```
+
+**Purpose:** Lists inputs available to the workflow at start.
+
+**Rules:**
+- These become available to activities via `Needs:`
+- Known at workflow start, unchanged during execution
+
+---
+
+### Returns (Optional)
+
+```text
+Returns:
+  - Approval decision
+  - Evidence package
+  - Notification confirmation
+```
+
+**Purpose:** Lists outputs produced by the workflow.
+
+**Rules:**
+- Available when workflow reaches an Outcome
+- Documents the workflow's interface
+
+---
+
+### Configuration (Optional)
+
+```text
+Configuration:
+  Tools:
+    - Salesforce CRM (read customer records)
+    - SendGrid (send emails)
+  Settings:
+    - Timeout: 30 minutes
+    - Evidence storage: OneDrive /Evidence/
+```
+
+**Purpose:** Specifies tools and settings for execution.
+
+**When to use:**
+- Runtime needs specific tool access
+- Environment-specific settings
+- Deployment configurations
+
+---
+
+### Governance (Optional)
+
+```text
+Governance:
+  - Current authoritative policy sources
+  - Independent verification of recommendations
+  - Human approval for high-risk decisions
+  - Recorded external-system confirmations
+```
+
+**Purpose:** Documents how the workflow ensures dependable outcomes.
+
+**Best Practice:** Include for production workflows to document quality assurance approach.
+
+---
+
+## Part II: Activity-Level Fields
+
+### Common Activity Fields
+
+These fields can be used with any activity, regardless of Kind.
+
+#### Activity Name (Required)
 
 ```text
 Review Request
@@ -17,7 +151,7 @@ Review Request
 
 **Rules:**
 - Must be unique within the workflow
-- Use clear, action-oriented names
+- Use clear, action-oriented names (verb + object)
 - Can include spaces
 
 **Examples:**
@@ -28,7 +162,7 @@ Review Request
 
 ---
 
-### Kind (Optional, default: Work)
+#### Kind (Optional, default: Work)
 
 ```text
 Activity Name
@@ -53,7 +187,7 @@ Activity Name
 
 ---
 
-### Role (Optional for Work, Required for Approval)
+#### Role (Optional for Work, Required for Approval)
 
 ```text
 Activity Name
@@ -78,7 +212,7 @@ Activity Name
 
 ---
 
-### Needs (Optional)
+#### Needs (Optional)
 
 ```text
 Activity Name
@@ -100,7 +234,7 @@ Analyze Request
 
 ---
 
-### Do (Required)
+#### Do (Required)
 
 ```text
 Activity Name
@@ -125,7 +259,7 @@ Do: Compare invoice with purchase order, receiving evidence, and contract terms.
 
 ---
 
-### Creates (Optional)
+#### Creates (Optional)
 
 ```text
 Activity Name
@@ -146,7 +280,7 @@ Creates: Recommendation, Risk score, Evidence package
 
 ---
 
-### Verify (Optional but Recommended)
+#### Verify (Optional but Recommended)
 
 ```text
 Activity Name
@@ -173,7 +307,7 @@ Verify: Every material fact has an authoritative source
 
 ---
 
-### If Failed (Optional)
+#### If Failed (Optional)
 
 ```text
 Activity Name
@@ -202,7 +336,7 @@ Activity Name
 
 ---
 
-### If Unclear (Optional)
+#### If Unclear (Optional)
 
 ```text
 Activity Name
@@ -223,7 +357,7 @@ If Unclear: Route to specialist for investigation
 
 ---
 
-### Next (Required for most activities)
+#### Next (Required for most activities)
 
 ```text
 Activity Name
@@ -248,7 +382,7 @@ Next: Completed
 
 ---
 
-### State Changes (Extended - Optional)
+#### State Changes (Extended - Optional)
 
 ```text
 Activity Name
@@ -268,9 +402,30 @@ State Changes: Set Workflow State to Awaiting Approval
 
 ---
 
-## Choice Activity Fields
+#### Events (Extended - Optional)
 
-### Conditions (Required for Kind: Choice)
+```text
+Activity Name
+  Events:
+    On Failure: Log error + Notify team → Escalate
+    On Timeout: → System Unavailable
+```
+
+**Purpose:** Handles exceptional conditions.
+
+**When to use:**
+- Define behavior for failures, timeouts, escalations
+- Triggers actions before routing to next activity
+
+---
+
+### Kind-Specific Fields
+
+Additional fields required or available for specialized activity kinds.
+
+#### Choice Activity Fields
+
+##### Conditions (Required for Kind: Choice)
 
 ```text
 Route Decision
@@ -292,14 +447,25 @@ Route Decision
 - Use `Otherwise` for default case
 - Arrow `→` indicates target activity
 
+**Operators:** AND, OR, NOT, >, <, ≥, ≤, =, ≠
+
 ---
 
-## Approval Activity Fields
+#### Approval Activity Fields
 
+Approval activities use only common fields. No additional fields required.
 
-## Repeat Activity Fields
+**Key fields for Approvals:**
+- `Kind: Approval` (required)
+- `Role: Approver` (required)
+- `Needs:` (recommended - what the approver reviews)
+- `Next:` (with decision paths: Approve → X, Reject → Y)
 
-### Repeat Over (Required for Kind: Repeat)
+---
+
+#### Repeat Activity Fields
+
+##### Repeat Over (Required for collection iteration)
 
 ```text
 Process Each Document
@@ -314,19 +480,66 @@ Process Each Document
 
 ---
 
-### Maximum (Optional for Repeat)
+##### Repeat Until (Required for retry logic)
+
+```text
+Submit Payment
+  Kind: Repeat
+  Repeat Until: System responds successfully
+  Maximum Attempts: 3
+  Wait Between Attempts: 5s, 15s, 45s
+  If Successful: Confirm
+  If All Attempts Fail: System Unavailable
+```
+
+**Purpose:** Defines the success condition for retry loops.
+
+---
+
+##### Maximum / Maximum Attempts (Required)
 
 ```text
 Maximum: 100 documents
 ```
+or
+```text
+Maximum Attempts: 3
+```
 
 **Purpose:** Sets upper limit on iterations (prevents infinite loops).
 
+**Rules:**
+- Required for all Repeat activities
+- Use `Maximum` for collections
+- Use `Maximum Attempts` for retry logic
+
 ---
 
-## Wait Activity Fields
+##### For Each Item (Optional)
 
-### Time Limit (Optional for Kind: Wait)
+```text
+For Each Item:
+  - If valid: Add to results
+  - If invalid: Add to exceptions
+```
+
+**Purpose:** Defines per-item processing logic.
+
+---
+
+##### Wait Between Attempts (Optional for retry)
+
+```text
+Wait Between Attempts: 5s, 15s, 45s
+```
+
+**Purpose:** Defines backoff strategy for retry attempts.
+
+---
+
+#### Wait Activity Fields
+
+##### Time Limit (Required for Kind: Wait)
 
 ```text
 Wait for Upload
@@ -340,102 +553,99 @@ Wait for Upload
 
 **Purpose:** Sets timeout for wait activities.
 
+**Rules:**
+- Required for Wait activities
+- Must define what happens on timeout
+
 ---
 
-## Workflow-Level Fields
+#### Do Together Fields
 
-### Workflow (Required)
+##### Do These Activities Together (Required)
 
 ```text
-Workflow: Customer Refund Review
+Validate Request
+  Kind: Do Together
+  Do These Activities Together:
+    - Check Customer Identity
+    - Check Inventory
+    - Check Credit
+  Wait For: All
+  Time Limit: 30s
+  When All Complete:
+    - If all passed → Process
+    - If any failed → Reject
 ```
 
-**Purpose:** Names the workflow.
+**Purpose:** Lists activities to execute in parallel.
 
 ---
 
-### Version (Optional)
+##### Wait For (Required)
+
+**Options:**
+- `Wait For: All` - Wait for all activities to complete
+- `Wait For: First` - Wait for first successful response
+
+---
+
+##### When All Complete (Required)
+
+**Purpose:** Defines routing based on parallel execution results.
+
+**Rules:**
+- Must handle: all passed, any failed, timeout scenarios
+
+---
+
+#### Run Workflow Fields
+
+##### Workflow (Required)
 
 ```text
-Version: 1.0
+Activity: Run Credit Check
+  Kind: Run Workflow
+  Workflow: Standard Credit Check
+  Version: 2.1
+  Provide:
+    - Customer ID
+    - Requested Amount
+  Receive:
+    - Credit Decision
+    - Credit Score
+  Next: Process Order
 ```
 
-**Purpose:** Tracks workflow versions.
+**Purpose:** Names the workflow to invoke.
 
 ---
 
-### Goal (Required)
+##### Provide (Required)
 
-```text
-Goal: Approve or reject refund requests
-```
-
-**Purpose:** Describes the business result to achieve.
+**Purpose:** Specifies inputs to pass to the invoked workflow.
 
 ---
 
-### Handles (Optional)
+##### Receive (Required)
 
-```text
-Handles: Each refund request
-```
-
-**Purpose:** Describes what each execution processes.
+**Purpose:** Specifies outputs to receive from the invoked workflow.
 
 ---
 
-### Provided (Optional)
-
-```text
-Provided:
-  - Refund request
-  - Customer record
-  - Policy document
-```
-
-**Purpose:** Lists inputs available to the workflow.
-
----
-
-### Returns (Optional)
-
-```text
-Returns:
-  - Approval decision
-  - Evidence package
-  - Notification confirmation
-```
-
-**Purpose:** Lists outputs produced by the workflow.
-
----
-
-### Configuration (Optional)
-
-```text
-Configuration:
-  Tools:
-    - Salesforce CRM (read customer records)
-    - SendGrid (send emails)
-  Settings:
-    - Timeout: 30 minutes
-    - Evidence storage: OneDrive /Evidence/
-```
-
-**Purpose:** Specifies tools and settings for execution.
-
----
-
-## Field Combinations
+## Part III: Examples
 
 ### Minimal Activity
+
 ```text
 Review Request
   Do: Check if complete
   Next: Make Decision
 ```
 
+---
+
 ### Standard Activity
+
 ```text
 Review Request
   Role: Analyst
@@ -447,7 +657,10 @@ Review Request
   Next: Make Decision
 ```
 
+---
+
 ### Extended Activity with State
+
 ```text
 Review Request
   Role: Analyst
@@ -458,6 +671,60 @@ Review Request
   State Changes: Set Business State to Under Review
   If Failed: Set Business State to Incomplete; Reject incomplete
   Next: Make Decision
+```
+
+---
+
+### Complete Workflow Example
+
+```text
+Workflow: Refund Review
+Version: 1.0
+Goal: Approve or reject refund requests
+Handles: Each customer refund request
+
+Provided:
+  - Refund request
+  - Customer record
+
+Returns:
+  - Decision
+  - Evidence package
+
+Activity: Review Request
+  Role: Analyst
+  Needs: Refund request, Customer record
+  Do: Verify request completeness
+  Verify: All required fields present
+  If Failed: Request More Information
+  Next: Analyze Request
+
+Activity: Analyze Request
+  Role: Analyst
+  Do: Determine if request meets policy
+  Verify: Decision supported by policy
+  Next: Manager Approval
+
+Activity: Manager Approval
+  Kind: Approval
+  Role: Approver
+  Needs: Analysis results
+  Do: Approve or reject
+  Next:
+    - Approve → Process Refund
+    - Reject → Rejected
+
+Outcome: Rejected
+  Return: Decision, Reason
+
+Activity: Process Refund
+  Role: Executor
+  Do: Execute refund transaction
+  Verify: Transaction confirmed
+  Next: Completed
+
+Outcome: Completed
+  Return: Decision, Transaction ID, Evidence package
 ```
 
 ---
