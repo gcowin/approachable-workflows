@@ -50,9 +50,9 @@ Built-in quality gates (`Verify:` conditions), execution reports with activity f
 
 **Progressive Formalization:** Start with 10 lines. Add detail only when you need it.
 
-### Why Verify: Matters in AI-Driven Workflows
+### Why Verify: Matters When LLMs Execute Workflows
 
-Traditional workflows execute the same way every time. **AI-driven workflows don't** — the same prompt can produce different outputs, miss critical details, or invent plausible-sounding "facts" that aren't true.
+Traditional workflows execute the same way every time. **LLM-executed workflows don't** — the same prompt can produce different outputs, miss critical details, or invent plausible-sounding "facts" that aren't true.
 
 **The Verify: field is your quality gate:**
 
@@ -68,16 +68,16 @@ Activity: Research Policy
 **Why this matters:**
 
 **1. Prevents error propagation**  
-Activity 1: AI "finds" a policy clause that doesn't exist. Activity 2: Uses that fake clause to justify a recommendation. Activity 3: Approver reviews reasoning based on fake clause. Activity 4: System executes based on false premise. **One unverified output poisons the entire workflow.** Verify: catches the error at Activity 1 before it cascades.
+Activity 1: LLM "finds" a policy clause that doesn't exist. Activity 2: Uses that fake clause to justify a recommendation. Activity 3: Approver reviews reasoning based on fake clause. Activity 4: System executes based on false premise. **One unverified output poisons the entire workflow.** Verify: catches the error at Activity 1 before it cascades.
 
 **2. Forces explicit success criteria**  
-AI can produce plausible outputs that might not meet your requirements. Verify: makes requirements testable, not just believable.
+LLMs produce plausible outputs that might not meet your requirements. Verify: makes requirements testable, not just believable.
 
 **3. Creates audit checkpoints**  
-When things fail, you know *which* verification failed and *why* — not just "the AI was wrong."
+When things fail, you know *which* verification failed and *why* — not just "the LLM was wrong."
 
 **4. Enables uncertainty routing**  
-AI can produce ambiguous results. Verify: + If Unclear routes uncertain states to human review instead of forcing false confidence.
+LLMs produce ambiguous results. Verify: + If Unclear routes uncertain states to human review instead of forcing false confidence.
 
 **5. Governance by design**  
 Each Verify: becomes a logged assertion in execution reports. Auditors see what was *checked*, not just what was *claimed*.
@@ -88,7 +88,7 @@ Activity: Analyze Request
   Do: Determine if customer qualifies
   Next: Approve or Reject
 ```
-→ AI might invent qualifications, cite non-existent policies, or miss critical details.
+→ LLM might invent qualifications, cite non-existent policies, or miss critical details.
 
 **Example with Verify** (safe):
 ```text
@@ -102,15 +102,15 @@ Activity: Analyze Request
   If Unclear: Escalate to specialist
   Next: Manager Approval
 ```
-→ Forces the AI to ground its reasoning in verifiable facts, with explicit handling when it can't.
+→ Forces the LLM to ground its reasoning in verifiable facts, with explicit handling when it can't.
 
 **Real-world impact:**
 
-Without Verify: A mortgage approval workflow "analyzed" 50 applications. The AI cited non-existent regulation clauses and approved 12 unqualified applicants. The error wasn't caught until underwriting review — 3 weeks and $47K in processing costs later.
+Without Verify: A mortgage approval workflow "analyzed" 50 applications. The LLM cited non-existent regulation clauses and approved 12 unqualified applicants. The error wasn't caught until underwriting review — 3 weeks and $47K in processing costs later.
 
 With Verify: The same workflow catches incomplete analysis in Activity 2, routes 8 applications to manual review, and flags 4 for policy clarification. Total cost: 2 hours of analyst time. Zero unqualified approvals reached underwriting.
 
-**In production AI workflows, Verify: isn't optional — it's the difference between an interesting demo and a system you can actually trust with decisions.**
+**When LLMs execute workflows, Verify: isn't optional — it's the difference between an interesting demo and a system you can actually trust with decisions.**
 
 ---
 
