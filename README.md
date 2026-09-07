@@ -122,9 +122,9 @@ The **workflow-runtime skill** is a harness skill that executes, validates, and 
 - Execute workflows with automatic quality gates and evidence collection
 - Validate workflows before deployment (structure + 3-law governance checks)
 - Analyze workflows for complexity, risk, and bottlenecks
-- Generate execution reports with mermaid diagrams for audit trails
+- Generate execution reports with diagrams for audit trails
 
-**How it works:** Point the skill at your workflow specification (a `.txt` or `.md` file), specify the mode, and it handles the rest — graph traversal, state management, verification enforcement, and comprehensive reporting.
+**How it works:** Point the skill at your workflow specification, specify the mode, and it handles the rest — graph traversal, state management, verification enforcement, and comprehensive reporting.
 
 ### Three Operational Modes
 
@@ -139,7 +139,7 @@ The workflow-runtime skill provides three operational modes:
 **🔍 Analyze Mode**  
 `"Analyze this workflow"` → Evaluates complexity, risk, bottlenecks, and governance compliance. Provides recommendations without executing.
 
-[See full workflow-runtime documentation →](skills/workflow-runtime/SKILL.md)
+[See full workflow-runtime skill →](skills/workflow-runtime/SKILL.md)
 
 ---
 
