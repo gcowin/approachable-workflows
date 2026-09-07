@@ -39,6 +39,7 @@ build/
 *.html
 *.pdf
 !examples/**/*.html
+!examples/**/*.pdf
 !docs/**/*.html
 
 # Language-specific (if tooling added later)
