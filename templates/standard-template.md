@@ -174,7 +174,7 @@ Submit (Repeat: max 3 attempts) → Confirm → Done
 ## Examples Using This Template
 
 - **Payment Processing**: [docs/explanation/overview.md](../docs/explanation/overview.md) - High-value supplier payment exception workflow
-- **Legal Review**: [examples/legal-review-analysis/](../examples/legal-review-analysis/) - Production legal discovery workflow (99.5/100 evaluation)
+- **Legal Review**: [examples/legal-review-analysis/](../examples/legal-review-analysis/) - Production legal discovery workflow (100/100 evaluation)
 - **Getting Started**: [docs/tutorials/first-workflow.md](../docs/tutorials/first-workflow.md) - Build your first workflow in 10 minutes
 
 ---

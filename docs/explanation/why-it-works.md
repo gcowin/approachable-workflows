@@ -8,7 +8,7 @@ Critics claim LLMs can't handle true graph engineering — the directed graphs, 
 
 ## Production-Ready Evidence
 
-Our [**legal discovery review evaluation**](../../examples/legal-review-analysis/cases/vantek-ostrow/runs/Vantek-v-Ostrow-Halcyon-VDI-2025-0503-20260906-012531/chat-log.md)  demonstrates **production-ready performance** on a 25-document corpus with:
+Our [**legal discovery review evaluation**](../../examples/legal-review-analysis/cases/vantek-ostrow/runs/Vantek-v-Halcyon-20260908-005405/chat-log.md)  demonstrates **production-ready performance** on a 25-document corpus with:
 
 - ✅ **Complex graph traversal**: 20+ activities with conditional branching, privilege review gates, and evidence collection
 - ✅ **State propagation**: Propagates and tracks state across workflow nodes
@@ -94,12 +94,12 @@ The LLM doesn't just execute prompts — it **traverses a formal workflow graph*
 
 ## See a sophisticated Workflow Run and Eval
 
-**Evaluation Report**: [EVAL_REPORT_20260906-012531.md](../../examples/legal-review-analysis/cases/vantek-ostrow/evals/EVAL_REPORT_20260906-012531.md)
+**Evaluation Report**: [EVAL_REPORT_20260908-074252.md](../../examples/legal-review-analysis/cases/vantek-ostrow/evals/EVAL_REPORT_20260908-074252.md)
 - Every zero-tolerance gate passed
 - Every graph invariant maintained
 - Production-ready execution from plain English specifications
 
-**Execution Trace**: [Chat log](../../examples/legal-review-analysis/cases/vantek-ostrow/runs/Vantek-v-Ostrow-Halcyon-VDI-2025-0503-20260906-012531/chat-log.md)
+**Execution Trace**: [Chat log](../../examples/legal-review-analysis/cases/vantek-ostrow/runs/Vantek-v-Halcyon-20260908-005405/chat-log.md)
 - Shows the agent executing each workflow node
 - Demonstrates graph traversal with `Verify:` conditions
 - Proves state propagation and activity feedback capture at every step
@@ -110,7 +110,7 @@ The LLM doesn't just execute prompts — it **traverses a formal workflow graph*
 - Conditional branching, state management, parallel execution
 - Quality gates and activity feedback reporting built in
 
-**Execution Report**: [Workflow Execution Report](../../examples/legal-review-analysis/cases/vantek-ostrow/runs/Vantek-v-Ostrow-Halcyon-VDI-2025-0503-20260906-012531/Workflow_Execution_Report_Vantek_v_Ostrow_Halcyon_VDI-2025-0503.html)
+**Execution Report**: [Workflow Execution Report](../../examples/legal-review-analysis/cases/vantek-ostrow/runs/Vantek-v-Halcyon-20260908-005405/Workflow_Execution_Report_LDR-20260908-005405.html)
 - HTML report showing complete audit trail
 - All activities, verifications, and state transitions
 - Evidence package with full governance

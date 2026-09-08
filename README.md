@@ -7,7 +7,7 @@ Approachable-Workflows lets you specify complex, production-ready workflows in n
 **What it really is:** Graph engineering in natural language—workflows execute as directed graphs with conditional branching, state management, and parallel execution. When LLM agents execute these graphs, built-in quality gates (Verify:) prevent error propagation and enforce governance at every step.
 
   
-**[See example workflow run →](examples/legal-review-analysis/cases/vantek-ostrow/runs/Vantek-v-Ostrow-Halcyon-VDI-2025-0503-20260906-012531/chat-log.md)** 
+**[See example workflow run →](examples/legal-review-analysis/cases/vantek-ostrow/runs/Vantek-v-Halcyon-20260908-005405/chat-log.md)** 
 
 
 **[Using Example Workflow →](examples/legal-review-analysis/legal-review-workflow.txt)**
@@ -171,7 +171,7 @@ Choose your path based on what you need:
 - [Language Spec](docs/reference/spec-for-humans.md) — Complete specification
 - [All reference docs →](docs/reference/)
 
-**Production example:** [Legal Discovery Review](examples/legal-review-analysis/) — 20+ activities, 99.5/100 evaluation score  
+**Production example:** [Legal Discovery Review](examples/legal-review-analysis/) — 20+ activities, 100/100 evaluation score  
 **Templates:** [standard-template.md](templates/standard-template.md) — Copy and adapt  
 **More examples:** [examples/examples.md](examples/examples.md) — Real-world workflows
 

@@ -212,3 +212,4 @@ Classify & Analyze (25 records) → Build Timeline (25 events) → Detect Contra
 `/Workflow-Artifacts/Vantek-v-Ostrow-Halcyon-20260906-020322/`: README.txt, README_INIT.txt, manifest_evidence_log.csv, privileged_document_log_PENDING_APPROVAL.json (now Approved), redaction_map_PENDING_APPROVAL.json (now Approved), approval_record.json, redacted_document_set.txt
 
 The workflow's top improvement recommendation: add a dedicated "Expert/Forensic Report" rubric type, since D003 and D005 didn't cleanly fit the five defined document categories and defaulted to Needs-Review status.
+
