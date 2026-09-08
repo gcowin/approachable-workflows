@@ -225,17 +225,7 @@ All 7 source files present; E019 (newsletter) appears exactly once (in the exclu
 
 Self-contained: single `<style>` block, zero external references. All Verify checks pass.
 
-## ✓ Activity Complete: "Synthesize Discovery Review"
-
-**Verify results**:
-- Every finding/contradiction traces to source file(s) ✓
-- All 7 uploaded files appear in inventory or exclusion list ✓
-- No NOT RELEVANT documents in main inventory (E019 newsletter, E017 business-content only in exclusion table) ✓
-- No privileged content in HTML body outside privilege log section — verified via automated leak scan (removed the D004 memo's substantive risk-analysis language and settlement-range references from Document Inventory/Timeline; withheld Contradiction C4 from public register since its only factual basis was the privileged memo) ✓
-- Recommendation consistent with severity/counts ✓
-- HTML validates and is fully self-contained (single `<style>` block, zero external refs, 53,297 chars, well under 5M limit) ✓
-- Elapsed time: 17.3 min (within 60-min budget) ✓
-
+ 
 **Confirmation Summary**: 
 - **Recommendation**: Produce with Redactions & Conditions
 - **Findings**: 25 records analyzed (19 emails + 6 documents); 2 excluded (not relevant); 4 confirmed privileged; 5 needs-review/withheld; 1 Critical security flag (prompt injection, not followed)
