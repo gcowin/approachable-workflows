@@ -1,0 +1,138 @@
+{
+  "Marcus Ostrow": {
+    "role": "Central figure. Former Senior Firmware Engineer, Actuator Systems (Employee ID VD-04471). Subject of the trade-secret misappropriation investigation.",
+    "involvement": "Signed NDA/IP Assignment 2024-08-01 (D001). Received Kestrel spec v3 (E002). Passed over for platform lead (E005). Recruited by TalentBridge for Halcyon role (E006). Contacted Halcyon's Denise Iyer (E007). Executed 2.31 GB USB transfer 2025-04-30 23:41 (E008/D003). Resigned 2025-05-02, last day 05-16 (E009). Exit interview 05-09 (E016/D006).",
+    "documents": [
+      "D001",
+      "E001",
+      "E002",
+      "E005",
+      "E006",
+      "E007",
+      "E008",
+      "E009",
+      "E014 (as subject)",
+      "E016",
+      "D003 (custodian)",
+      "D006"
+    ],
+    "contradictions": [
+      "C-01 (statement vs. forensic access log \u2014 present factual conflict only; do not editorialize)"
+    ],
+    "prep": "Cross-examine on C-01: signed statement vs. 11 logged core/research accesses. Establish standing (non-exceptional) read/write access per D003 \u00a72.3 is NOT disputed \u2014 the conflict is with the 'never had access' assertion, not with authorization. Probe E007 'once I'm on the other side' awareness of confidentiality duty. Do not import any privileged strategy analysis into examination; use only non-privileged exhibits (D001, E002, D003, D005 underlying comparison facts, D006)."
+  },
+  "Priya Chandrasekaran": {
+    "role": "VP Engineering; Ostrow's manager. Fact witness on distribution controls and timing of company awareness.",
+    "involvement": "Circulated spec v3 with restricted-distribution instruction (E002). Flagged transfer+resignation concern to Legal/HR (E010). Scheduled exit interview (E015).",
+    "documents": [
+      "E002",
+      "E010",
+      "E015"
+    ],
+    "contradictions": [
+      "None (the apparent controls tension is a temporal boundary, not a conflict)"
+    ],
+    "prep": "She reports a concern; she does not allege wrongdoing. Pin down the date restricted distribution began (2025-02-03) and what she told Ostrow. Avoid overstating her role."
+  },
+  "David Feldstein": {
+    "role": "In-house General Counsel. Witness handling governed with extra caution.",
+    "involvement": "Received E002/E004 CC; gave advice in E003 (privileged \u2014 do not recount as fact testimony); engaged outside counsel (E011, privileged).",
+    "documents": [
+      "E003 (privileged)",
+      "E004",
+      "E010",
+      "E011 (privileged)",
+      "E012 (privileged, addressee)",
+      "E016",
+      "E014"
+    ],
+    "contradictions": [
+      "None attributable as fact testimony"
+    ],
+    "prep": "Truth Preservation: do not draft any examination that quotes his privileged legal advice as if it were fact testimony. Limit any non-privileged groundwork to custody chain (E014) and hold issuance (E013/D002) which he received."
+  },
+  "Linda Okonkwo-Reyes": {
+    "role": "Director of HR. Custodian of NDA (E001) and exit-interview process (E016/D006).",
+    "involvement": "Transmitted signed NDA (E001); issued company-wide hold (E013); conducted exit interview (E016, D006).",
+    "documents": [
+      "E001",
+      "E013",
+      "E016",
+      "D001 (counterparty signature)",
+      "D002",
+      "D006",
+      "E018"
+    ],
+    "contradictions": [
+      "C-01 (as interviewer who recorded the statement)"
+    ],
+    "prep": "Foundation witness for D001 and D006 authenticity; confirm the interview script was directed by Legal without reciting privileged content."
+  },
+  "Tom Bayless": {
+    "role": "IT Security Manager. Custodian/chain-of-custody witness for devices.",
+    "involvement": "Received DLP alert (E008); handed devices to Meridian 2025-05-05; confirmed imaging (E014).",
+    "documents": [
+      "E008",
+      "E014"
+    ],
+    "contradictions": [
+      "None"
+    ],
+    "prep": "Foundation for D003 chain of custody (E008 trigger, E014 custody log). Keep to factual log content."
+  },
+  "J. Whitcombe": {
+    "role": "Senior Forensic Analyst, Meridian Digital Forensics. Single-mention but material foundation/expert witness.",
+    "involvement": "Authored D003 report (imaging methodology, USB log analysis, repository access findings, no deletion activity).",
+    "documents": [
+      "D003"
+    ],
+    "contradictions": [
+      "Source of one side of C-01"
+    ],
+    "prep": "Authenticate write-blocked imaging, chain-of-custody exhibit, and the '11 occasions' access finding; confirm access was standing role-based access, not an error."
+  },
+  "Rachel Bregman": {
+    "role": "Outside litigation counsel, Bregman & Voss LLP.",
+    "involvement": "Advice/strategy communications E011/E012 and D004 are privileged/withheld.",
+    "documents": [
+      "(all substantive content withheld \u2014 see privilege log)"
+    ],
+    "contradictions": [
+      "None public"
+    ],
+    "prep": "Not presented as a fact witness; any involvement privilege-governed."
+  },
+  "Kevin Marsh": {
+    "role": "Senior Recruiter, TalentBridge Partners. Non-custodian third party.",
+    "involvement": "Pitched Halcyon role to Ostrow (E006).",
+    "documents": [
+      "E006"
+    ],
+    "contradictions": [
+      "Corroborating context for C-01 investigation"
+    ],
+    "prep": "Third-party witness on timing of recruitment pipeline."
+  },
+  "Denise Iyer": {
+    "role": "VP Product, Halcyon Robotics. Non-custodian, opposing party's personnel.",
+    "involvement": "Received Ostrow's post-interview email (E007).",
+    "documents": [
+      "E007"
+    ],
+    "contradictions": [
+      "Context for E007 outreach"
+    ]
+  },
+  "Sam Ostrow": {
+    "role": "Marcus Ostrow's spouse. Non-custodian.",
+    "involvement": "Recipient of personal venting email (E005). Mentioned as emergency contact (E018, D006 \u2014 contact info already redacted).",
+    "documents": [
+      "E005",
+      "(redacted contact fields in E018/D006)"
+    ],
+    "contradictions": [
+      "None"
+    ],
+    "prep": "Insufficient information / not a substantive witness. Note: 'Ostrow' alone in E005/E018/D006 emergency-contact fields refers to Sam, not Marcus \u2014 do not conflate."
+  }
+}

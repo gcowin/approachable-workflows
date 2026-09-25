@@ -12,37 +12,34 @@ Each example demonstrates Activities in action—no pattern declarations, just c
 Workflow: Customer Support Resolution
 
 Goal:
-  Resolve a customer issue accurately and quickly.
+Resolve a customer issue accurately and quickly.
 
 Handles:
-  Customer support request
+Customer support request
 
 Activity: Understand Request
-  Kind: Work
-  Role: Researcher
-  Needs: Customer request, account history
-  Do: Classify the issue and identify missing information.
-  Verify: Classification confidence meets threshold.
-  Next: Analyze Resolution
+Kind: Work
+Needs: Customer request, account history
+Do: Classify the issue and identify missing information.
+Verify: Classification confidence meets threshold.
+Next: Analyze Resolution
 
 Activity: Analyze Resolution
-  Kind: Work
-  Role: Analyst
-  Do: Determine the best resolution.
-  Next: Verify Recommendation
+Kind: Work
+Do: Determine the best resolution.
+Next: Verify Recommendation
 
 Activity: Verify Recommendation
-  Kind: Work
-  Role: Analyst
-  Verify: Recommendation is supported by evidence.
-  Next: Resolved
+Kind: Work
+Verify: Recommendation is supported by evidence.
+Next: Resolved
 
 Activity: Resolved
-  Kind: Outcome
-  Do: Request resolved.
+Kind: Outcome
+Do: Request resolved.
 
 Governance:
-  Customer records, policy guidance, independent verification.
+Customer records, policy guidance, independent verification.
 ```
 
 ## Example 2: Insurance Claim Review
@@ -51,31 +48,27 @@ Governance:
 Workflow: Insurance Claim Review
 
 Goal:
-  Reach a supported claim decision.
+Reach a supported claim decision.
 
 Handles:
-  Insurance claim
+Insurance claim
 
 Activity: Validate Claim
-  Kind: Work
-  Role: Researcher
+Kind: Work
 
 Activity: Analyze Coverage
-  Kind: Work
-  Role: Analyst
+Kind: Work
 
 Activity: Verify Findings
-  Kind: Work
-  Role: Analyst
+Kind: Work
 
 Activity: Claim Approval
-  Kind: Approval
-  Role: Approver
-  Do: Approve, deny, or refer the claim.
-  Next:
-    - Approve → Approved
-    - Deny → Denied
-    - Refer → Referred
+Kind: Approval
+Do: Approve, deny, or refer the claim.
+Next:
+  - Approve → Approved
+  - Deny → Denied
+  - Refer → Referred
 ```
 
 ## Example 3: Employee Onboarding
@@ -84,16 +77,16 @@ Activity: Claim Approval
 Workflow: Employee Onboarding
 
 Goal:
-  Prepare a new employee for productive work.
+Prepare a new employee for productive work.
 
 Handles:
-  Employee onboarding request
+Employee onboarding request
 
 Activities:
-  - Provision equipment
-  - Create accounts
-  - Assign training
-  - Schedule introductions → Employee Ready
+- Provision equipment
+- Create accounts
+- Assign training
+- Schedule introductions → Employee Ready
 ```
 
 ## Example 4: Procurement Approval
@@ -102,17 +95,17 @@ Activities:
 Workflow: Procurement Approval
 
 Goal:
-  Authorize valid purchasing requests.
+Authorize valid purchasing requests.
 
 Handles:
-  Purchase request
+Purchase request
 
 Activities:
-  1. Validate budget
-  2. Assess business value
-  3. Generate recommendation
-  4. Request approval
-  5. Approved purchase (outcome)
+1. Validate budget
+2. Assess business value
+3. Generate recommendation
+4. Request approval
+5. Approved purchase (outcome)
 ```
 
 ## Example 5: Security Incident Investigation
@@ -121,18 +114,18 @@ Activities:
 Workflow: Security Incident Investigation
 
 Goal:
-  Protect systems and data from threats.
+Protect systems and data from threats.
 
 Handles:
-  Security incident
+Security incident
 
 Activities:
-  1. Detect alert
-  2. Gather evidence
-  3. Assess severity
-  4. Recommend response
-  5. Escalate if needed
-  6. Contained / escalated / closed (outcome)
+1. Detect alert
+2. Gather evidence
+3. Assess severity
+4. Recommend response
+5. Escalate if needed
+6. Contained / escalated / closed (outcome)
 ```
 
 ## Example 6: Sales Opportunity Qualification
@@ -141,17 +134,17 @@ Activities:
 Workflow: Sales Opportunity Qualification
 
 Goal:
-  Determine whether an opportunity should advance.
+Determine whether an opportunity should advance.
 
 Handles:
-  Sales opportunity
+Sales opportunity
 
 Activities:
-  1. Research account
-  2. Assess fit
-  3. Evaluate opportunity
-  4. Recommend action
-  5. Qualified / nurture / disqualify (outcome)
+1. Research account
+2. Assess fit
+3. Evaluate opportunity
+4. Recommend action
+5. Qualified / nurture / disqualify (outcome)
 ```
 
 ## Example 7: Marketing Content Publication
@@ -160,14 +153,14 @@ Activities:
 Workflow: Marketing Content Publication
 
 Goal:
-  Publish accurate and compliant content.
+Publish accurate and compliant content.
 
 Activities:
-  1. Draft content
-  2. Verify accuracy
-  3. Review compliance
-  4. Approve publication
-  5. Publish content → Content Published
+1. Draft content
+2. Verify accuracy
+3. Review compliance
+4. Approve publication
+5. Publish content → Content Published
 ```
 
 ## Example 8: Contract Review
@@ -176,14 +169,14 @@ Activities:
 Workflow: Contract Review
 
 Goal:
-  Identify risk and determine acceptance.
+Identify risk and determine acceptance.
 
 Activities:
-  1. Extract terms
-  2. Compare against standards
-  3. Review exceptions
-  4. Obtain legal approval
-  5. Approved / revised / rejected (outcome)
+1. Extract terms
+2. Compare against standards
+3. Review exceptions
+4. Obtain legal approval
+5. Approved / revised / rejected (outcome)
 ```
 
 ## Example 9: Data Quality Remediation
@@ -192,14 +185,14 @@ Activities:
 Workflow: Data Quality Remediation
 
 Goal:
-  Improve trustworthiness of enterprise data.
+Improve trustworthiness of enterprise data.
 
 Activities:
-  1. Detect issues
-  2. Analyze root cause
-  3. Recommend fixes
-  4. Validate corrections
-  5. Certified dataset (outcome)
+1. Detect issues
+2. Analyze root cause
+3. Recommend fixes
+4. Validate corrections
+5. Certified dataset (outcome)
 ```
 
 ## Example 10: Product Launch Readiness
@@ -208,15 +201,15 @@ Activities:
 Workflow: Product Launch Readiness
 
 Goal:
-  Determine launch readiness.
+Determine launch readiness.
 
 Activities:
-  - Technical review
-  - Security review
-  - Compliance review
-  - Documentation review
-  - Support review
-  - Launch approval → Approved / Delayed / Cancelled
+- Technical review
+- Security review
+- Compliance review
+- Documentation review
+- Support review
+- Launch approval → Approved / Delayed / Cancelled
 ```
 
 ## Workflow Definition, Subject, and Instance
@@ -225,16 +218,16 @@ Activities:
 Workflow: Refund Review
 
 Workflow Definition:
-  Refund Review (reusable)
+Refund Review (reusable)
 
 Handles:
-  Each customer refund request
+Each customer refund request
 
 Subject:
-  Refund Request 100245 (a specific instance)
+Refund Request 100245 (a specific instance)
 
 Workflow Instance:
-  Execution of Refund Review handling Refund Request 100245.
+Execution of Refund Review handling Refund Request 100245.
 ```
 
 ## Example 11: Multi-Vendor Purchase Order Processing
@@ -243,76 +236,72 @@ Workflow Instance:
 Workflow: Multi-Vendor Purchase Order Processing
 
 Goal:
-  Process a purchase order with multiple line items from multiple vendors efficiently.
+Process a purchase order with multiple line items from multiple vendors efficiently.
 
 Handles:
-  Purchase order
+Purchase order
 
 Activities:
 Activity: Receive Purchase Order
-  Kind: Work
-  Role: Coordinator
-  Do: Validate PO structure and create a work record
-  State Changes:
-    - Set Business State to Received
-    - Set Workflow State to In Progress
-  Next: Process All Line Items
+Kind: Work
+Do: Validate PO structure and create a work record
+State Changes:
+  - Set Business State to Received
+  - Set Workflow State to In Progress
+Next: Process All Line Items
 
 Activity: Process All Line Items
-  Kind: Repeat
-  Role: Analyst
-  Repeat Over: Each line item in the purchase order
-  Maximum: 500 items
-  Do: Validate item number, quantity, price, and vendor for each line item
-  For Each Item:
-    - If valid: Add to approved list
-    - If invalid: Add to exceptions list
-  Events:
-    - On Failure:
-      - Log processing error
-      - Continue to Manual Review
-  Next: Validate All Vendors Concurrently
+Kind: Repeat
+Repeat Over: Each line item in the purchase order
+Maximum: 500 items
+Do: Validate item number, quantity, price, and vendor for each line item
+For Each Item:
+  - If valid: Add to approved list
+  - If invalid: Add to exceptions list
+Events:
+  - On Failure:
+    - Log processing error
+    - Continue to Manual Review
+Next: Validate All Vendors Concurrently
 
 Activity: Validate All Vendors Concurrently
-  Kind: Do Together
-  Role: Researcher
-  Do These Activities Together:
-    - Validate vendor credit standing
-    - Check vendor compliance status
-    - Verify vendor contract terms
-    - Confirm vendor delivery capability
-  Wait For: All activities to complete
-  Time Limit: 30 seconds
-  When All Complete:
-    - If all passed: Continue to Approve Purchase Order
-    - If any failed: Continue to Vendor Review Required
-    - If timeout: Continue to Escalate
+Kind: Do Together
+Do These Activities Together:
+  - Validate vendor credit standing
+  - Check vendor compliance status
+  - Verify vendor contract terms
+  - Confirm vendor delivery capability
+Wait For: All activities to complete
+Time Limit: 30 seconds
+When All Complete:
+  - If all passed: Continue to Approve Purchase Order
+  - If any failed: Continue to Vendor Review Required
+  - If timeout: Continue to Escalate
 
 Activity: Submit to ERP System
-  Kind: Repeat
-  Role: Executor
-  Repeat Until: ERP system confirms receipt
-  Maximum Attempts: 3
-  Wait Between Attempts: 10 seconds, then 30 seconds, then 60 seconds
-  Do: Submit approved purchase order to ERP system
-  Events:
-    - On Timeout:
-      - Alert: ERP integration team
-      - Continue to ERP System Unavailable
-  If Successful:
-    - Set Business State to Submitted to ERP
-    - Continue to PO Completed
-  If All Attempts Fail:
+Kind: Repeat
+Repeat Until: ERP system confirms receipt
+Maximum Attempts: 3
+Wait Between Attempts: 10 seconds, then 30 seconds, then 60 seconds
+Do: Submit approved purchase order to ERP system
+Events:
+  - On Timeout:
+    - Alert: ERP integration team
     - Continue to ERP System Unavailable
+If Successful:
+  - Set Business State to Submitted to ERP
+  - Continue to PO Completed
+If All Attempts Fail:
+  - Continue to ERP System Unavailable
 
 Outcome:
-  PO completed, vendor review required, ERP system unavailable, or manual review
+PO completed, vendor review required, ERP system unavailable, or manual review
 
 Governance:
-  - Each line item validated
-  - All vendors checked in parallel for efficiency
-  - ERP submission retried automatically
-  - Complete audit trail of all validations and attempts
+- Each line item validated
+- All vendors checked in parallel for efficiency
+- ERP submission retried automatically
+- Complete audit trail of all validations and attempts
 ```
 
 ---

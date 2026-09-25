@@ -80,6 +80,22 @@ Provided:
 
 ---
 
+### Working (Optional)
+
+```text
+Working:
+  - Document classification + findings
+  - Key player registry
+```
+
+**Purpose:** Lists information created or updated as activities complete.
+
+**Rules:**
+- Produced mid-execution by activities via `Creates:` (unlike `Provided:`, not known at start)
+- May be read by later activities via `Needs:`
+
+---
+
 ### Returns (Optional)
 
 ```text
@@ -166,7 +182,7 @@ Review Request
 
 ```text
 Activity Name
-  Kind: Work | Choice | Approval | Wait | Outcome | Repeat | Do Together | Run Workflow
+Kind: Work | Choice | Approval | Wait | Outcome | Repeat | Do Together | Run Workflow
 ```
 
 **Purpose:** Defines the structural behavior of the activity.
@@ -187,26 +203,22 @@ Activity Name
 
 ---
 
-#### Role (Optional for Work, Required for Approval)
+#### Role (Optional — default: Analyst)
 
 ```text
 Activity Name
-  Role: Coordinator | Researcher | Analyst | Approver | Executor | Communicator | Observer
+Role: Approver | Observer   # only when the work needs a named role
 ```
 
 **Purpose:** Identifies who is accountable for the activity.
 
-**The 7 Roles:**
+**The default role is Analyst** — interprets, recommends, and verifies. Most activities need no Role field at all; the activity name and `Do:` already say what the work is. Name a Role only when it changes how the workflow must behave:
 
 | Role | Responsibility | When to Use |
 |------|----------------|-------------|
-| **Coordinator** | Routes work, tracks progress, handles handoffs | Workflow orchestration, routing, handoffs |
-| **Researcher** | Finds information, gathers evidence, retrieves data | Data gathering, source lookup, research |
-| **Analyst** | Interprets information, forms recommendations, verifies quality | Analysis, recommendation, verification |
-| **Approver** | Grants or denies authorization | Authorization decisions, approvals |
-| **Executor** | Performs approved actions, executes external changes | External system changes, payments, actions |
-| **Communicator** | Formats and delivers messages | Notifications, emails, reports |
-| **Observer** | Monitors external systems, confirms results | Result confirmation, reconciliation |
+| **Analyst** (default) | Interprets information, forms recommendations, verifies quality | Omit — implied for ordinary work |
+| **Approver** | Grants or denies authorization | Required for Approval activities and high-risk authorization |
+| **Observer** | Monitors external systems, confirms results | Confirming an external action actually took effect |
 
 **Activity feedback is captured automatically in execution reports** - no explicit field needed.
 
@@ -216,7 +228,7 @@ Activity Name
 
 ```text
 Activity Name
-  Needs: Input1, Input2, Input3
+Needs: Input1, Input2, Input3
 ```
 
 **Purpose:** Declares inputs required for this activity (like function parameters).
@@ -229,7 +241,7 @@ Activity Name
 **Examples:**
 ```text
 Analyze Request
-  Needs: Customer record, Policy document, Request details
+Needs: Customer record, Policy document, Request details
 ```
 
 ---
@@ -238,7 +250,7 @@ Analyze Request
 
 ```text
 Activity Name
-  Do: Description of what this activity does
+Do: Description of what this activity does
 ```
 
 **Purpose:** Explains what happens during this activity.
@@ -263,7 +275,7 @@ Do: Compare invoice with purchase order, receiving evidence, and contract terms.
 
 ```text
 Activity Name
-  Creates: Output1, Output2, Output3
+Creates: Output1, Output2, Output3
 ```
 
 **Purpose:** Declares outputs produced by this activity.
@@ -284,7 +296,7 @@ Creates: Recommendation, Risk score, Evidence package
 
 ```text
 Activity Name
-  Verify: Condition to check
+Verify: Condition to check
 ```
 
 **Purpose:** Quality gate that must pass before activity completes.
@@ -311,9 +323,9 @@ Verify: Every material fact has an authoritative source
 
 ```text
 Activity Name
-  Verify: Condition
-  If Failed: Activity Name or action description
-  Next: Activity Name
+Verify: Condition
+If Failed: Activity Name or action description
+Next: Activity Name
 ```
 
 **Purpose:** Defines what happens when verification fails.
@@ -340,7 +352,7 @@ Activity Name
 
 ```text
 Activity Name
-  If Unclear: Activity Name or action description
+If Unclear: Activity Name or action description
 ```
 
 **Purpose:** Handles uncertainty (neither success nor clear failure).
@@ -361,7 +373,7 @@ If Unclear: Route to specialist for investigation
 
 ```text
 Activity Name
-  Next: Activity Name
+Next: Activity Name
 ```
 
 **Purpose:** Defines the next activity on success.
@@ -386,7 +398,7 @@ Next: Completed
 
 ```text
 Activity Name
-  State Changes: Set Business State to Under Review
+State Changes: Set Business State to Under Review
 ```
 
 **Purpose:** Tracks business state transitions.
@@ -406,9 +418,9 @@ State Changes: Set Workflow State to Awaiting Approval
 
 ```text
 Activity Name
-  Events:
-    On Failure: Log error + Notify team → Escalate
-    On Timeout: → System Unavailable
+Events:
+  On Failure: Log error + Notify team → Escalate
+  On Timeout: → System Unavailable
 ```
 
 **Purpose:** Handles exceptional conditions.
@@ -429,13 +441,13 @@ Additional fields required or available for specialized activity kinds.
 
 ```text
 Route Decision
-  Kind: Choice
-  Do: Select routing based on criteria
-  Conditions:
-    1. If amount > $1000 → Senior Approval
-    2. If amount > $500 → Manager Approval
-    3. Otherwise → Auto-Approve
-  Next: The activity named by the selected route
+Kind: Choice
+Do: Select routing based on criteria
+Conditions:
+  1. If amount > $1000 → Senior Approval
+  2. If amount > $500 → Manager Approval
+  3. Otherwise → Auto-Approve
+Next: The activity named by the selected route
 ```
 
 **Purpose:** Defines routing rules for Choice activities.
@@ -469,11 +481,11 @@ Approval activities use only common fields. No additional fields required.
 
 ```text
 Process Each Document
-  Kind: Repeat
-  Repeat Over: Each document in the upload
-  Maximum: 100 documents
-  Do: Classify and analyze each document
-  Next: Summarize Results
+Kind: Repeat
+Repeat Over: Each document in the upload
+Maximum: 100 documents
+Do: Classify and analyze each document
+Next: Summarize Results
 ```
 
 **Purpose:** Defines the collection to iterate over.
@@ -484,12 +496,12 @@ Process Each Document
 
 ```text
 Submit Payment
-  Kind: Repeat
-  Repeat Until: System responds successfully
-  Maximum Attempts: 3
-  Wait Between Attempts: 5s, 15s, 45s
-  If Successful: Confirm
-  If All Attempts Fail: System Unavailable
+Kind: Repeat
+Repeat Until: System responds successfully
+Maximum Attempts: 3
+Wait Between Attempts: 5s, 15s, 45s
+If Successful: Confirm
+If All Attempts Fail: System Unavailable
 ```
 
 **Purpose:** Defines the success condition for retry loops.
@@ -543,12 +555,12 @@ Wait Between Attempts: 5s, 15s, 45s
 
 ```text
 Wait for Upload
-  Kind: Wait
-  Do: Wait for customer to upload documents
-  Time Limit: 48 hours
-  Next:
-    - Documents received → Validate Documents
-    - Timeout → Expired
+Kind: Wait
+Do: Wait for customer to upload documents
+Time Limit: 48 hours
+Next:
+  - Documents received → Validate Documents
+  - Timeout → Expired
 ```
 
 **Purpose:** Sets timeout for wait activities.
@@ -565,16 +577,16 @@ Wait for Upload
 
 ```text
 Validate Request
-  Kind: Do Together
-  Do These Activities Together:
-    - Check Customer Identity
-    - Check Inventory
-    - Check Credit
-  Wait For: All
-  Time Limit: 30s
-  When All Complete:
-    - If all passed → Process
-    - If any failed → Reject
+Kind: Do Together
+Do These Activities Together:
+  - Check Customer Identity
+  - Check Inventory
+  - Check Credit
+Wait For: All
+Time Limit: 30s
+When All Complete:
+  - If all passed → Process
+  - If any failed → Reject
 ```
 
 **Purpose:** Lists activities to execute in parallel.
@@ -604,16 +616,16 @@ Validate Request
 
 ```text
 Activity: Run Credit Check
-  Kind: Run Workflow
-  Workflow: Standard Credit Check
-  Version: 2.1
-  Provide:
-    - Customer ID
-    - Requested Amount
-  Receive:
-    - Credit Decision
-    - Credit Score
-  Next: Process Order
+Kind: Run Workflow
+Workflow: Standard Credit Check
+Version: 2.1
+Provide:
+  - Customer ID
+  - Requested Amount
+Receive:
+  - Credit Decision
+  - Credit Score
+Next: Process Order
 ```
 
 **Purpose:** Names the workflow to invoke.
@@ -632,14 +644,26 @@ Activity: Run Credit Check
 
 ---
 
+## Defaults and Simplifications
+
+These are the canonical defaults for the whole language — other docs link here instead of repeating them.
+
+- **Kind defaults to Work** — only specify for Choice, Outcome, Repeat, Do Together, etc.
+- **Next is implicit** — activities flow to the next one listed unless specified otherwise
+- **Role defaults to Analyst** — specify Approver for authorization or Observer for confirmation; omit otherwise
+- **Needs and Creates are optional** — specify only when not obvious from Do
+- **Execution reporting is automatic** — activity feedback is captured by Role and Kind (no explicit field needed)
+
+---
+
 ## Part III: Examples
 
 ### Minimal Activity
 
 ```text
 Review Request
-  Do: Check if complete
-  Next: Make Decision
+Do: Check if complete
+Next: Make Decision
 ```
 
 ---
@@ -648,13 +672,12 @@ Review Request
 
 ```text
 Review Request
-  Role: Analyst
-  Needs: Request data
-  Do: Check if complete and meets policy
-  Creates: Validation result
-  Verify: Amount and customer ID present
-  If Failed: Reject incomplete
-  Next: Make Decision
+Needs: Request data
+Do: Check if complete and meets policy
+Creates: Validation result
+Verify: Amount and customer ID present
+If Failed: Reject incomplete
+Next: Make Decision
 ```
 
 ---
@@ -663,14 +686,13 @@ Review Request
 
 ```text
 Review Request
-  Role: Analyst
-  Needs: Request data
-  Do: Check if complete and meets policy
-  Creates: Validation result
-  Verify: Amount and customer ID present
-  State Changes: Set Business State to Under Review
-  If Failed: Set Business State to Incomplete; Reject incomplete
-  Next: Make Decision
+Needs: Request data
+Do: Check if complete and meets policy
+Creates: Validation result
+Verify: Amount and customer ID present
+State Changes: Set Business State to Under Review
+If Failed: Set Business State to Incomplete; Reject incomplete
+Next: Make Decision
 ```
 
 ---
@@ -684,47 +706,43 @@ Goal: Approve or reject refund requests
 Handles: Each customer refund request
 
 Provided:
-  - Refund request
-  - Customer record
+- Refund request
+- Customer record
 
 Returns:
-  - Decision
-  - Evidence package
+- Decision
+- Evidence package
 
 Activity: Review Request
-  Role: Analyst
-  Needs: Refund request, Customer record
-  Do: Verify request completeness
-  Verify: All required fields present
-  If Failed: Request More Information
-  Next: Analyze Request
+Needs: Refund request, Customer record
+Do: Verify request completeness
+Verify: All required fields present
+If Failed: Request More Information
+Next: Analyze Request
 
 Activity: Analyze Request
-  Role: Analyst
-  Do: Determine if request meets policy
-  Verify: Decision supported by policy
-  Next: Manager Approval
+Do: Determine if request meets policy
+Verify: Decision supported by policy
+Next: Manager Approval
 
 Activity: Manager Approval
-  Kind: Approval
-  Role: Approver
-  Needs: Analysis results
-  Do: Approve or reject
-  Next:
-    - Approve → Process Refund
-    - Reject → Rejected
+Kind: Approval
+Needs: Analysis results
+Do: Approve or reject
+Next:
+  - Approve → Process Refund
+  - Reject → Rejected
 
 Outcome: Rejected
-  Return: Decision, Reason
+Return: Decision, Reason
 
 Activity: Process Refund
-  Role: Executor
-  Do: Execute refund transaction
-  Verify: Transaction confirmed
-  Next: Completed
+Do: Execute refund transaction
+Verify: Transaction confirmed
+Next: Completed
 
 Outcome: Completed
-  Return: Decision, Transaction ID, Evidence package
+Return: Decision, Transaction ID, Evidence package
 ```
 
 ---

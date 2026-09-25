@@ -1,0 +1,201 @@
+Workflow: Payer Policy Change Impact Analyzer
+
+Purpose: Analyze healthcare payer policy changes and estimate financial impact to identify revenue risks before they affect the organization.
+
+Start Activity: Receive Policy Change Notice
+
+# Phase 1: Policy Change Analysis
+
+Activity: Receive Policy Change Notice
+Handles: New payer policy bulletin or update notification
+Needs: Policy bulletin, payer name, effective date
+Do: Extract key metadata including payer, policy type, effective date, and policy scope
+Creates: Policy change summary, Key metadata record
+Next: Parse Policy Document
+
+Activity: Parse Policy Document
+Needs: Policy change summary, Full policy document
+Do: Read and structure the policy document into sections covering reimbursement changes, coding updates, authorization requirements, and billing rule modifications
+Creates: Structured policy sections, Change categories
+Verify: All major sections identified and categorized
+Next: Identify Policy Changes
+
+Activity: Identify Policy Changes
+Needs: Structured policy sections, Previous policy version (if available)
+Do: Compare new policy to previous version and identify specific changes in reimbursement rates, procedure codes, authorization requirements, and documentation standards
+Creates: Detailed change list, Change severity ratings
+Verify: Changes are specific and measurable
+If Failed: Flag document for manual review
+Next: Summarize Policy Impact
+
+Activity: Summarize Policy Impact
+Needs: Detailed change list, Change categories
+Do: Create executive summary highlighting critical changes, effective dates, and preliminary impact areas
+Creates: Executive policy summary, Critical change highlights
+Next: Identify Affected Services
+
+# Phase 2: Impact Identification
+
+Activity: Identify Affected Services
+Needs: Detailed change list, Provider service catalog
+Do: Map policy changes to specific services, procedures, and CPT/HCPCS codes offered by the healthcare system
+Creates: Affected services list, Procedure code mappings
+Verify: All relevant services identified
+Next: Map to Departments and Service Lines
+
+Activity: Map to Departments and Service Lines
+Needs: Affected services list, Organizational structure data
+Do: Identify which departments, service lines, and provider groups are impacted by the policy changes
+Creates: Department impact map, Service line risk assessment
+Next: Retrieve Historical Data
+
+Activity: Retrieve Historical Data
+Kind: Do Together
+
+Activity: Pull Claims Data
+Needs: Affected services list, Claims database access
+Do: Extract 12-24 months of claims data for affected procedure codes and service lines including claim volumes, billed amounts, and paid amounts
+Creates: Historical claims dataset
+Verify: Data completeness and date range coverage
+
+Activity: Pull Denial Data
+Needs: Affected services list, Denial tracking system
+Do: Extract denial history for affected services including denial reasons, appeal outcomes, and write-off amounts
+Creates: Historical denial dataset
+Verify: Denial reasons mapped correctly
+
+Activity: Pull Contract Data
+Needs: Payer name, Contract management system
+Do: Retrieve current contract terms, reimbursement schedules, and negotiated rates for the specific payer
+Creates: Contract terms summary
+Verify: Contract is current and applicable
+
+End Do Together
+Next: Analyze Claims Patterns
+
+Activity: Analyze Claims Patterns
+Needs: Historical claims dataset, Affected services list
+Do: Calculate claim volumes, average reimbursement per service, seasonal patterns, and top revenue-generating procedures for affected services
+Creates: Claims pattern analysis, Revenue baseline metrics
+Verify: Calculations accurate and patterns identified
+Next: Analyze Current Practice Gaps
+
+# Phase 3: Gap and Financial Analysis
+
+Activity: Analyze Current Practice Gaps
+Needs: Detailed change list, Claims pattern analysis, Current billing procedures
+Do: Compare new policy requirements against current billing practices to identify gaps in documentation, coding, authorization processes, and compliance
+Creates: Gap analysis report, Non-compliance risk areas
+Verify: Gaps are specific and actionable
+Next: Estimate Revenue Impact
+
+Activity: Estimate Revenue Impact
+Kind: Do Together
+
+Activity: Calculate Reimbursement Impact
+Needs: Claims pattern analysis, Detailed change list, Contract terms summary
+Do: Calculate projected revenue change based on new reimbursement rates, annual claim volumes, and rate differentials
+Creates: Reimbursement impact estimate
+Verify: Calculations use correct baseline and rates
+
+Activity: Calculate Denial Risk Exposure
+Needs: Historical denial dataset, Gap analysis report, Claims pattern analysis
+Do: Estimate potential increase in denials based on new requirements and current practice gaps, including expected denial rate increase and average denial amount
+Creates: Denial risk estimate
+Verify: Risk assumptions documented
+
+Activity: Calculate Authorization Impact
+Needs: Detailed change list, Claims pattern analysis
+Do: Estimate revenue delay or loss from new prior authorization requirements including delay costs and potential authorization denial rates
+Creates: Authorization impact estimate
+Verify: Authorization volume estimates reasonable
+
+End Do Together
+Next: Aggregate Financial Impact
+
+Activity: Aggregate Financial Impact
+Needs: Reimbursement impact estimate, Denial risk estimate, Authorization impact estimate
+Do: Combine all financial estimates into total annual impact, categorized by impact type and confidence level
+Creates: Total financial impact estimate, Impact breakdown by category, Confidence ratings
+Verify: No double-counting, totals reconcile
+If Failed: Recalculate individual components
+Next: Identify High-Risk Areas
+
+Activity: Identify High-Risk Areas
+Needs: Total financial impact estimate, Department impact map, Service line risk assessment
+Do: Rank service lines and departments by financial exposure to prioritize mitigation efforts
+Creates: Risk-ranked service lines, Priority mitigation targets
+Next: Develop Mitigation Strategies
+
+# Phase 4: Recommendation Development
+
+Activity: Develop Mitigation Strategies
+Needs: Gap analysis report, Risk-ranked service lines, Detailed change list
+Do: Create specific action plans for each high-risk area including process changes, documentation improvements, staff training needs, and timeline for implementation
+Creates: Mitigation action plan, Implementation timeline
+Verify: Actions are specific and assignable
+Next: Estimate Mitigation Costs
+
+Activity: Estimate Mitigation Costs
+Needs: Mitigation action plan
+Do: Calculate costs for implementing mitigation strategies including training, process changes, technology updates, and staffing adjustments
+Creates: Mitigation cost estimate, Cost-benefit analysis
+Verify: Cost estimates include all implementation components
+Next: Develop Monitoring Plan
+
+Activity: Develop Monitoring Plan
+Needs: Risk-ranked service lines, Mitigation action plan
+Do: Define key performance indicators, monitoring frequency, reporting structure, and early warning triggers for tracking policy change impact
+Creates: Monitoring and reporting plan, KPI definitions
+Next: Compile Executive Report
+
+Activity: Compile Executive Report
+Needs: Executive policy summary, Total financial impact estimate, Department impact map, Mitigation action plan, Mitigation cost estimate, Monitoring and reporting plan
+Do: Create comprehensive executive report with policy summary, financial impact, affected areas, recommendations, costs, and implementation timeline
+Creates: Executive impact report, Presentation deck
+Verify: Report is clear, complete, and actionable
+Next: Submit for Review
+
+# Phase 5: Review and Approval
+
+Activity: Submit for Review
+Needs: Executive impact report
+Do: Distribute report to Revenue Cycle Leadership, Finance Department, and Executive Leadership for review with review deadline and approval requirements
+Creates: Review package with supporting documentation
+Next: Leadership Review
+
+Activity: Leadership Review
+Needs: Executive impact report, All supporting analysis
+Do: Finance and Revenue Cycle leadership review financial impact estimates, mitigation strategies, and cost-benefit analysis, then approve or request modifications
+Creates: Review decision, Feedback for revisions
+Choice:
+  If: Approved
+    Next: Distribute Final Report
+  If: Revisions Requested
+    Next: Incorporate Feedback
+  If: Rejected
+    Next: Document Decision and Archive
+
+Activity: Incorporate Feedback
+Needs: Review decision, Feedback for revisions, Executive impact report
+Do: Update analysis and recommendations based on leadership feedback and recalculate impacts if assumptions changed
+Creates: Revised executive report
+Next: Submit for Review
+
+Activity: Distribute Final Report
+Needs: Executive impact report (approved), Review decision
+Do: Distribute approved report to all stakeholders including department heads, contracting team, and implementation leads
+Creates: Stakeholder notification, Implementation authorization
+Next: Initiate Implementation Tracking
+
+Activity: Initiate Implementation Tracking
+Needs: Mitigation action plan (approved), Monitoring and reporting plan
+Do: Set up tracking systems, assign action items to responsible parties, establish review cadence, and create monitoring dashboard
+Creates: Implementation tracker, Assigned action items, Monitoring dashboard
+Next: End
+
+Activity: Document Decision and Archive
+Needs: Review decision, Executive impact report
+Do: Document reasons for rejection, archive analysis for future reference, and notify stakeholders
+Creates: Decision documentation, Archived analysis record
+Next: End

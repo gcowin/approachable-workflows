@@ -1,0 +1,65 @@
+[
+  {
+    "id": "P-01",
+    "item": "ALL_EMAILS#E003",
+    "basis": "Attorney-client (GC legal advice on patent/disclosure timing)",
+    "status": "PRIVILEGED \u2014 WITHHOLD",
+    "confidence": "Confident"
+  },
+  {
+    "id": "P-02",
+    "item": "ALL_EMAILS#E011",
+    "basis": "Attorney-client + anticipation of litigation",
+    "status": "PRIVILEGED \u2014 WITHHOLD",
+    "confidence": "Confident"
+  },
+  {
+    "id": "P-03",
+    "item": "ALL_EMAILS#E012",
+    "basis": "Attorney-client + express work product",
+    "status": "PRIVILEGED \u2014 WITHHOLD",
+    "confidence": "Confident"
+  },
+  {
+    "id": "P-04",
+    "item": "D004",
+    "basis": "Attorney work product (strategy, weaknesses, exposure range)",
+    "status": "PRIVILEGED \u2014 WITHHOLD (highest sensitivity)",
+    "confidence": "Confident"
+  },
+  {
+    "id": "P-05",
+    "item": "ALL_EMAILS#E010",
+    "basis": "Factual report to counsel",
+    "status": "NEEDS ATTORNEY JUDGMENT",
+    "confidence": "Needs Review"
+  },
+  {
+    "id": "P-06",
+    "item": "ALL_EMAILS#E014",
+    "basis": "Work-product-referencing sentence only",
+    "status": "NEEDS ATTORNEY JUDGMENT",
+    "confidence": "Needs Review"
+  },
+  {
+    "id": "P-07",
+    "item": "ALL_EMAILS#E016",
+    "basis": "Conduct per counsel script; underlying facts in D006",
+    "status": "NEEDS ATTORNEY JUDGMENT",
+    "confidence": "Needs Review"
+  },
+  {
+    "id": "P-08",
+    "item": "D003",
+    "basis": "Counsel-commissioned expert report; underlying facts discoverable",
+    "status": "NEEDS ATTORNEY JUDGMENT",
+    "confidence": "Needs Review"
+  },
+  {
+    "id": "P-09",
+    "item": "D005",
+    "basis": "Consulting-expert framing; underlying comparison facts independently discoverable",
+    "status": "NEEDS ATTORNEY JUDGMENT",
+    "confidence": "Needs Review"
+  }
+]

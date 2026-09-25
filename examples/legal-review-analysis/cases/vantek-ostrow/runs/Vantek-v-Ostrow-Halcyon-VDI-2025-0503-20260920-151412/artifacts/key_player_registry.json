@@ -1,0 +1,89 @@
+{
+  "Marcus Ostrow": {
+    "role": "Central figure. Former Senior Firmware Engineer, Actuator Systems (Employee ID VD-04471). Subject of the trade-secret misappropriation investigation.",
+    "documents": [
+      "D001",
+      "E001",
+      "E002",
+      "E005",
+      "E006",
+      "E007",
+      "E008",
+      "E009",
+      "E014 (as subject)",
+      "E016",
+      "D003 (custodian)",
+      "D006"
+    ]
+  },
+  "Priya Chandrasekaran": {
+    "role": "VP Engineering; Ostrow's manager. Fact witness on distribution controls and timing of company awareness.",
+    "documents": [
+      "E002",
+      "E010",
+      "E015"
+    ]
+  },
+  "David Feldstein": {
+    "role": "In-house General Counsel. Witness handling governed with extra caution.",
+    "documents": [
+      "E003 (privileged)",
+      "E004",
+      "E010",
+      "E011 (privileged)",
+      "E012 (privileged, addressee)",
+      "E016",
+      "E014"
+    ]
+  },
+  "Linda Okonkwo-Reyes": {
+    "role": "Director of HR. Custodian of NDA (E001) and exit-interview process (E016/D006).",
+    "documents": [
+      "E001",
+      "E013",
+      "E016",
+      "D001 (counterparty signature)",
+      "D002",
+      "D006",
+      "E018"
+    ]
+  },
+  "Tom Bayless": {
+    "role": "IT Security Manager. Custodian/chain-of-custody witness for devices.",
+    "documents": [
+      "E008",
+      "E014"
+    ]
+  },
+  "J. Whitcombe": {
+    "role": "Senior Forensic Analyst, Meridian Digital Forensics. Single-mention but material foundation/expert witness.",
+    "documents": [
+      "D003"
+    ]
+  },
+  "Rachel Bregman": {
+    "role": "Outside litigation counsel, Bregman & Voss LLP.",
+    "documents": [
+      "(all substantive content withheld \u2014 see privilege log)"
+    ]
+  },
+  "Kevin Marsh": {
+    "role": "Senior Recruiter, TalentBridge Partners. Non-custodian third party.",
+    "documents": [
+      "E006"
+    ]
+  },
+  "Denise Iyer": {
+    "role": "VP Product, Halcyon Robotics. Non-custodian, opposing party's personnel.",
+    "documents": [
+      "E007"
+    ]
+  },
+  "Sam Ostrow": {
+    "role": "Marcus Ostrow's spouse. Non-custodian.",
+    "documents": [
+      "E005",
+      "(redacted contact fields in E018/D006)"
+    ]
+  }
+}

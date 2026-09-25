@@ -10,13 +10,12 @@ An **activity** is the atomic unit of work in Approachable-Workflows. Every work
 
 ```text
 Review Request
-  Role: Analyst
-  Needs: Request data
-  Do: Check if complete and meets policy
-  Creates: Validation result
-  Verify: Amount and customer ID present
-  If Failed: Reject incomplete
-  Next: Make Decision
+Needs: Request data
+Do: Check if complete and meets policy
+Creates: Validation result
+Verify: Amount and customer ID present
+If Failed: Reject incomplete
+Next: Make Decision
 ```
 
 This single activity defines:
@@ -37,7 +36,7 @@ Every activity separates two concerns:
 | Concern | Field | Example |
 |---------|-------|---------|
 | **What structural behavior occurs?** | `Kind` | Work, Choice, Approval, Wait, Outcome |
-| **Who is accountable?** | `Role` | Researcher, Analyst, Approver, Executor |
+| **Who is accountable?** | `Role` | Approver (default: Analyst) |
 
 ### Why This Separation Matters
 
@@ -52,8 +51,7 @@ Problem: "analyst_review_task" mixes behavior (review) with identity (analyst).
 **With separation (Approachable-Workflows):**
 ```text
 Review Request
-  Kind: Work
-  Role: Analyst
+Kind: Work
 ```
 Benefit: Change staffing (analyst → AI agent) without changing the workflow graph.
 
@@ -66,9 +64,8 @@ Standard activity that performs work.
 
 ```text
 Analyze Request
-  Role: Analyst
-  Do: Compare data and form recommendation
-  Next: Verify Recommendation
+Do: Compare data and form recommendation
+Next: Verify Recommendation
 ```
 
 **Graph behavior:** Single entry, single exit, conditional branching on verification.
@@ -80,12 +77,12 @@ Decision point that routes based on conditions.
 
 ```text
 Route by Amount
-  Kind: Choice
-  Do: Select routing based on amount
-  Conditions:
-    1. If amount > $1000 → Senior Approval
-    2. Otherwise → Auto-Approve
-  Next: The activity named by the selected route
+Kind: Choice
+Do: Select routing based on amount
+Conditions:
+  1. If amount > $1000 → Senior Approval
+  2. Otherwise → Auto-Approve
+Next: The activity named by the selected route
 ```
 
 **Graph behavior:** Single entry, multiple exits, condition-based edge selection.
@@ -97,12 +94,11 @@ Human authorization gate.
 
 ```text
 Approve Payment
-  Kind: Approval
-  Role: Approver
-  Do: Review and approve or reject
-  Next:
-    - Approve → Execute Payment
-    - Reject → Return to Analysis
+Kind: Approval
+Do: Review and approve or reject
+Next:
+  - Approve → Execute Payment
+  - Reject → Return to Analysis
 ```
 
 **Graph behavior:** Single entry, multiple exits based on approval decision.
@@ -116,12 +112,12 @@ Pauses for external event or timeout.
 
 ```text
 Wait for Upload
-  Kind: Wait
-  Do: Wait for customer to upload documents
-  Time Limit: 48 hours
-  Next:
-    - Documents received → Validate Documents
-    - Timeout → Expired
+Kind: Wait
+Do: Wait for customer to upload documents
+Time Limit: 48 hours
+Next:
+  - Documents received → Validate Documents
+  - Timeout → Expired
 ```
 
 **Graph behavior:** Suspends execution, resumes on event or timeout.
@@ -133,11 +129,11 @@ Iterates over collection or until condition.
 
 ```text
 Process Each Document
-  Kind: Repeat
-  Repeat Over: Each document in the upload
-  Maximum: 100 documents
-  Do: Classify and analyze each document
-  Next: Summarize Results
+Kind: Repeat
+Repeat Over: Each document in the upload
+Maximum: 100 documents
+Do: Classify and analyze each document
+Next: Summarize Results
 ```
 
 **Graph behavior:** Loop node with internal iteration, single exit when complete.
@@ -149,13 +145,13 @@ Runs multiple activities concurrently.
 
 ```text
 Validate Request
-  Kind: Do Together
-  Do These Activities Together:
-    - Check Customer Credit
-    - Check Inventory
-    - Check Fraud
-  Wait For: All
-  Next: Process Order
+Kind: Do Together
+Do These Activities Together:
+  - Check Customer Credit
+  - Check Inventory
+  - Check Fraud
+Wait For: All
+Next: Process Order
 ```
 
 **Graph behavior:** Fork node, parallel subgraph execution, join on completion.
@@ -167,11 +163,11 @@ Invokes another workflow.
 
 ```text
 Run Credit Check
-  Kind: Run Workflow
-  Workflow: Standard Credit Check
-  Provide: Customer ID, Amount
-  Receive: Credit decision, Credit score
-  Next: Process Order
+Kind: Run Workflow
+Workflow: Standard Credit Check
+Provide: Customer ID, Amount
+Receive: Credit decision, Credit score
+Next: Process Order
 ```
 
 **Graph behavior:** Subgraph invocation, state passed in/out.
@@ -183,9 +179,9 @@ Workflow termination point.
 
 ```text
 Completed
-  Kind: Outcome
-  Status: Success
-  Return: Final results, Evidence package
+Kind: Outcome
+Status: Success
+Return: Final results, Evidence package
 ```
 
 **Graph behavior:** Terminal node, no outgoing edges.
@@ -198,18 +194,18 @@ Activities pass data through `Creates:` → `Needs:` connections:
 
 ```text
 Research Policy
-  Creates: Policy document, Policy version
-  Next: Analyze Request
+Creates: Policy document, Policy version
+Next: Analyze Request
 
 Analyze Request
-  Needs: Policy document, Policy version
-  Creates: Recommendation
-  Next: Verify Recommendation
+Needs: Policy document, Policy version
+Creates: Recommendation
+Next: Verify Recommendation
 
 Verify Recommendation
-  Needs: Recommendation, Policy document
-  Creates: Verification result
-  Next: Make Decision
+Needs: Recommendation, Policy document
+Creates: Verification result
+Next: Make Decision
 ```
 
 **This is the graph's data flow:**
@@ -225,10 +221,10 @@ Research → [Policy] → Analyze → [Recommendation] → Verify → [Verificat
 
 ```text
 Gather Records
-  Do: Retrieve records from sources
-  Verify: Every material fact has an authoritative source
-  If Failed: Try alternate sources
-  Next: Analyze Records
+Do: Retrieve records from sources
+Verify: Every material fact has an authoritative source
+If Failed: Try alternate sources
+Next: Analyze Records
 ```
 
 **Graph behavior:**
@@ -242,19 +238,9 @@ Gather Records
 
 ## Roles and Activity Feedback
 
-The `Role` determines what feedback is captured in execution reports:
+The `Role` indicates what feedback is captured in execution reports — by default (Analyst) reports hold analysis, recommendations, and verification results; an Approver's holds the authorization record; an Observer's holds the confirmation record.
 
-| Role | Activity Feedback |
-|------|-------------------|
-| **Researcher** | Sources cited, provenance trail |
-| **Analyst** | Reasoning, findings, recommendations |
-| **Approver** | Authorization record (who, when, decision, reasoning) |
-| **Executor** | Action record (what was done, system response, transaction ID) |
-| **Observer** | Confirmation record (what was verified, timestamp) |
-| **Communicator** | Message sent, recipient, timestamp |
-| **Coordinator** | Routing decisions, handoffs, ownership changes |
-
-**This is automatic — you don't write reporting code.**
+**This is automatic — you don't write reporting code.** See the [Role field reference](../reference/fields.md#role-optional--default-analyst) for the full table.
 
 ---
 
@@ -277,17 +263,17 @@ graph = {
 ### Approachable-Workflows (Plain Language)
 ```text
 Review Request
-  Verify: Request is complete
-  If Failed: Reject incomplete
-  Next: Make Decision
+Verify: Request is complete
+If Failed: Reject incomplete
+Next: Make Decision
 
 Make Decision
-  Do: Approve or reject
-  Next: Notify Customer
+Do: Approve or reject
+Next: Notify Customer
 
 Reject incomplete
-  Do: Return request with missing fields
-  Next: Completed
+Do: Return request with missing fields
+Next: Completed
 ```
 
 **Same graph, readable by anyone.**
@@ -389,7 +375,6 @@ When a workflow runs:
 
 **See it in action:**
 - [Tutorial: Your First Workflow](../tutorials/first-workflow.md)
-- [Step-by-Step Guide](../tutorials/step-by-step.md) — Complete learning guide
 
 **Look up syntax:**
 - [Field Reference](../reference/fields.md) — All fields explained

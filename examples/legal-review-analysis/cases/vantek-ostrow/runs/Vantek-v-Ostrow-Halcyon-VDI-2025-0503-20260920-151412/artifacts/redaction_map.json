@@ -1,0 +1,56 @@
+[
+  {
+    "file": "ALL_EMAILS#E018",
+    "span": "SSN 512-88-4471",
+    "type": "SSN",
+    "action": "REDACT"
+  },
+  {
+    "file": "ALL_EMAILS#E018",
+    "span": "Home address 4417 Willowmere Lane, Denton, TX 76201",
+    "type": "Address",
+    "action": "REDACT"
+  },
+  {
+    "file": "ALL_EMAILS#E018",
+    "span": "Personal cell (940) 555-0148",
+    "type": "Phone",
+    "action": "REDACT"
+  },
+  {
+    "file": "ALL_EMAILS#E018",
+    "span": "Emergency contact Sam Ostrow (spouse) + address + (940) 555-0149",
+    "type": "Third-party PII",
+    "action": "REDACT"
+  },
+  {
+    "file": "D006",
+    "span": "Home address 4417 Willowmere Lane, Denton, TX 76201",
+    "type": "Address",
+    "action": "REDACT"
+  },
+  {
+    "file": "D006",
+    "span": "Personal phone (940) 555-0148",
+    "type": "Phone",
+    "action": "REDACT"
+  },
+  {
+    "file": "D006",
+    "span": "Emergency contact Sam Ostrow (spouse) - (940) 555-0149",
+    "type": "Third-party PII",
+    "action": "REDACT"
+  },
+  {
+    "file": "D003",
+    "span": "Device asset #VD-4471/VD-4472; USB serial SNDK-88231-A",
+    "type": "Evidentiary identifiers \u2014 NOT PII",
+    "action": "KEEP UNREDACTED"
+  },
+  {
+    "file": "D001; E001",
+    "span": "Work email; Employee ID VD-04471; job title",
+    "type": "Business identifiers \u2014 not sensitive PII",
+    "action": "KEEP UNREDACTED"
+  }
+]

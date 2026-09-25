@@ -12,41 +12,41 @@ This is a one-page template showing all the key fields you can use in an Approac
 Workflow: [Name]
 
 Goal:
-  What business result should this workflow achieve?
+What business result should this workflow achieve?
 
 Handles:
-  What does each execution process?
+What does each execution process?
 
-Provided Information:
-  What must be known at the start?
+Provided:
+What must be known at the start?
 
-Final Result:
-  What will be returned?
+Working:
+What is created or updated as activities complete?
+
+Returns:
+What will be returned?
 
 Roles:
-  Who is responsible for each kind of work?
-
-Capabilities:
-  Which kinds of work does the workflow perform?
+Who is accountable? (default: Analyst — name Approver or Observer only when needed)
 
 Activity: [Clear verb and object]
-  Kind: Work, Choice, Approval, Wait, or Outcome
-  Role: Who is responsible?
-  Needs: What information is available?
-  Do: What happens?
-  Creates: What result is expected?
-  Verify: What must be true before continuing?
-  If Failed: What happens if the Activity cannot complete?
-  If Unclear: What happens if verification cannot reach a clear result?
-  Next: What Activity or outcome follows?
+Kind: Work, Choice, Approval, Wait, or Outcome
+Role: Only when needed — Approver or Observer
+Needs: What information is available?
+Do: What happens?
+Creates: What result is expected?
+Verify: What must be true before continuing?
+If Failed: What happens if the Activity cannot complete?
+If Unclear: What happens if verification cannot reach a clear result?
+Next: What Activity or outcome follows?
 
 Activity: [Another clear verb and object]
-  ...
-  Next: [Eventually Completed]
+...
+Next: [Eventually Completed]
 
 Governance:
-  How does the workflow ensure dependable outcomes?
-  
+How does the workflow ensure dependable outcomes?
+
 ```
 
 ---
@@ -61,16 +61,14 @@ Goal: [What you want to achieve]
 Handles: [What each execution processes]
 
 Activity: [First Step]
-  Role: [Who]
-  Do: [What happens]
-  Next: [Second Step]
+Do: [What happens]
+Next: [Second Step]
 
 Activity: [Second Step]
-  Role: [Who]
-  Do: [What happens]
-  Verify: [What must be true]
-  If Failed: [Where to go if fails]
-  Next: Completed
+Do: [What happens]
+Verify: [What must be true]
+If Failed: [Where to go if fails]
+Next: Completed
 
 ```
 
@@ -86,7 +84,7 @@ Activity: [Second Step]
 - **Next**: Where to go next (or Outcome)
 
 ### Quality & Control
-- **Role**: Who is responsible (Coordinator, Researcher, Analyst, Approver, Executor, Communicator, Observer)
+- **Role**: Who is accountable — defaults to Analyst; name Approver or Observer only when needed
 - **Verify**: Condition that must be true
 - **If Failed**: Path when verification fails
 - **If Unclear**: Path when result is uncertain
@@ -100,21 +98,19 @@ Activity: [Second Step]
 
 ### Advanced Features
 - **State Changes**: Track business/workflow state
-- **Events**: Handle exceptions (OnFailure, OnTimeout, OnEscalation)
+- **Events**: Handle exceptions (On Failure, On Timeout, On Escalation)
 - **Configuration**: Tools, settings, environment
 
 ---
 
-## 7 Roles to Choose From
+## Roles
+
+The default role is **Analyst** — interpret, recommend, verify. Omit the `Role:` field for ordinary work; name one only when it changes behavior:
 
 | Role | Use When | Activity Feedback |
 |------|----------|-------------------|
-| **Coordinator** | Routing, tracking, handoffs | Routing decisions, handoff confirmations |
-| **Researcher** | Finding information, gathering evidence | Sources, versions, retrieval timestamps |
-| **Analyst** | Interpreting data, making recommendations, verifying | Analysis, recommendations, verification results |
+| **Analyst** (default) | Interpreting data, making recommendations, verifying | Analysis, recommendations, verification results |
 | **Approver** | Authorizing decisions | Decision, identity, timestamp, comments |
-| **Executor** | Performing external actions | Transaction ID, system response |
-| **Communicator** | Sending messages, notifications | Message, recipient, delivery confirmation |
 | **Observer** | Monitoring, confirming external results | Observed state, confirmation results |
 
 ---
@@ -185,7 +181,7 @@ Submit (Repeat: max 3 attempts) → Confirm → Done
 - **Visual Patterns**: [visual-patterns.md](../docs/reference/visual-patterns.md) - Mermaid diagrams
 - **Full Spec**: [spec-for-humans.md](../docs/reference/spec-for-humans.md) - Complete specification
 - **Common Mistakes**: [spec-for-humans.md](../docs/reference/spec-for-humans.md#part-ii-common-mistakes--how-to-avoid-them) - What to avoid
-- **Step-by-Step Guide**: [step-by-step.md](../docs/tutorials/step-by-step.md) - Complete learning guide
+- **Tutorial**: [first-workflow.md](../docs/tutorials/first-workflow.md) - Complete learning guide
 
 ---
 

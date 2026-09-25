@@ -56,12 +56,11 @@ def review_request(request):
 
 ```text
 Review Request
-  Role: Analyst
-  Needs: Refund request, Customer record
-  Do: Check if the refund request meets our policy
-  Verify: Request amount and customer ID are present
-  If Failed: Reject incomplete request
-  Next: Make Decision
+Needs: Refund request, Customer record
+Do: Check if the refund request meets our policy
+Verify: Request amount and customer ID are present
+If Failed: Reject incomplete request
+Next: Make Decision
 ```
 
 **Why this works:**
@@ -92,28 +91,26 @@ Start simple, add detail only when needed:
 **Simple (10 lines):**
 ```text
 Review Request
-  Do: Check the request
-  Next: Make Decision
+Do: Check the request
+Next: Make Decision
 ```
 
 **Standard (with verification):**
 ```text
 Review Request
-  Role: Analyst
-  Do: Check the request
-  Verify: Request is complete
-  Next: Make Decision
+Do: Check the request
+Verify: Request is complete
+Next: Make Decision
 ```
 
 **Extended (with state and events):**
 ```text
 Review Request
-  Role: Analyst
-  Do: Check the request
-  Verify: Request is complete
-  State Changes: Set Business State to Under Review
-  If Failed: Set Business State to Incomplete
-  Next: Make Decision
+Do: Check the request
+Verify: Request is complete
+State Changes: Set Business State to Under Review
+If Failed: Set Business State to Incomplete
+Next: Make Decision
 ```
 
 All three are valid. The language doesn't force complexity.
@@ -122,25 +119,23 @@ All three are valid. The language doesn't force complexity.
 
 Smart defaults reduce noise:
 - `Kind:` defaults to `Work` (most common)
-- `Role:` implies capabilities (Analyst analyzes, Researcher researches)
+- `Role:` defaults to Analyst — only Approver and Observer need naming
 - `Next:` is implicit when there's only one path forward
 
 **Without defaults:**
 ```text
 Activity: Review Request
-  Kind: Work
-  Role: Analyst
-  Capability: Analysis
-  Next: Make Decision
-  If Success: Make Decision
+Kind: Work
+Capability: Analysis
+Next: Make Decision
+If Success: Make Decision
 ```
 
 **With defaults:**
 ```text
 Review Request
-  Role: Analyst
-  Do: Check the request
-  Next: Make Decision
+Do: Check the request
+Next: Make Decision
 ```
 
 Same meaning, half the text.
@@ -157,8 +152,8 @@ Critics say: *"That's not graph engineering, it's just plain text."*
 
 ```text
 Review Request
-  If Failed: Reject incomplete
-  Next: Make Decision
+If Failed: Reject incomplete
+Next: Make Decision
 ```
 
 This defines:
@@ -179,7 +174,7 @@ When an agent runs this workflow:
 
 **This is graph traversal**, not sequential prompting.
 
-[See why-it-works.md](why-it-works.md) for evaluation evidence (99.5/100).
+[See why-it-works.md](why-it-works.md) for evaluation evidence (100/100).
 
 ---
 
@@ -210,23 +205,20 @@ When an agent runs this workflow:
 ### Approachable-Workflows (15 lines)
 ```text
 Review Request
-  Role: Analyst
-  Needs: Refund request
-  Do: Check if complete and meets policy
-  Verify: Amount and customer ID present
-  If Failed: Reject incomplete
-  Next: Make Decision
+Needs: Refund request
+Do: Check if complete and meets policy
+Verify: Amount and customer ID present
+If Failed: Reject incomplete
+Next: Make Decision
 
 Make Decision
-  Role: Approver
-  Do: Approve or reject based on policy
-  Verify: Decision has reasoning
-  Next: Notify Customer
+Do: Approve or reject based on policy
+Verify: Decision has reasoning
+Next: Notify Customer
 
 Notify Customer
-  Role: Communicator
-  Do: Send email to customer
-  Next: Completed
+Do: Send email to customer
+Next: Completed
 ```
 
 ### YAML (30 lines)

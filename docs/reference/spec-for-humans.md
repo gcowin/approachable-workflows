@@ -35,24 +35,24 @@ Workflow: Expense Approval
 Goal: Approve or reject expense requests
 
 Activities:
-  Receive Request → Review Expense → Manager Decision → Notify Employee
+Receive Request → Review Expense → Manager Decision → Notify Employee
 
 Receive Request:
-  Employee submits expense with receipt
+Employee submits expense with receipt
 
 Review Expense:
-  Check amount is within policy limits
+Check amount is within policy limits
 
 Manager Decision:
-  Approve if under $500, otherwise escalate
+Approve if under $500, otherwise escalate
 
 Notify Employee:
-  Send approval or rejection email
+Send approval or rejection email
 
 ### Add Detail As Needed
 
 **For production workflows, add:**
-- Role for each activity
+- Role only when it matters — Approver for authorization, Observer for confirmation (Analyst is the default)
 - Verify conditions for quality gates
 - If Failed paths for critical activities
 - Kind when using Choice, Approval, Wait, Repeat, Do Together, Run Workflow, or Outcome
@@ -63,15 +63,14 @@ Workflow: Expense Approval
 Goal: Approve or reject expense requests
 
 Review Expense
-  Role: Analyst
-  Do: Check amount is within policy limits
-  Verify: Amount under limit, receipt attached
-  If Failed: Reject Request
-  Next: Manager Decision
+Do: Check amount is within policy limits
+Verify: Amount under limit, receipt attached
+If Failed: Reject Request
+Next: Manager Decision
 
 **For complex workflows, add:**
 - State tracking (Workflow State and Business State)
-- Event handlers (OnFailure, OnTimeout, etc.)
+- Event handlers (On Failure, On Timeout, etc.)
 - Performance monitoring
 - Needs/Creates for explicit data flow
 
@@ -103,27 +102,17 @@ A workflow definition is reusable. "Handles" describes what each execution proce
 #### 2.3 Information
 Approachable-Workflows distinguishes:
 
-- Provided information: Known when the workflow begins and unchanged during the instance
-- Working information: Created or updated as Activities complete
-- Final result: Returned when the workflow reaches an outcome
+- Provided information (`Provided:`): Known when the workflow begins and unchanged during the instance
+- Working information (`Working:`): Created or updated as Activities complete
+- Final result (`Returns:`): Returned when the workflow reaches an outcome
 
 Information may have plain-language rules such as “Amount is required” or “Decision must be Approved, Rejected, or Needs review.” Profiles or runtime records may add technical schemas.
 
 #### 2.4 Roles
 
-A role describes both responsibility and the type of work performed. A role may be fulfilled by a person, an agent, a team, or a service when the workflow is deployed.
+A role describes who is accountable, not the implementation. A person, agent, team, or service may fulfill it when deployed.
 
-**Standard roles (7 roles)**:
-
-- Coordinator: Routes work, tracks progress, handles handoffs, coordinates activities
-- Researcher: Finds information, gathers evidence, retrieves data from sources
-- Analyst: Interprets information, analyzes data, produces findings or recommendations, verifies quality
-- Approver: Grants or denies authorization, makes approval decisions
-- Executor: Performs approved actions, executes external changes
-- Observer: Watches conditions, monitors systems, raises events
-- Communicator: Formats and delivers messages, reports, notifications
-
-A workflow should name only the roles it needs. The role name indicates what type of work that activity performs.
+**Analyst is the default role** — interpreting, recommending, and verifying is implied for ordinary work activities, so most activities need no Role field. Name a Role only when it changes behavior: `Approver` for authorization decisions (required for Approval activities) and `Observer` for confirming that an external action actually took effect. See the Role field reference in [fields.md](fields.md#role-optional--default-analyst).
 
 #### 2.5 Activity
 
@@ -133,9 +122,7 @@ An Activity is the smallest named unit of workflow behavior. An Activity may per
 
 **Activity feedback is captured automatically** by the runtime based on Role and Kind — no explicit field needed. Execution reports provide durable proof of what each activity did, verified, and produced.
 
-**Captured for all activities**: Who performed it, start/end time, inputs used, outputs created, verification results.
-
-**Role-specific additions**: Approver (decision, authorization), Executor (transaction ID, system response), Researcher (sources, citations), Observer (confirmation results).
+**Captured for all activities**: Who performed it, start/end time, inputs used, outputs created, verification results. Role-specific additions (e.g., Approver decision records, Observer confirmation records) are listed in [fields.md](fields.md#role-optional--default-analyst).
 
 **Retention and access controls** are configured at runtime/deployment level per governance requirements.
 
@@ -187,19 +174,19 @@ Profiles may add business outcomes such as Approved, Rejected, Contained, or Nee
 **Simple usage** (no declaration needed):
 
 Process Order
-  Do: Execute the order
-  Next: Completed
+Do: Execute the order
+Next: Completed
 
 **Detailed usage** (declare when specifying returns):
 
 Process Order
-  Do: Execute the order
-  Next: Completed
+Do: Execute the order
+Next: Completed
 
 Outcome: Completed
-  Return:
-    - Order confirmation
-    - Transaction ID
+Return:
+  - Order confirmation
+  - Transaction ID
 
 #### 2.11 State
 
@@ -230,12 +217,12 @@ The two state types are independent. A workflow may be in Waiting (workflow stat
 **Activities may change state**:
 
 Receive Refund Request
-  Kind: Work
-  Do: Create the work record and classify the request
-  State Changes:
-    - Set Business State to Submitted
-    - Set Workflow State to In Progress
-  Next: Check Required Information
+Kind: Work
+Do: Create the work record and classify the request
+State Changes:
+  - Set Business State to Submitted
+  - Set Workflow State to In Progress
+Next: Check Required Information
 
 State changes should be visible so operators, auditors, and runtime tools can understand the current condition of the workflow and subject.
 
@@ -255,20 +242,19 @@ Events let workflows respond when important conditions occur beyond normal flow 
 **Activities may define event responses**:
 
 Analyze Refund Request
-  Kind: Work
-  Role: Analyst
-  Do: Review the request and produce a recommendation
-  
-  Events:
-    On Failure:
-      - Log the analysis failure for this request
-      - Notify the Refund Operations team
-      - Continue to Escalate the request
-    
-    On Timeout:
-      - Continue to Escalate the request
-  
-  Next: Verify Recommendation
+Kind: Work
+Do: Review the request and produce a recommendation
+
+Events:
+  On Failure:
+    - Log the analysis failure for this request
+    - Notify the Refund Operations team
+    - Continue to Escalate the request
+
+  On Timeout:
+    - Continue to Escalate the request
+
+Next: Verify Recommendation
 
 Events provide a clear way to handle exceptional conditions without cluttering the main workflow logic.
 
@@ -298,7 +284,7 @@ The Core formalism is intentionally small. It answers:
 - Next (or implicit flow)
 
 **Add for production workflows:**
-- Role (who is accountable)
+- Role only when needed (Approver for approval, Observer for confirmation; Analyst is default)
 - Verify (quality gates)
 - If Failed (error paths)
 - Kind (when using Choice, Approval, Wait, Repeat, Do Together, Run Workflow, or Outcome)
@@ -313,32 +299,27 @@ The Core formalism is intentionally small. It answers:
 
 **Defaults and Simplifications:**
 
-- **Kind defaults to Work** - only specify for Choice, Outcome, Repeat, Do Together, etc.
-- **Next is implicit** - activities flow to the next one listed unless specified otherwise
-- **Role indicates work type** - Analyst analyzes and verifies, Researcher researches, Executor executes, etc.
-- **Needs and Creates are optional** - specify only when not obvious from Do
-- **Execution reporting is automatic** - activity feedback captured based on Role and Kind (no explicit field needed)
+Kind defaults to Work, Next is implicit, Role indicates work type, Needs/Creates are optional, and execution reporting is automatic. See **Defaults and Simplifications** in [fields.md](fields.md#defaults-and-simplifications) for the canonical list.
 
 #### 4.1 Optional Activity Performance Expectations
 
 Activities may declare expected performance for monitoring and alerting.
 
 Activity: Verify Recommendation
-  Kind: Work
-  Role: Analyst
-  
-  Do: Verify the recommendation
-  
-  Expected Performance:
-    - Complete within 5 seconds normally
-    - Success rate above 95 percent
-    - Alert if duration exceeds 10 seconds
-    - Alert if success rate falls below 90 percent
-  
-  Track:
-    - How long verification takes
-    - Whether verification passed or failed
-    - How often unclear results occur
+Kind: Work
+
+Do: Verify the recommendation
+
+Expected Performance:
+  - Complete within 5 seconds normally
+  - Success rate above 95 percent
+  - Alert if duration exceeds 10 seconds
+  - Alert if success rate falls below 90 percent
+
+Track:
+  - How long verification takes
+  - Whether verification passed or failed
+  - How often unclear results occur
 
 Performance expectations guide runtime monitoring without making them mandatory for all workflows.
 
@@ -348,7 +329,7 @@ Performance expectations guide runtime monitoring without making them mandatory 
 
 Performs a meaningful action.
 
-Common work types include: research, analyze, create, verify, communicate, execute, monitor, and coordinate - indicated by the Role.
+Common work types include: research, analyze, create, verify, communicate, execute, monitor, and coordinate - made clear by the Activity name and its `Do:`.
 
 #### 5.2 Choice
 
@@ -359,31 +340,31 @@ A Choice Activity should end with Otherwise unless the workflow intentionally tr
 **Conditions may use simple comparisons and logical operators**:
 
 Activity: Choose Approval Path
-  Kind: Choice
-  
-  Needs:
-    - Recommendation
-    - Amount
-    - Risk level
-    - Verification result
-  
-  Do: Choose the next path
-  
-  Conditions:
-    1. If verification result is Unclear
-       → Continue to Needs Review
-    
-    2. If verification result is Failed
-       → Continue to Needs Review
-    
-    3. If amount is greater than 1000 AND risk level is High
-       → Continue to Senior Manager Approval
-    
-    4. If amount is greater than 1000 OR requires authorization is Yes
-       → Continue to Manager Approval
-    
-    5. Otherwise
-       → Continue to Execute Authorized Decision
+Kind: Choice
+
+Needs:
+  - Recommendation
+  - Amount
+  - Risk level
+  - Verification result
+
+Do: Choose the next path
+
+Conditions:
+  1. If verification result is Unclear
+     → Continue to Needs Review
+
+  2. If verification result is Failed
+     → Continue to Needs Review
+
+  3. If amount is greater than 1000 AND risk level is High
+     → Continue to Senior Manager Approval
+
+  4. If amount is greater than 1000 OR requires authorization is Yes
+     → Continue to Manager Approval
+
+  5. Otherwise
+     → Continue to Execute Authorized Decision
 
 Logical operators (AND, OR, NOT) and comparisons (is, is not, greater than, less than, in list) keep conditions readable while adding expressive power.
 
@@ -399,11 +380,11 @@ Pauses until a stated event, condition, or time. It must state what happens if t
 
 Ends the workflow or branch with a named result.
 
-### 5A. Advanced Activity Kinds
+### 6. Advanced Activity Kinds
 
 Advanced structures for concurrent work, repeated work, and reusable workflows. They use the same plain-language style as Core Activities.
 
-#### 5A.1 Repeat
+#### 6.1 Repeat
 
 Performs work multiple times over a collection or until a condition is met.
 
@@ -415,28 +396,27 @@ Goal: Validate all line items in an invoice
 Handles: Each supplier invoice
 
 Activity: Process Invoice Line Items
-  Kind: Repeat
-  Role: Analyst
-  
-  Repeat Over: Each line item in the invoice
-  Maximum: 100 items
-  
-  Do: Validate quantity, price, and tax for the line item
-  
-  For Each Item:
-    - If valid: Add to running total
-    - If invalid: Record the error and continue with next item
-  
-  Creates:
-    - Validated line items
-    - Total amount
-    - Error list
-  
-  When Complete:
-    - Continue to Calculate Invoice Total
-  
-  If Failed:
-    - Continue to Manual Line Item Review
+Kind: Repeat
+
+Repeat Over: Each line item in the invoice
+Maximum: 100 items
+
+Do: Validate quantity, price, and tax for the line item
+
+For Each Item:
+  - If valid: Add to running total
+  - If invalid: Record the error and continue with next item
+
+Creates:
+  - Validated line items
+  - Total amount
+  - Error list
+
+When Complete:
+  - Continue to Calculate Invoice Total
+
+If Failed:
+  - Continue to Manual Line Item Review
 ```
 
 **Example - Retry with backoff**:
@@ -447,23 +427,22 @@ Goal: Submit payment transaction with retry logic
 Handles: Payment transaction
 
 Activity: Call External Payment System
-  Kind: Repeat
-  Role: Executor
-  
-  Repeat Until: External system responds successfully
-  Maximum Attempts: 3
-  Wait Between Attempts: 5 seconds, then 10 seconds, then 30 seconds
-  
-  Do: Submit payment transaction to external system
-  
-  If Successful:
-    - Continue to Confirm Payment
-  
-  If All Attempts Fail:
-    - Continue to Payment System Unavailable
+Kind: Repeat
+
+Repeat Until: External system responds successfully
+Maximum Attempts: 3
+Wait Between Attempts: 5 seconds, then 10 seconds, then 30 seconds
+
+Do: Submit payment transaction to external system
+
+If Successful:
+  - Continue to Confirm Payment
+
+If All Attempts Fail:
+  - Continue to Payment System Unavailable
 ```
 
-#### 5A.2 Do Together
+#### 6.2 Do Together
 
 Execute multiple Activities at the same time and wait for results.
 
@@ -473,22 +452,21 @@ Goal: Validate refund request with parallel checks
 Handles: Customer refund request
 
 Activity: Validate Refund Request
-  Kind: Do Together
-  Role: Coordinator
-  
-  Do These Activities Together:
-    - Validate Customer Identity
-    - Validate Invoice Exists
-    - Check Fraud Indicators
-    - Verify Payment Method
-  
-  Wait For: All activities to complete
-  Time Limit: 30 seconds
-  
-  When All Complete:
-    - If all passed: Continue to Analyze Request
-    - If any failed: Continue to Escalate the request
-    - If time expired: Continue to Escalate the request
+Kind: Do Together
+
+Do These Activities Together:
+  - Validate Customer Identity
+  - Validate Invoice Exists
+  - Check Fraud Indicators
+  - Verify Payment Method
+
+Wait For: All activities to complete
+Time Limit: 30 seconds
+
+When All Complete:
+  - If all passed: Continue to Analyze Request
+  - If any failed: Continue to Escalate the request
+  - If time expired: Continue to Escalate the request
 ```
 
 **Alternative - First to respond**:
@@ -499,22 +477,21 @@ Goal: Get policy document with failover
 Handles: Policy lookup request
 
 Activity: Get Policy from Multiple Sources
-  Kind: Do Together
-  Role: Researcher
-  
-  Do These Activities Together:
-    - Fetch from Primary Policy Service
-    - Fetch from Backup Policy Service
-  
-  Wait For: First successful response
-  Time Limit: 10 seconds
-  
-  Needs: The response from whichever completes first
-  
-  Next: Apply Policy Rules
+Kind: Do Together
+
+Do These Activities Together:
+  - Fetch from Primary Policy Service
+  - Fetch from Backup Policy Service
+
+Wait For: First successful response
+Time Limit: 10 seconds
+
+Needs: The response from whichever completes first
+
+Next: Apply Policy Rules
 ```
 
-#### 5A.3 Run Workflow
+#### 6.3 Run Workflow
 
 Call another workflow as part of this workflow.
 
@@ -524,30 +501,29 @@ Goal: Process customer order with credit verification
 Handles: Customer order
 
 Activity: Perform Credit Check
-  Kind: Run Workflow
-  Role: Coordinator
-  
-  Workflow: Standard Credit Check
-  Version: 2.1
-  
-  Provide:
-    - Customer number
-    - Requested amount
-  
-  Receive:
-    - Credit score
-    - Credit decision
-    - Check timestamp
-  
-  Next:
-    - If Credit decision is Approved: Continue to Process Order
-    - If Credit decision is Rejected: Continue to Reject Request
-    - Otherwise: Continue to Manual Credit Review
+Kind: Run Workflow
+
+Workflow: Standard Credit Check
+Version: 2.1
+
+Provide:
+  - Customer number
+  - Requested amount
+
+Receive:
+  - Credit score
+  - Credit decision
+  - Check timestamp
+
+Next:
+  - If Credit decision is Approved: Continue to Process Order
+  - If Credit decision is Rejected: Continue to Reject Request
+  - Otherwise: Continue to Manual Credit Review
 ```
 
 Invoking workflows promotes reuse and maintains consistency across business processes.
 
-### 6. Author-facing Activity format
+### 7. Author-facing Activity format
 
 #### Activity: Review applicable policy
 
@@ -555,9 +531,6 @@ Invoking workflows promotes reuse and maintains consistency across business proc
 
 Work
 
-**Role**
-
-Researcher
 
 **Needs**
 
@@ -590,12 +563,12 @@ Send the request to a policy specialist.
 
 Analyze the request.
 
-### 7. Compact Activity notation
+### 8. Compact Activity notation
 
 Documents, forms, and diagrams may use a compact representation when the full meaning remains available.
 
 Review applicable policy
-Work | Researcher | Research
+Work | Research
 Needs: Request summary and current policy library
 Creates: Policy findings and source references
 Verify: Every material finding has a current authoritative source
@@ -604,7 +577,7 @@ Next: Analyze the request
 
 The compact form is a view of the same Activity, not a different language.
 
-### 8. Activity identity and references
+### 9. Activity identity and references
 
 Each Activity must have a stable identifier in the portable record, even if authors see only its name.
 
@@ -614,7 +587,7 @@ Each Activity must have a stable identifier in the portable record, even if auth
 - Renaming an Activity should not change its stable identity.
 - Evidence and execution records should refer to the stable identity.
 
-### 9. Activity completion rule
+### 10. Activity completion rule
 
 A Work Activity succeeds only after:
 
@@ -645,12 +618,12 @@ An Approval Activity succeeds only after an authorized decision is recorded. A W
 - Unclear results need If Unclear paths → route to human review
 
 **Governance:**
-- High-risk Executor → preceded by Approver (Law 2: Authorization)
+- High-risk action → preceded by Approver (Law 2: Authorization)
 - External actions → followed by Observer (Law 3: Confirmation)
 - Never force unclear to clear (Law 1: Truth Preservation)
 
 **Accountability:**
-- Specify Role for production workflows (who is responsible?)
+- Role defaults to Analyst; specify `Approver` for authorization and `Observer` for confirmation
 - Approvals automatically capture feedback (decision, identity, timestamp)
 - Use Kind: Approval + Needs to document what approver reviews
 
@@ -664,9 +637,9 @@ An Approval Activity succeeds only after an authorized decision is recorded. A W
 - [ ] Every Wait has Time Limit + timeout path
 - [ ] Every Repeat is bounded (Maximum/Maximum Attempts)
 - [ ] Critical activities have If Failed paths
-- [ ] External Executor followed by Observer
+- [ ] External actions followed by Observer confirmation
 - [ ] Verify conditions are objective
-- [ ] Roles specified for accountability
+- [ ] Roles named only where needed (Approver, Observer)
 - [ ] Approvals use Kind: Approval
 - [ ] Unclear → human review, not forced clear
 - [ ] Every activity has Next (unless Outcome)
@@ -676,7 +649,7 @@ An Approval Activity succeeds only after an authorized decision is recorded. A W
 **See also**: 
 - [Visual Patterns](visual-patterns.md) for correct pattern examples
 - [Quick Reference](quick-reference.md) for field requirements
-- [Step-by-Step Guide](../tutorials/step-by-step.md) for complete learning guide
+- [Your First Workflow](../tutorials/first-workflow.md) for the complete learning guide
 
 ## Part II: One-Page Core Authoring Template
 
@@ -685,7 +658,7 @@ An Approval Activity succeeds only after an authorized decision is recorded. A W
 The template includes:
 - Full workflow structure with all fields
 - Minimal quick-start version for simple workflows
-- 7 roles reference table
+- Role guide (default Analyst; Approver/Observer when needed)
 - 8 activity kinds reference
 - Common workflow patterns
 - Tips for getting started
@@ -697,15 +670,14 @@ Goal: [What you want to achieve]
 Handles: [What each execution processes]
 
 Activity: [Name]
-  Role: [Who]
-  Do: [What happens]
-  Verify: [What must be true]
-  If Failed: [Failure path]
-  Next: [Next activity]
+Do: [What happens]
+Verify: [What must be true]
+If Failed: [Failure path]
+Next: [Next activity]
 
 ## Part III: Core Conformance
 
-### 17. Conformance
+### 11. Conformance
 
 **Essential conformance:**
 
@@ -717,7 +689,7 @@ Activity: [Name]
 
 **Production workflow conformance adds:**
 
-6. Assign a Role to each Activity
+6. Name a Role only where it changes behavior (Approver, Observer)
 7. State checks for decisions and external actions
 8. Define If Failed behavior when checks can fail
 9. Bound every repeating path
@@ -729,7 +701,7 @@ Activity: [Name]
 13. Event handlers when needed
 14. Performance expectations when needed
 
-### 18. Validation messages
+### 12. Validation messages
 
 Validators should report errors in business language.
 
@@ -741,7 +713,7 @@ Validators should report errors in business language.
 - “Issue refund changes an external system but does not require an action record as evidence.”
 - “Request changes can repeat without a limit.”
 
-### 19. Progressive Formalization Guide
+### 13. Progressive Formalization Guide
 
 **Start simple for**:
 
@@ -762,7 +734,7 @@ Validators should report errors in business language.
 - Threshold or weighted verification
 - Multi-party approval
 
-### 20. Summary
+### 14. Summary
 
 Approachable-Workflows Core provides a plain-language, business-analyst-friendly way to describe accountable workflows while remaining powerful enough for AI engineers and structured enough for runtime compilation.
 

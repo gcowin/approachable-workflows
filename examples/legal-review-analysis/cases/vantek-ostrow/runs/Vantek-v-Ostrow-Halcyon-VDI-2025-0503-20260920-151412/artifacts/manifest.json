@@ -1,0 +1,93 @@
+{
+  "matter": "VDI-2025-0503",
+  "instance": "Vantek-v-Ostrow-Halcyon-VDI-2025-0503-20260920-151412",
+  "generated": "2026-09-20T16:14Z",
+  "note": "OneDrive mount unavailable on this host; audit trail stored on disk per artifact-transport config (write to disk first). Files >20KB also flagged for chat attachment at /app/created/ (not writable on this host \u2014 noted limitation).",
+  "files": [
+    {
+      "path": "Discovery_Review_Report_Vantek_v_Ostrow_Halcyon_VDI-2025-0503.html",
+      "bytes": 24720,
+      "sha256": "9801e6e8467b4c07"
+    },
+    {
+      "path": "Redacted-Documents/D006_Ostrow_Exit_Interview_Form_REDACTED.txt",
+      "bytes": 308,
+      "sha256": "e46be4912aa8cd48"
+    },
+    {
+      "path": "Redacted-Documents/E018_HR_Payroll_Email_REDACTED.txt",
+      "bytes": 714,
+      "sha256": "5f39c52dc2fda1cf"
+    },
+    {
+      "path": "artifacts/key_player_registry.json",
+      "bytes": 2177,
+      "sha256": "12b6431c214d4580"
+    },
+    {
+      "path": "artifacts/redaction_map.md",
+      "bytes": 1045,
+      "sha256": "1f425b86f17105d8"
+    },
+    {
+      "path": "artifacts/timeline.md",
+      "bytes": 3191,
+      "sha256": "f254e9df5c7a33dc"
+    },
+    {
+      "path": "artifacts/witness_prep_summaries.md",
+      "bytes": 5849,
+      "sha256": "725fd55d8d6e3d84"
+    },
+    {
+      "path": "artifacts/witness_summaries.json",
+      "bytes": 6117,
+      "sha256": "b6dfc252b6fe5deb"
+    },
+    {
+      "path": "artifacts/evidence_log.md",
+      "bytes": 5188,
+      "sha256": "6fb94ab17e8bc1f0"
+    },
+    {
+      "path": "artifacts/redaction_map.json",
+      "bytes": 1355,
+      "sha256": "3b673ecc64c9a64a"
+    },
+    {
+      "path": "artifacts/privilege_log_draft.json",
+      "bytes": 1796,
+      "sha256": "5ebe636ae8531fae"
+    },
+    {
+      "path": "artifacts/privileged_document_log_DRAFT.md",
+      "bytes": 1220,
+      "sha256": "7cc6b10929a59d10"
+    },
+    {
+      "path": "artifacts/contradictions_register.md",
+      "bytes": 672,
+      "sha256": "190838c5ecf12054"
+    },
+    {
+      "path": "artifacts/timeline.json",
+      "bytes": 3476,
+      "sha256": "be754fceaee7a35f"
+    },
+    {
+      "path": "artifacts/contradictions.json",
+      "bytes": 401,
+      "sha256": "72f95ebddd04282b"
+    },
+    {
+      "path": "artifacts/exclusion_log.json",
+      "bytes": 264,
+      "sha256": "485fdd9376466be9"
+    },
+    {
+      "path": "artifacts/approval_record.md",
+      "bytes": 1194,
+      "sha256": "346e05842219e5bd"
+    }
+  ]
+}

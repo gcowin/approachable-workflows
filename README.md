@@ -23,18 +23,16 @@ A workflow is a sequence of named activities, each with a role, purpose, inputs,
 
 ```text
 Review Request
-  Role: Analyst
-  Needs: Refund request
-  Do: Check if request meets policy
-  Verify: Amount and customer ID present
-  If Failed: Reject incomplete
-  Next: Make Decision
+Needs: Refund request
+Do: Check if request meets policy
+Verify: Amount and customer ID present
+If Failed: Reject incomplete
+Next: Make Decision
 
 Make Decision
-  Role: Approver
-  Do: Approve or reject based on policy
-  Verify: Decision has reasoning
-  Next: Notify Customer
+Do: Approve or reject based on policy
+Verify: Decision has reasoning
+Next: Notify Customer
 ```
 
 Core pattern: Research → Analyze → Verify → Approve → Execute.
@@ -58,11 +56,10 @@ Traditional workflows execute the same way every time. **LLM-executed workflows 
 
 ```text
 Activity: Research Policy
-  Role: Researcher
-  Do: Find applicable policy from approved sources
-  Verify: At least one authoritative source cited for each finding
-  If Failed: Use approved backup source
-  Next: Analyze Request
+Do: Find applicable policy from approved sources
+Verify: At least one authoritative source cited for each finding
+If Failed: Use approved backup source
+Next: Analyze Request
 ```
 
 **Why this matters:**
@@ -85,22 +82,22 @@ Each Verify: becomes a logged assertion in execution reports. Auditors see what 
 **Example without Verify** (unsafe):
 ```text
 Activity: Analyze Request
-  Do: Determine if customer qualifies
-  Next: Approve or Reject
+Do: Determine if customer qualifies
+Next: Approve or Reject
 ```
 → LLM might invent qualifications, cite non-existent policies, or miss critical details.
 
 **Example with Verify** (safe):
 ```text
 Activity: Analyze Request
-  Do: Determine if customer qualifies based on policy
-  Verify: 
-    - All criteria from policy section 4.2 evaluated
-    - Each criterion has supporting evidence
-    - Recommendation matches policy outcome table
-  If Failed: Flag for manual analyst review
-  If Unclear: Escalate to specialist
-  Next: Manager Approval
+Do: Determine if customer qualifies based on policy
+Verify: 
+  - All criteria from policy section 4.2 evaluated
+  - Each criterion has supporting evidence
+  - Recommendation matches policy outcome table
+If Failed: Flag for manual analyst review
+If Unclear: Escalate to specialist
+Next: Manager Approval
 ```
 → Forces the LLM to ground its reasoning in verifiable facts, with explicit handling when it can't.
 
@@ -160,7 +157,7 @@ Choose your path based on what you need:
 
 💡 **Want to understand how it works?**
 - [Overview](docs/explanation/overview.md) — Complete concepts + sophisticated example
-- [Why It Works](docs/explanation/why-it-works.md) — 99.5/100 evaluation
+- [Why It Works](docs/explanation/why-it-works.md) — 100/100 evaluation
 - [Design Philosophy](docs/explanation/philosophy.md) — Why plain language?
 - [The Activity Model](docs/explanation/activity-model.md) — How activities work
 - [All explanations →](docs/explanation/)

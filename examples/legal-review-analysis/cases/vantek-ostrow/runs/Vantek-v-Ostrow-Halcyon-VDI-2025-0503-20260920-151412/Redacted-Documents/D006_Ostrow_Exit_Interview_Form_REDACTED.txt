@@ -1,0 +1,8 @@
+Employee Name: Marcus D. Ostrow
+Employee ID: VD-04471
+Position: Senior Firmware Engineer, Actuator Systems
+Home Address: [ADDRESS REDACTED]
+Personal Phone: [PHONE REDACTED]
+Emergency Contact: Sam Ostrow (Spouse) - [PHONE REDACTED]
+Last Day: May 16, 2025
+... (full text = source D006 with spans above masked)

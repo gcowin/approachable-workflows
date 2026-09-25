@@ -10,19 +10,19 @@
 
 ```text
 Validate Request
-  Kind: Do Together
-  Do These Activities Together:
-    - Check Customer Credit
-    - Check Inventory Availability
-    - Check Fraud Indicators
-  
-  Wait For: All
-  Time Limit: 30 seconds
-  
-  When All Complete:
-    - If all passed → Process Order
-    - If any failed → Reject Request
-    - If timeout → Escalate
+Kind: Do Together
+Do These Activities Together:
+  - Check Customer Credit
+  - Check Inventory Availability
+  - Check Fraud Indicators
+
+Wait For: All
+Time Limit: 30 seconds
+
+When All Complete:
+  - If all passed → Process Order
+  - If any failed → Reject Request
+  - If timeout → Escalate
 ```
 
 ---
@@ -51,20 +51,19 @@ Gather Records → Analyze Records → Verify Analysis
 
 ```text
 Validate Request
-  Kind: Do Together
-  Role: Coordinator
-  Needs: Order details
-  Do These Activities Together:
-    - Check Customer Credit
-    - Check Inventory Availability  
-    - Check Fraud Indicators
-  
-  Wait For: All
-  Time Limit: 30 seconds
-  
-  Creates: Validation results
-  Verify: All checks completed
-  Next: Process Order
+Kind: Do Together
+Needs: Order details
+Do These Activities Together:
+  - Check Customer Credit
+  - Check Inventory Availability  
+  - Check Fraud Indicators
+
+Wait For: All
+Time Limit: 30 seconds
+
+Creates: Validation results
+Verify: All checks completed
+Next: Process Order
 ```
 
 **Key fields:**
@@ -81,28 +80,25 @@ Each parallel activity is defined normally:
 
 ```text
 Check Customer Credit
-  Role: Analyst
-  Needs: Customer ID
-  Do: Query credit service and return credit score
-  Creates: Credit score, Credit status
-  Verify: Credit service responded successfully
-  If Failed: Log credit check failure
+Needs: Customer ID
+Do: Query credit service and return credit score
+Creates: Credit score, Credit status
+Verify: Credit service responded successfully
+If Failed: Log credit check failure
 
 Check Inventory Availability
-  Role: Researcher
-  Needs: Product ID, Quantity
-  Do: Check warehouse inventory levels
-  Creates: Inventory status, Available quantity
-  Verify: Inventory levels retrieved
-  If Failed: Log inventory check failure
+Needs: Product ID, Quantity
+Do: Check warehouse inventory levels
+Creates: Inventory status, Available quantity
+Verify: Inventory levels retrieved
+If Failed: Log inventory check failure
 
 Check Fraud Indicators
-  Role: Analyst
-  Needs: Order details, Customer history
-  Do: Run fraud detection rules
-  Creates: Fraud risk score
-  Verify: Fraud check completed
-  If Failed: Log fraud check failure
+Needs: Order details, Customer history
+Do: Run fraud detection rules
+Creates: Fraud risk score
+Verify: Fraud check completed
+If Failed: Log fraud check failure
 ```
 
 ---
@@ -115,17 +111,17 @@ All parallel activities must complete successfully:
 
 ```text
 Validate Request
-  Kind: Do Together
-  Do These Activities Together:
-    - Check Customer Credit
-    - Check Inventory Availability
-    - Check Fraud Indicators
-  
-  Wait For: All
-  
-  When All Complete:
-    - If all passed → Process Order
-    - If any failed → Reject Request
+Kind: Do Together
+Do These Activities Together:
+  - Check Customer Credit
+  - Check Inventory Availability
+  - Check Fraud Indicators
+
+Wait For: All
+
+When All Complete:
+  - If all passed → Process Order
+  - If any failed → Reject Request
 ```
 
 **Use when:** All checks are required for the workflow to proceed.
@@ -136,15 +132,15 @@ First successful activity wins:
 
 ```text
 Get Customer Data
-  Kind: Do Together
-  Do These Activities Together:
-    - Query Primary CRM
-    - Query Backup CRM
-  
-  Wait For: Any
-  
-  When Any Complete:
-    - First success → Continue with that data
+Kind: Do Together
+Do These Activities Together:
+  - Query Primary CRM
+  - Query Backup CRM
+
+Wait For: Any
+
+When Any Complete:
+  - First success → Continue with that data
 ```
 
 **Use when:** Multiple sources can provide the same data (redundancy/failover).
@@ -155,17 +151,17 @@ Get Customer Data
 
 ```text
 Validate Request
-  Kind: Do Together
-  Do These Activities Together:
-    - Check Customer Credit
-    - Check Inventory Availability
-    - Check Fraud Indicators
-  
-  Time Limit: 30 seconds
-  
-  Next:
-    - All completed → Process Order
-    - Timeout → Escalate for manual review
+Kind: Do Together
+Do These Activities Together:
+  - Check Customer Credit
+  - Check Inventory Availability
+  - Check Fraud Indicators
+
+Time Limit: 30 seconds
+
+Next:
+  - All completed → Process Order
+  - Timeout → Escalate for manual review
 ```
 
 **Best practice:** Always set a `Time Limit` to prevent hanging workflows.
@@ -179,75 +175,67 @@ Workflow: Fast Order Validation
 Goal: Validate orders with parallel checks
 
 Receive Order
-  Role: Coordinator
-  Needs: Order request
-  Do: Create order record and extract details
-  Creates: Order details
-  Verify: Order has customer ID and product ID
-  Next: Validate Request
+Needs: Order request
+Do: Create order record and extract details
+Creates: Order details
+Verify: Order has customer ID and product ID
+Next: Validate Request
 
 Validate Request
-  Kind: Do Together
-  Role: Coordinator
-  Needs: Order details
-  Do These Activities Together:
-    - Check Customer Credit
-    - Check Inventory Availability
-    - Check Fraud Indicators
-  
-  Wait For: All
-  Time Limit: 30 seconds
-  
-  Creates: Validation results
-  Verify: All checks completed
-  
-  Next:
-    - All passed → Process Order
-    - Any failed → Reject Request
-    - Timeout → Escalate for Manual Review
+Kind: Do Together
+Needs: Order details
+Do These Activities Together:
+  - Check Customer Credit
+  - Check Inventory Availability
+  - Check Fraud Indicators
+
+Wait For: All
+Time Limit: 30 seconds
+
+Creates: Validation results
+Verify: All checks completed
+
+Next:
+  - All passed → Process Order
+  - Any failed → Reject Request
+  - Timeout → Escalate for Manual Review
 
 Check Customer Credit
-  Role: Analyst
-  Needs: Customer ID
-  Do: Query credit service and return credit score
-  Creates: Credit score (pass/fail)
-  Verify: Credit service responded successfully
-  If Failed: Mark as failed check
+Needs: Customer ID
+Do: Query credit service and return credit score
+Creates: Credit score (pass/fail)
+Verify: Credit service responded successfully
+If Failed: Mark as failed check
 
 Check Inventory Availability
-  Role: Researcher
-  Needs: Product ID, Quantity
-  Do: Check warehouse inventory levels
-  Creates: Inventory status (available/unavailable)
-  Verify: Inventory levels retrieved
-  If Failed: Mark as failed check
+Needs: Product ID, Quantity
+Do: Check warehouse inventory levels
+Creates: Inventory status (available/unavailable)
+Verify: Inventory levels retrieved
+If Failed: Mark as failed check
 
 Check Fraud Indicators
-  Role: Analyst
-  Needs: Order details, Customer history
-  Do: Run fraud detection rules
-  Creates: Fraud risk score (pass/fail)
-  Verify: Fraud check completed
-  If Failed: Mark as failed check
+Needs: Order details, Customer history
+Do: Run fraud detection rules
+Creates: Fraud risk score (pass/fail)
+Verify: Fraud check completed
+If Failed: Mark as failed check
 
 Process Order
-  Role: Executor
-  Needs: Order details, Validation results
-  Do: Submit order to fulfillment system
-  Verify: Order accepted by fulfillment
-  Next: Notify Customer
+Needs: Order details, Validation results
+Do: Submit order to fulfillment system
+Verify: Order accepted by fulfillment
+Next: Notify Customer
 
 Reject Request
-  Role: Coordinator
-  Needs: Validation results
-  Do: Log rejection reason and notify customer
-  Next: Completed
+Needs: Validation results
+Do: Log rejection reason and notify customer
+Next: Completed
 
 Escalate for Manual Review
-  Role: Coordinator
-  Needs: Order details, Partial validation results
-  Do: Route to operations team for manual validation
-  Next: Completed
+Needs: Order details, Partial validation results
+Do: Route to operations team for manual validation
+Next: Completed
 ```
 
 ---
@@ -276,39 +264,39 @@ Check Fraud (19s) ┘
 
 ```text
 Gather Data
-  Kind: Do Together
-  Do These Activities Together:
-    - Fetch Customer Record
-    - Fetch Policy Documents
-    - Fetch Transaction History
-  Wait For: All
-  Next: Analyze Data
+Kind: Do Together
+Do These Activities Together:
+  - Fetch Customer Record
+  - Fetch Policy Documents
+  - Fetch Transaction History
+Wait For: All
+Next: Analyze Data
 ```
 
 ### 2. Parallel Notifications
 
 ```text
 Notify All Parties
-  Kind: Do Together
-  Do These Activities Together:
-    - Send Email to Customer
-    - Post to Slack Channel
-    - Update CRM Record
-  Wait For: All
-  Next: Completed
+Kind: Do Together
+Do These Activities Together:
+  - Send Email to Customer
+  - Post to Slack Channel
+  - Update CRM Record
+Wait For: All
+Next: Completed
 ```
 
 ### 3. Failover with Any
 
 ```text
 Retrieve Data
-  Kind: Do Together
-  Do These Activities Together:
-    - Query Primary Database
-    - Query Secondary Database
-  Wait For: Any
-  Time Limit: 10 seconds
-  Next: Process Data
+Kind: Do Together
+Do These Activities Together:
+  - Query Primary Database
+  - Query Secondary Database
+Wait For: Any
+Time Limit: 10 seconds
+Next: Process Data
 ```
 
 ---
@@ -339,7 +327,7 @@ Retrieve Data
 
 **Learn more:**
 - [Activity Model](../explanation/activity-model.md) — Understanding activities and roles
-- [Step-by-Step Tutorial](../tutorials/step-by-step.md) — Advanced features including Repeat
+- [Your First Workflow](../tutorials/first-workflow.md) — Tutorial including advanced features like Repeat
 
 **See examples:**
 - [Visual Patterns: Do Together](../reference/visual-patterns.md#pattern-5-parallel-execution)

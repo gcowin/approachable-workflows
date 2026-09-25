@@ -18,7 +18,7 @@ This document shows common patterns that appear in Approachable-Workflows workfl
 **Solves**: Need to gather supported facts from authoritative sources
 
 **Key Elements**:
-- Researcher role gathers information
+- The research activity gathers information
 - Records provenance (which source, which version)
 - Returns findings with source references
 
@@ -28,24 +28,22 @@ This document shows common patterns that appear in Approachable-Workflows workfl
 Workflow: Research Pattern
 
 Goal:
-  Gather facts supported by authoritative sources.
+Gather facts supported by authoritative sources.
 
 Handles:
-  Research request
+Research request
 
 Activity: Research Applicable Policy
-  Kind: Work
-  Role: Researcher
-  Do: Find current policies that apply to this request.
-  Verify:
-    - Every finding has an authoritative source.
-  Next: Review Findings
+Kind: Work
+Do: Find current policies that apply to this request.
+Verify:
+  - Every finding has an authoritative source.
+Next: Review Findings
 
 Activity: Review Findings
-  Kind: Work
-  Role: Analyst
-  Do: Compare findings and determine the relevant rule.
-  Next: Respond
+Kind: Work
+Do: Compare findings and determine the relevant rule.
+Next: Respond
 ```
 
 **When to Use**: Anytime you need to find and cite current, authoritative information
@@ -67,25 +65,23 @@ Activity: Review Findings
 Workflow: Analyze and Verify Pattern
 
 Goal:
-  Produce a recommendation supported by verification.
+Produce a recommendation supported by verification.
 
 Handles:
-  Review request
+Review request
 
 Activity: Analyze Request
-  Kind: Work
-  Role: Analyst
-  Do: Review evidence and produce a recommendation.
-  Next: Verify Recommendation
+Kind: Work
+Do: Review evidence and produce a recommendation.
+Next: Verify Recommendation
 
 Activity: Verify Recommendation
-  Kind: Work
-  Role: Analyst
-  Do: Check that evidence supports the recommendation.
-  Verify:
-    - All conclusions traceable to evidence.
-    - Required checks were applied.
-  Next: Decide
+Kind: Work
+Do: Check that evidence supports the recommendation.
+Verify:
+  - All conclusions traceable to evidence.
+  - Required checks were applied.
+Next: Decide
 ```
 
 **When to Use**: When decisions need verification before approval (refunds, approvals, compliance)
@@ -97,7 +93,7 @@ Activity: Verify Recommendation
 **Solves**: Need authorized person to make a decision
 
 **Key Elements**:
-- Approver role with clear authority
+- A named Approver with clear authority
 - Explicit choices (Approve, Reject, Request Changes)
 - Authorization recorded with identity and timestamp
 
@@ -107,25 +103,24 @@ Activity: Verify Recommendation
 Workflow: Human Approval Pattern
 
 Goal:
-  Ensure a valid decision is made by an authorized person.
+Ensure a valid decision is made by an authorized person.
 
 Handles:
-  Approval decision
+Approval decision
 
 Activity: Manager Approval
-  Kind: Approval
-  Role: Approver
-  Needs:
-    - Recommendation
-    - Evidence package
-    - Amount
-  Do: Choose Approve, Reject, or Request Changes.
-  Verify:
-    - Approver is authorized for this amount.
-  Next:
-    - Approve: Execute Decision
-    - Reject: Close as Rejected
-    - Request Changes: Return to Analysis
+Kind: Approval
+Needs:
+  - Recommendation
+  - Evidence package
+  - Amount
+Do: Choose Approve, Reject, or Request Changes.
+Verify:
+  - Approver is authorized for this amount.
+Next:
+  - Approve: Execute Decision
+  - Reject: Close as Rejected
+  - Request Changes: Return to Analysis
 ```
 
 **When to Use**: High-value decisions, compliance requirements, risk mitigation
@@ -147,25 +142,24 @@ Activity: Manager Approval
 Workflow: Parallel Validation Pattern
 
 Goal:
-  Evaluate independent requirements concurrently and only continue when the checks are complete.
+Evaluate independent requirements concurrently and only continue when the checks are complete.
 
 Handles:
-  Validation set
+Validation set
 
 Activity: Validate All Requirements
-  Kind: Do Together
-  Role: Coordinator
-  Do These Activities Together
-    - Validate Customer Identity
-    - Check Credit Standing
-    - Verify Contract Terms
-    - Confirm Delivery Capability
-  Wait For: All activities to complete.
-  Time Limit: 30 seconds.
-  When All Complete:
-    - If all passed: Continue to Approve
-    - If any failed: Continue to Review Failures
-    - If timeout: Continue to Manual Review
+Kind: Do Together
+Do These Activities Together
+  - Validate Customer Identity
+  - Check Credit Standing
+  - Verify Contract Terms
+  - Confirm Delivery Capability
+Wait For: All activities to complete.
+Time Limit: 30 seconds.
+When All Complete:
+  - If all passed: Continue to Approve
+  - If any failed: Continue to Review Failures
+  - If timeout: Continue to Manual Review
 ```
 
 **When to Use**: Independent checks that don't depend on each other's results
@@ -187,22 +181,21 @@ Activity: Validate All Requirements
 Workflow: Retry with Backoff Pattern
 
 Goal:
-  Keep trying a temporary external action without spamming the system.
+Keep trying a temporary external action without spamming the system.
 
 Handles:
-  External integration request
+External integration request
 
 Activity: Submit to External System
-  Kind: Repeat
-  Role: Executor
-  Repeat Until: External system responds successfully.
-  Maximum Attempts: 3
-  Wait Between Attempts: 5 seconds, then 15 seconds, then 45 seconds.
-  Do: Submit the transaction.
-  If Successful
-    - Continue to Confirm Result
-  If All Attempts Fail
-    - Continue to External System Unavailable
+Kind: Repeat
+Repeat Until: External system responds successfully.
+Maximum Attempts: 3
+Wait Between Attempts: 5 seconds, then 15 seconds, then 45 seconds.
+Do: Submit the transaction.
+If Successful
+  - Continue to Confirm Result
+If All Attempts Fail
+  - Continue to External System Unavailable
 ```
 
 **When to Use**: Integration with external APIs, payment systems, third-party services
@@ -224,24 +217,23 @@ Activity: Submit to External System
 Workflow: Escalation Pattern
 
 Goal:
-  Hand off unresolved, unclear, or high-risk work to a specialist with full context.
+Hand off unresolved, unclear, or high-risk work to a specialist with full context.
 
 Handles:
-  Escalated request
+Escalated request
 
 Activity: Escalate to Specialist
-  Kind: Work
-  Role: Coordinator
-  Needs:
-    - Complete work record
-    - All evidence
-    - Failed or unclear criteria
-  Do: Transfer the request to a finance specialist with full context.
-  Creates:
-    - Escalation record
-    - New owner
-    - Response deadline
-  Next: Wait for Specialist Decision
+Kind: Work
+Needs:
+  - Complete work record
+  - All evidence
+  - Failed or unclear criteria
+Do: Transfer the request to a finance specialist with full context.
+Creates:
+  - Escalation record
+  - New owner
+  - Response deadline
+Next: Wait for Specialist Decision
 ```
 
 **When to Use**: Unclear results, policy exceptions, unusual cases, timeout conditions
@@ -253,7 +245,7 @@ Activity: Escalate to Specialist
 **Solves**: Manage a business subject (ticket, claim, request) across multiple steps, waits, and decisions
 
 **Key Elements**:
-- Coordinator owns the subject throughout
+- One activity owns the subject throughout
 - Business state tracks progress
 - Subject remains open across waits and handoffs
 
@@ -263,25 +255,25 @@ Activity: Escalate to Specialist
 Workflow: Request Management Pattern
 
 Goal:
-  Keep a business subject active from first submission through final closure.
+Keep a business subject active from first submission through final closure.
 
 Handles:
-  Request record
+Request record
 
-1. Create Request (Coordinator)
-  - Set Business State to Submitted
+1. Create Request
+- Set Business State to Submitted
 
-2. Gather Information (Researcher)
-  - Set Business State to Under Review
+2. Gather Information
+- Set Business State to Under Review
 
 3. Analyze and Decide
-  - Set Business State to Pending Approval or Approved
+- Set Business State to Pending Approval or Approved
 
 4. Execute if Approved
-  - Set Business State to Completed
+- Set Business State to Completed
 
-5. Close Request (Coordinator)
-  - Return complete record and evidence
+5. Close Request
+- Return complete record and evidence
 ```
 
 **When to Use**: Support tickets, claims processing, requests, investigations
@@ -300,22 +292,21 @@ Handles:
 Workflow: Process Collection Pattern
 
 Goal:
-  Apply the same handling to each item in a collection.
+Apply the same handling to each item in a collection.
 
 Handles:
-  Collection of line items
+Collection of line items
 
 Activity: Process All Line Items
-  Kind: Repeat
-  Role: Analyst
-  Repeat Over: Each line item in the order.
-  Maximum: 500 items.
-  Do: Validate item number, quantity, and price.
-  For Each Item:
-    - If valid: Add to approved list
-    - If invalid: Add to exceptions list
-  When Complete
-    - Continue to Calculate Total
+Kind: Repeat
+Repeat Over: Each line item in the order.
+Maximum: 500 items.
+Do: Validate item number, quantity, and price.
+For Each Item:
+  - If valid: Add to approved list
+  - If invalid: Add to exceptions list
+When Complete
+  - Continue to Calculate Total
 ```
 
 **When to Use**: Invoice line items, batch approvals, multi-item orders

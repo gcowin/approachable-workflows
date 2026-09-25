@@ -121,7 +121,7 @@ I already identified the core contradictions during analysis — writing them to
 ## ▶ Activity Transition: "Privilege & Redaction Review" — 🔴 HUMAN APPROVAL REQUIRED
 **Kind**: Approval | **Role**: Approver (**TestUser — this is you**)
 
-**Do (key parts)**: Human Privilege Reviewer confirms/adjusts privilege designations and approves the redaction map before any document leaves attorney control. Upon approval, redactions are auto-applied to produce the redacted-document set.
+**Do (key parts)**: Human Privilege Revie=wer confirms/adjusts privilege designations and approves the redaction map before any document leaves attorney control. Upon approval, redactions are auto-applied to produce the redacted-document set.
 
 **Verify**: Every privileged document is excluded from the redacted-document set/distribution package; every approved redaction is applied and reversible only by the Approver.
 

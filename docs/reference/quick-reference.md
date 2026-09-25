@@ -15,17 +15,11 @@
 ---
 
 
-## 7 Roles (Who Does What)
+## Roles (Who Does What)
 
-| Role | Does | Activity Feedback |
-|------|------|-------------------|
-| **Coordinator** | Routes, tracks, handoffs | Routing decisions, handoffs |
-| **Researcher** | Finds info, cites sources | Sources, versions, timestamps |
-| **Analyst** | Interprets, recommends, verifies | Analysis, recommendations, verification results |
-| **Approver** | Authorizes decisions | Decision, identity, timestamp, comments |
-| **Executor** | External actions | Transaction ID, system response |
-| **Communicator** | Delivers messages | Message, recipient, delivery confirmation |
-| **Observer** | Monitors, confirms | Observed state, confirmations |
+**Analyst is the default** — no Role field needed for ordinary work. Name a role only when it changes behavior: **Approver** (authorizes) · **Observer** (confirms results).
+
+Full table with per-role activity feedback: [fields.md](fields.md#role-optional--default-analyst).
 
 ---
 
@@ -51,23 +45,26 @@ Workflow: [Name]
 Version: [Number]
 Goal: [What you're trying to achieve]
 Handles: [What each execution processes]
+Provided: [Inputs known at start]
+Working: [Information created as activities complete]
+Returns: [Outputs produced at end]
 
 Configuration:
-  Tools: [List of tools with descriptions and how to integrate if necessary]
-  Settings: [Key settings]
+Tools: [List of tools with descriptions and how to integrate if necessary]
+Settings: [Key settings]
 
 Activities:
 
 Activity: [Name]
-  Kind: [Work/Choice/Approval/Wait/Repeat/Do Together/Run Workflow/Outcome]
-  Role: [Who's responsible]
-  Needs: [Inputs]
-  Do: [What to do]
-  Creates: [Outputs]
-  Verify: [Conditions that must be true]
-  If Failed: [Path when verify fails]
-  If Unclear: [Path when uncertain]
-  Next: [Next activity or outcome]
+Kind: [Work/Choice/Approval/Wait/Repeat/Do Together/Run Workflow/Outcome]
+Role: [Only when needed: Approver or Observer]
+Needs: [Inputs]
+Do: [What to do]
+Creates: [Outputs]
+Verify: [Conditions that must be true]
+If Failed: [Path when verify fails]
+If Unclear: [Path when uncertain]
+Next: [Next activity or outcome]
 ```
 
 ---
@@ -85,7 +82,7 @@ Activity: [Name]
    - Captures authorization evidence automatically
 
 3. **Confirmation** - External actions need Observer verification
-   - Runtime expects Observer confirmation after Executor actions
+   - Runtime expects Observer confirmation after external actions
    - Validates external system state matches expected outcome
 
 **Specified in:**
@@ -98,40 +95,35 @@ Activity: [Name]
 
 ```
 Activity: Research Policy
-  Role: Researcher
-  Do: Find applicable policies
-  Verify: Every fact has authoritative source
-  Next: Analyze Request
+Do: Find applicable policies
+Verify: Every fact has authoritative source
+Next: Analyze Request
 
 Activity: Analyze Request
-  Role: Analyst
-  Do: Form recommendation
-  Verify: All criteria addressed
-  Next: Verify Recommendation
+Do: Form recommendation
+Verify: All criteria addressed
+Next: Verify Recommendation
 
 Activity: Verify Recommendation
-  Role: Analyst
-  Do: Check evidence supports recommendation
-  Verify: All conclusions traceable
-  Next: Approval Decision
+Do: Check evidence supports recommendation
+Verify: All conclusions traceable
+Next: Approval Decision
 
 Activity: Approval Decision
-  Kind: Choice
-  Conditions:
-    1. If high risk → Manager Approval
-    2. Otherwise → Execute
+Kind: Choice
+Conditions:
+  1. If high risk → Manager Approval
+  2. Otherwise → Execute
 
 Activity: Manager Approval
-  Kind: Approval
-  Role: Approver
-  Do: Approve or reject
-  Next: Approve→Execute, Reject→End
+Kind: Approval
+Do: Approve or reject
+Next: Approve→Execute, Reject→End
 
 Activity: Execute
-  Role: Executor
-  Do: Perform approved action
-  Verify: System confirms success
-  Next: Completed
+Do: Perform approved action
+Verify: System confirms success
+Next: Completed
 ```
 
 ---
@@ -144,16 +136,14 @@ Goal: [What you want to achieve]
 Handles: [What each execution processes]
 
 Activity: [First Step]
-  Role: Coordinator
-  Do: [What happens first]
-  Next: [Second Step]
+Do: [What happens first]
+Next: [Second Step]
 
 Activity: [Second Step]
-  Role: [Analyst/Researcher/etc]
-  Do: [What happens]
-  Verify: [What must be true]
-  If Failed: [Where to go if it fails]
-  Next: [Third Step or Done]
+Do: [What happens]
+Verify: [What must be true]
+If Failed: [Where to go if it fails]
+Next: [Third Step or Done]
 
 Outcome: Done
 ```
@@ -163,23 +153,17 @@ Outcome: Done
 
 ## Execution Reporting is Automatic
 
-Execution reports capture activity feedback:
-- **All roles**: start/end time, who, inputs, outputs
-- **Approver**: decision, identity, timestamp
-- **Executor**: transaction ID, system response
-- **Researcher**: sources, versions, timestamps
-- **By Kind**: Approval → auth record, Wait → trigger, Repeat → attempts
+Execution reports capture activity feedback automatically, based on Role and Kind — no explicit field needed. See [fields.md](fields.md#defaults-and-simplifications).
 
 ---
 
 ## Need More Help?
 
-- **Getting Started**: [Your First Workflow](../tutorials/first-workflow.md) — 10-minute tutorial
-- **Step-by-Step Guide**: [Step-by-Step Tutorial](../tutorials/step-by-step.md) — Complete learning guide
+- **Getting Started**: [Your First Workflow](../tutorials/first-workflow.md) — 10-minute tutorial + production patterns
 - **Full Specification**: [spec-for-humans.md](spec-for-humans.md)
 - **Examples**: [Real-world workflows](../../examples/examples.md)
 - **Visual Patterns**: [visual-patterns.md](visual-patterns.md)
-- **Common Mistakes**: See [spec-for-humans.md](spec-for-humans.md) Section 3
+- **Common Mistakes**: See [spec-for-humans.md](spec-for-humans.md#quick-tips--common-pitfalls)
 
 ---
 

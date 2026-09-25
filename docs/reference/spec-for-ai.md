@@ -32,11 +32,10 @@ Handles: [What each execution processes]
 Activities: [A] → [B] → [C]
 
 Activity: [Name]
-  Role: [Who]
-  Do: [What]
-  Verify: [Condition]
-  If Failed: [Path]
-  Next: [Activity/Outcome]
+Do: [What]
+Verify: [Condition]
+If Failed: [Path]
+Next: [Activity/Outcome]
 ```
 
 ## Fields (Standard)
@@ -44,7 +43,7 @@ Activity: [Name]
 | Field | Type | Default | Example |
 |-------|------|---------|---------|
 | Kind | Work/Choice/Approval/Wait/Repeat/Do Together/Run Workflow/Outcome | Work | Choice |
-| Role | Coordinator/Researcher/Analyst/Approver/Executor/Communicator/Observer | - | Researcher |
+| Role | Approver/Observer (default: Analyst) | Analyst | Approver |
 | Needs | Inputs | - | Policy, Request |
 | Do | Action | - | Find policy, check criteria |
 | Creates | Outputs | - | Recommendation |
@@ -68,9 +67,9 @@ Activity: [Name]
 7. **Run Workflow**: Call subworkflow
 8. **Outcome**: Terminal state (optional - just use Next: [outcome name], only declare if specifying return values)
 
-## Roles (7)
+## Roles
 
-Coordinator (routes, tracks), Researcher (finds, cites), Analyst (interprets, recommends), Approver (authorizes), Executor (external actions), Communicator (messages), Observer (confirms)
+**Analyst is the default** — omit Role for ordinary work. Name Approver (authorizes) or Observer (confirms) only when it changes behavior.
 
 ## Validation Rules
 
@@ -88,32 +87,32 @@ Coordinator (routes, tracks), Researcher (finds, cites), Analyst (interprets, re
 
 ```
 State Changes:
-  - Set Business State to [state]
-  - Set Workflow State to [state]
+- Set Business State to [state]
+- Set Workflow State to [state]
 ```
 
 ## Events (Extended)
 
 ```
 Events:
-  On Failure: [actions] + Continue to [Activity]
-  On Timeout: [actions] + Continue to [Activity]
-  On Escalation: [actions]
+On Failure: [actions] + Continue to [Activity]
+On Timeout: [actions] + Continue to [Activity]
+On Escalation: [actions]
 ```
 
 ## Patterns
 
 **Research → Analyze → Approve → Execute**
-- Researcher: gather + cite sources
-- Analyst: interpret + recommend + verify
-- Approver: authorize (decision auto-captured)
-- Executor: execute (transaction auto-captured)
+- Research activity: gather + cite sources (default Analyst)
+- Analyze + verify: interpret + recommend (default Analyst)
+- Approve: authorize (Approver, decision auto-captured)
+- Execute: perform action (auto-captured); confirm with Observer where external
 
 **Retry w/ Backoff**: Kind=Repeat, Maximum Attempts, Wait Between Attempts, If Successful/If All Attempts Fail
 
 **Parallel**: Kind=Do Together, Wait For (All/First), Time Limit, When All Complete
 
-**Request Mgmt**: Coordinator owns throughout, Business State tracks progress
+**Request Mgmt**: one activity owns the request throughout, Business State tracks progress
 
 ## Examples
 
@@ -136,69 +135,64 @@ Goal: Approve/reject refund
 Handles: Customer refund request
 
 Activity: Check Request
-  Role: Analyst
-  Do: Verify fields
-  Verify: Has customer ID, amount, reason
-  If Failed: Request More Info
-  Next: Verify Amount
+Do: Verify fields
+Verify: Has customer ID, amount, reason
+If Failed: Request More Info
+Next: Verify Amount
 
 Activity: Verify Amount
-  Role: Analyst
-  Needs: Policy, Request
-  Do: Check within limits
-  Verify: Amount ≤ max
-  If Failed: Reject
-  Next: Manager Decision
+Needs: Policy, Request
+Do: Check within limits
+Verify: Amount ≤ max
+If Failed: Reject
+Next: Manager Decision
 
 Activity: Manager Decision
-  Kind: Choice
-  Conditions:
-    1. If amount > $500 → Approval
-    2. Otherwise → Process
+Kind: Choice
+Conditions:
+  1. If amount > $500 → Approval
+  2. Otherwise → Process
 
 Activity: Approval
-  Kind: Approval
-  Role: Approver
-  Do: Approve/Reject
-  Next: Approve→Process, Reject→Rejected
+Kind: Approval
+Do: Approve/Reject
+Next: Approve→Process, Reject→Rejected
 
 Activity: Process
-  Role: Executor
-  Do: Execute refund
-  Verify: System confirms
-  If Failed: Escalate
-  Next: Completed
+Do: Execute refund
+Verify: System confirms
+If Failed: Escalate
+Next: Completed
 ```
 
 ### Extended (Repeat + Events + State)
 ```
 Activity: Submit Payment
-  Kind: Repeat
-  Role: Executor
-  Repeat Until: System responds
-  Maximum Attempts: 3
-  Wait Between Attempts: 5s, 15s, 45s
-  Do: Submit transaction
-  Events:
-    On Failure: Log + Notify finance → Payment Failed
-    On Timeout: → System Unavailable
-  State Changes:
-    - Set Business State to Processing Payment
-  If Successful: Confirm
-  If All Attempts Fail: Payment Failed
+Kind: Repeat
+Repeat Until: System responds
+Maximum Attempts: 3
+Wait Between Attempts: 5s, 15s, 45s
+Do: Submit transaction
+Events:
+  On Failure: Log + Notify finance → Payment Failed
+  On Timeout: → System Unavailable
+State Changes:
+  - Set Business State to Processing Payment
+If Successful: Confirm
+If All Attempts Fail: Payment Failed
 ```
 
 ## Choice Syntax
 
 ```
 Activity: [Name]
-  Kind: Choice
-  Do: Select path
-  Conditions:
-    1. If [cond] → [Activity]
-    2. If [cond] AND [cond] → [Activity]
-    3. If [cond] OR [cond] → [Activity]
-    4. Otherwise → [Activity]
+Kind: Choice
+Do: Select path
+Conditions:
+  1. If [cond] → [Activity]
+  2. If [cond] AND [cond] → [Activity]
+  3. If [cond] OR [cond] → [Activity]
+  4. Otherwise → [Activity]
 ```
 
 Operators: AND, OR, NOT, >, <, ≥, ≤, =, ≠, in
@@ -207,16 +201,16 @@ Operators: AND, OR, NOT, >, <, ≥, ≤, =, ≠, in
 
 ```
 Activity: [Name]
-  Kind: Do Together
-  Do These Activities Together:
-    - [Activity1]
-    - [Activity2]
-  Wait For: All/First
-  Time Limit: [duration]
-  When All Complete:
-    - If all passed: → [Activity]
-    - If any failed: → [Activity]
-    - If timeout: → [Activity]
+Kind: Do Together
+Do These Activities Together:
+  - [Activity1]
+  - [Activity2]
+Wait For: All/First
+Time Limit: [duration]
+When All Complete:
+  - If all passed: → [Activity]
+  - If any failed: → [Activity]
+  - If timeout: → [Activity]
 ```
 
 ## Repeat Syntax
@@ -224,37 +218,37 @@ Activity: [Name]
 **Collection:**
 ```
 Activity: [Name]
-  Kind: Repeat
-  Repeat Over: Each [item] in [collection]
-  Maximum: [count]
-  Do: [action per item]
-  For Each Item:
-    - If valid: [action]
-    - If invalid: [action]
-  When Complete: → [Activity]
+Kind: Repeat
+Repeat Over: Each [item] in [collection]
+Maximum: [count]
+Do: [action per item]
+For Each Item:
+  - If valid: [action]
+  - If invalid: [action]
+When Complete: → [Activity]
 ```
 
 **Retry:**
 ```
 Activity: [Name]
-  Kind: Repeat
-  Repeat Until: [condition]
-  Maximum Attempts: [count]
-  Wait Between Attempts: [t1], [t2], [t3]
-  Do: [action]
-  If Successful: → [Activity]
-  If All Attempts Fail: → [Activity]
+Kind: Repeat
+Repeat Until: [condition]
+Maximum Attempts: [count]
+Wait Between Attempts: [t1], [t2], [t3]
+Do: [action]
+If Successful: → [Activity]
+If All Attempts Fail: → [Activity]
 ```
 
 ## Run Workflow Syntax
 
 ```
 Activity: [Name]
-  Kind: Run Workflow
-  Workflow: [Workflow Name]
-  Provide: [inputs]
-  Receive: [outputs]
-  Next: → [Activity]
+Kind: Run Workflow
+Workflow: [Workflow Name]
+Provide: [inputs]
+Receive: [outputs]
+Next: → [Activity]
 ```
 
 ## Key Distinctions
@@ -278,7 +272,9 @@ Activity: [Name]
 ## Compact Notation (for reference only)
 
 ```
-[Activity] ([Role]): [Do] → [Next]
+[Activity Name]
+[Kind] | [Do summary]
+Needs/Creates/Verify/Failed/Unclear/Next as before
 ```
 
 Expands to full fields. Not required in workflows.

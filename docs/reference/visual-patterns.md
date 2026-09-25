@@ -47,10 +47,10 @@ The patterns below serve as **templates and reference examples** — use them to
 ```mermaid
 %%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#2E7D32','primaryTextColor':'#fff','primaryBorderColor':'#1B5E20','lineColor':'#666','secondaryColor':'#1565C0','tertiaryColor':'#F57C00'}}}%%
 graph TD
-    Start([Start]) --> A[Receive Request<br/>Coordinator]
+    Start([Start]) --> A[Receive Request]
     A --> B[Review Request<br/>Analyst]
-    B --> C[Process Request<br/>Executor]
-    C --> D[Notify Customer<br/>Communicator]
+    B --> C[Process Request]
+    C --> D[Notify Customer]
     D --> End([Completed])
     
     style Start fill:#1565C0,stroke:#0D47A1,color:#fff
@@ -78,12 +78,12 @@ Receive Request → Review Request → Process Request → Notify Customer → C
 ```mermaid
 %%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#2E7D32','primaryTextColor':'#fff','primaryBorderColor':'#1B5E20','lineColor':'#666'}}}%%
 graph TD
-    Start([Start]) --> A[Research Policy<br/>Researcher]
+    Start([Start]) --> A[Research Policy]
     A --> B[Analyze Request<br/>Analyst]
     B --> C[Verify Recommendation<br/>Analyst]
     C --> D{High Risk?<br/>Choice}
     D -->|Yes| E[Manager Approval<br/>Approver]
-    D -->|No| F[Execute Action<br/>Executor]
+    D -->|No| F[Execute Action]
     E -->|Approved| F
     E -->|Rejected| End1([Rejected])
     F --> G[Confirm Result<br/>Observer]
@@ -102,11 +102,11 @@ graph TD
 ```
 
 **Key Activities:**
-- **Research** (Researcher): Gather evidence with sources
+- **Research**: Gather evidence with sources
 - **Analyze** (Analyst): Form recommendation
 - **Verify** (Analyst): Check quality
 - **Approve** (Approver): Authorize high-risk actions
-- **Execute** (Executor): Perform action
+- **Execute**: Perform action
 - **Confirm** (Observer): Verify external result
 
 ---
@@ -122,8 +122,8 @@ graph TD
     A --> B{Route Decision<br/>Choice}
     B -->|Amount > $1000| C[Senior Approval<br/>Approver]
     B -->|Amount > $500| D[Manager Approval<br/>Approver]
-    B -->|Otherwise| E[Auto-Approve<br/>Coordinator]
-    C --> F[Execute<br/>Executor]
+    B -->|Otherwise| E[Auto-Approve]
+    C --> F[Execute]
     D --> F
     E --> F
     F --> End([Completed])
@@ -141,11 +141,11 @@ graph TD
 **Workflow:**
 ```
 Activity: Route Decision
-  Kind: Choice
-  Conditions:
-    1. If amount > $1000 → Senior Approval
-    2. If amount > $500 → Manager Approval
-    3. Otherwise → Auto-Approve
+Kind: Choice
+Conditions:
+  1. If amount > $1000 → Senior Approval
+  2. If amount > $500 → Manager Approval
+  3. Otherwise → Auto-Approve
 ```
 
 ---
@@ -157,7 +157,7 @@ Activity: Route Decision
 ```mermaid
 %%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#EF6C00','primaryTextColor':'#fff','lineColor':'#666'}}}%%
 graph TD
-    Start([Start]) --> A[Submit to API<br/>Executor<br/>Repeat]
+    Start([Start]) --> A[Submit to API<br/>Repeat]
     A -->|Attempt 1: 5s wait| B{Success?}
     A -->|Attempt 2: 15s wait| B
     A -->|Attempt 3: 45s wait| B
@@ -176,14 +176,13 @@ graph TD
 **Workflow:**
 ```
 Activity: Submit to API
-  Kind: Repeat
-  Role: Executor
-  Repeat Until: System responds successfully
-  Maximum Attempts: 3
-  Wait Between Attempts: 5s, 15s, 45s
-  
-  If Successful: Confirm Result
-  If All Attempts Fail: System Unavailable
+Kind: Repeat
+Repeat Until: System responds successfully
+Maximum Attempts: 3
+Wait Between Attempts: 5s, 15s, 45s
+
+If Successful: Confirm Result
+If All Attempts Fail: System Unavailable
 ```
 
 ---
@@ -196,13 +195,13 @@ Activity: Submit to API
 %%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#EF6C00','primaryTextColor':'#fff','lineColor':'#666'}}}%%
 graph TD
     Start([Start]) --> A[Validate Request<br/>Do Together]
-    A --> B[Check Customer<br/>Researcher]
-    A --> C[Check Inventory<br/>Researcher]
+    A --> B[Check Customer]
+    A --> C[Check Inventory]
     A --> D[Check Credit<br/>Analyst]
     B --> E{All Complete?}
     C --> E
     D --> E
-    E -->|All Passed| F[Process Order<br/>Executor]
+    E -->|All Passed| F[Process Order]
     E -->|Any Failed| G([Validation Failed])
     F --> H([Completed])
     
@@ -220,19 +219,19 @@ graph TD
 **Workflow:**
 ```
 Activity: Validate Request
-  Kind: Do Together
-  Do These Activities Together:
-    - Check Customer Identity
-    - Check Inventory Availability
-    - Check Credit Status
-  
-  Wait For: All
-  Time Limit: 30 seconds
-  
-  When All Complete:
-    - If all passed → Process Order
-    - If any failed → Validation Failed
-    - If timeout → Escalate
+Kind: Do Together
+Do These Activities Together:
+  - Check Customer Identity
+  - Check Inventory Availability
+  - Check Credit Status
+
+Wait For: All
+Time Limit: 30 seconds
+
+When All Complete:
+  - If all passed → Process Order
+  - If any failed → Validation Failed
+  - If timeout → Escalate
 ```
 
 ---
@@ -244,11 +243,11 @@ Activity: Validate Request
 ```mermaid
 %%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#2E7D32','primaryTextColor':'#fff','lineColor':'#666'}}}%%
 graph TD
-    Start([Start]) --> A[Request Documents<br/>Communicator]
-    A --> B[Wait for Upload<br/>Coordinator<br/>Wait]
+    Start([Start]) --> A[Request Documents]
+    A --> B[Wait for Upload<br/>Wait]
     B -->|Received| C[Validate Documents<br/>Analyst]
     B -->|Timeout 48h| D([Expired])
-    C -->|Valid| E[Process Application<br/>Executor]
+    C -->|Valid| E[Process Application]
     C -->|Invalid| A
     E --> F([Completed])
     
@@ -264,14 +263,13 @@ graph TD
 **Workflow:**
 ```
 Activity: Wait for Upload
-  Kind: Wait
-  Role: Coordinator
-  Do: Wait for customer to upload documents
-  Time Limit: 48 hours
-  
-  Next:
-    - Documents received → Validate Documents
-    - Timeout → Expired
+Kind: Wait
+Do: Wait for customer to upload documents
+Time Limit: 48 hours
+
+Next:
+  - Documents received → Validate Documents
+  - Timeout → Expired
 ```
 
 ---
@@ -283,10 +281,10 @@ Activity: Wait for Upload
 ```mermaid
 %%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#2E7D32','primaryTextColor':'#fff','lineColor':'#666'}}}%%
 graph TD
-    Start([Start]) --> A[Process Payment<br/>Executor]
-    A -->|✓ Success| B[Send Confirmation<br/>Communicator]
-    A -->|✗ Failed| C[Log Error<br/>Coordinator]
-    A -->|? Unclear| D[Manual Review<br/>Coordinator]
+    Start([Start]) --> A[Process Payment]
+    A -->|✓ Success| B[Send Confirmation]
+    A -->|✗ Failed| C[Log Error]
+    A -->|? Unclear| D[Manual Review]
     B --> End1([Completed])
     C --> End2([Failed])
     D --> End3([Needs Review])
@@ -304,13 +302,12 @@ graph TD
 **Workflow:**
 ```
 Activity: Process Payment
-  Role: Executor
-  Do: Submit payment to external system
-  Verify: System confirms transaction
-  
-  If Failed: Log Error → Failed
-  If Unclear: Manual Review → Needs Review
-  Next: Send Confirmation
+Do: Submit payment to external system
+Verify: System confirms transaction
+
+If Failed: Log Error → Failed
+If Unclear: Manual Review → Needs Review
+Next: Send Confirmation
 ```
 
 ---
@@ -347,17 +344,16 @@ graph TD
 **Workflow:**
 ```
 Activity: Process Each Document
-  Kind: Repeat
-  Role: Analyst
-  Repeat Over: Each document in the upload
-  Maximum: 20 documents
-  
-  For Each Item:
-    1. Classify document type
-    2. If valid: Analyze content
-    3. If invalid: Flag for manual review
-  
-  When Complete: Summarize Results
+Kind: Repeat
+Repeat Over: Each document in the upload
+Maximum: 20 documents
+
+For Each Item:
+  1. Classify document type
+  2. If valid: Analyze content
+  3. If invalid: Flag for manual review
+
+When Complete: Summarize Results
 ```
 
 ---
@@ -372,7 +368,7 @@ graph TD
     Start([Start]) --> A[Validate Customer<br/>Analyst]
     A --> B[Run Workflow:<br/>Credit Check]
     B --> C{Credit OK?}
-    C -->|Approved| D[Process Order<br/>Executor]
+    C -->|Approved| D[Process Order]
     C -->|Declined| E([Declined])
     D --> F([Completed])
     
@@ -388,16 +384,16 @@ graph TD
 **Workflow:**
 ```
 Activity: Run Credit Check
-  Kind: Run Workflow
-  Workflow: Standard Credit Check
-  Provide:
-    - Customer ID
-    - Requested Amount
-  Receive:
-    - Credit Decision
-    - Credit Score
-  
-  Next: Process Order
+Kind: Run Workflow
+Workflow: Standard Credit Check
+Provide:
+  - Customer ID
+  - Requested Amount
+Receive:
+  - Credit Decision
+  - Credit Score
+
+Next: Process Order
 ```
 
 ---
@@ -409,17 +405,17 @@ Activity: Run Credit Check
 ```mermaid
 %%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#2E7D32','primaryTextColor':'#fff','lineColor':'#666'}}}%%
 graph TD
-    Start([Start]) --> A[Submit Request<br/>Coordinator]
-    A --> B[Research<br/>Researcher]
+    Start([Start]) --> A[Submit Request]
+    A --> B[Research]
     B --> C[Analyze<br/>Analyst]
     C --> D{Risk Level?<br/>Choice}
     D -->|High| E[Senior Approval<br/>Approver]
     D -->|Medium| F[Manager Approval<br/>Approver]
-    D -->|Low| G[Execute<br/>Executor]
+    D -->|Low| G[Execute]
     E --> G
     F --> G
     G -->|Success| H[Confirm<br/>Observer]
-    G -->|Failed| I[OnFailure Event]
+    G -->|Failed| I[On Failure Event]
     H --> End1([Completed])
     I --> End2([Failed])
     
@@ -449,35 +445,35 @@ Workflow: Complex Request Processing
 Version: 2.0
 
 Business State:
-  - Submitted
-  - Under Review
-  - Awaiting Approval
-  - Approved
-  - Executing
-  - Completed
-  - Failed
-  - Escalated
+- Submitted
+- Under Review
+- Awaiting Approval
+- Approved
+- Executing
+- Completed
+- Failed
+- Escalated
 
 Events:
-  On Failure:
-    - Log to monitoring system
-    - Notify support team
-    - Set Business State to Failed
-    - Continue to Failed outcome
-  
-  On Timeout:
-    - Capture partial results
-    - Set Business State to Escalated
-    - Continue to Escalation
+On Failure:
+  - Log to monitoring system
+  - Notify support team
+  - Set Business State to Failed
+  - Continue to Failed outcome
+
+On Timeout:
+  - Capture partial results
+  - Set Business State to Escalated
+  - Continue to Escalation
 
 Activities:
-  [Activities with State Changes...]
-  
-  State Changes:
-    - Submit Request → Set Business State to Submitted
-    - Research → Set Business State to Under Review
-    - Approval → Set Business State to Awaiting Approval
-    - Execute → Set Business State to Executing
+[Activities with State Changes...]
+
+State Changes:
+  - Submit Request → Set Business State to Submitted
+  - Research → Set Business State to Under Review
+  - Approval → Set Business State to Awaiting Approval
+  - Execute → Set Business State to Executing
 ```
 
 ---
@@ -585,4 +581,4 @@ The execution diagram becomes a permanent audit record, making it easy to:
 - **Real workflows**: [examples.md](../../examples/examples.md)
 - **Pattern library**: [pattern-examples.md](../../examples/pattern-examples.md)
 - **Production example**: [Legal Discovery Review](../../examples/legal-review-analysis/)
-- **Step-by-Step Guide**: [step-by-step.md](../tutorials/step-by-step.md)
+- **Tutorial**: [first-workflow.md](../tutorials/first-workflow.md)

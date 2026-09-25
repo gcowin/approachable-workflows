@@ -51,23 +51,20 @@ Version: 1.0
 Goal: Approve or reject refund requests
 
 Review Request
-  Role: Analyst
-  Needs: Refund request
-  Do: Check if request meets policy
-  Verify: Amount and customer ID present
-  Next: Make Decision
+Needs: Refund request
+Do: Check if request meets policy
+Verify: Amount and customer ID present
+Next: Make Decision
 
 Make Decision
-  Role: Approver
-  Do: Approve or reject based on policy
-  Verify: Decision has reasoning
-  Next: Notify Customer
+Do: Approve or reject based on policy
+Verify: Decision has reasoning
+Next: Notify Customer
 
 Notify Customer
-  Role: Communicator
-  Do: Send approval or rejection email
-  Verify: Email sent successfully
-  Next: Completed
+Do: Send approval or rejection email
+Verify: Email sent successfully
+Next: Completed
 ```
 
 ---
@@ -110,9 +107,9 @@ The runtime skill generates:
 ### Console Output
 ```
 🔄 Starting workflow: Customer Refund Review
-✅ Review Request (Analyst) — PASSED verification
+✅ Review Request — PASSED verification
 ✅ Make Decision (Approver) — PASSED verification
-✅ Notify Customer (Communicator) — PASSED verification
+✅ Notify Customer — PASSED verification
 ✅ Workflow completed successfully
 
 📊 Execution report: 3 activities, 3 verifications

@@ -19,10 +19,11 @@ Provide a beautifully simple and powerful workflow language. Start simple (~10 l
 - `docs/reference/fields.md` — Complete A-Z field reference
 - `docs/tutorials/first-workflow.md` — 10-minute hands-on tutorial
 - `docs/explanation/why-it-works.md` — Evidence that graph engineering in LLMs works
-- `examples/` — Real-world workflows (including legal-review-analysis with 99.5/100 evaluation)
+- `skills/workflow-runtime/SKILL.md` — Canonical workflow-runtime skill (source of truth; harness-local copies such as `.opencode/skill/workflow-runtime/` mirror it — run `scripts/check-skill-sync.sh` to verify)
+- `examples/` — Real-world workflows (including legal-review-analysis with 100/100 evaluation)
 - `templates/` — Workflow templates to copy and adapt
 
-**README.md** — Streamlined entry point (97 lines), guides users to right resources by intent.
+**README.md** — Streamlined entry point, guides users to right resources by intent.
 
 ## Structure Conventions
 
@@ -63,7 +64,8 @@ All workflows are valid regardless of formalization level. Add structure only wh
 ## Key Simplifications (v0.8)
 
 - **Removed pattern declarations**: Workflows are self-documenting
-- **Removed Capability field**: Role indicates work type (Analyst analyzes, Researcher researches, etc.)
+- **Removed Capability field**: Activities self-document through name and Do
+- **Reduced roles**: Role defaults to Analyst and is usually omitted; name only Approver (authorization) or Observer (confirmation) when behavior changes
 - **Changed Case to Handles**: More active language ("Handles: Each refund request")
 - **Use → Needs**: Clearer dependencies ("Needs: Policy library, Customer data")
 - **Produce → Creates**: More natural language ("Creates: Recommendation, Risk score")
@@ -74,7 +76,7 @@ All workflows are valid regardless of formalization level. Add structure only wh
 
 ## Evidence
 
-**Production-ready:** Legal Discovery Review workflow achieved 99.5/100 evaluation score.
+**Production-ready:** Legal Discovery Review workflow achieved 100/100 evaluation score.
 
 **Key evidence:**
 - `examples/legal-review-analysis/legal-review-workflow.txt` — Production workflow (20+ activities)
@@ -95,8 +97,8 @@ Graph engineering in LLMs isn't just possible — it's **repeatable, auditable, 
 
 **v0.8** — Current
 - Documentation restructure by user intent
-- Streamlined README (97 lines, 48% reduction)
-- Production evidence: 99.5/100 evaluation
+- Streamlined README (concise, intent-based navigation)
+- Production evidence: 100/100 evaluation
 - Created comprehensive field reference
 - Added first-workflow tutorial
 - Established documentation by user intent

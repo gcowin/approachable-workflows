@@ -14,7 +14,7 @@ Use the pre-built [workflow-runtime skill](../../skills/workflow-runtime/SKILL.m
 - ✅ Automatic execution reporting with activity feedback
 - ✅ 3-law governance enforcement (Truth, Authorization, Confirmation)
 - ✅ Mermaid flow charts
-- ✅ HTML execution reports ([see example](examples/legal-review-analysis/cases/vantek-ostrow/runs/Vantek-v-Ostrow-Halcyon-VDI-2025-0503-20260906-012531/Workflow_Execution_Report_Vantek_v_Ostrow_Halcyon_VDI-2025-0503.html))
+- ✅ HTML execution reports ([see example](../../examples/legal-review-analysis/cases/vantek-ostrow/runs/Vantek-v-Ostrow-Halcyon-VDI-2025-0503-20260906-012531/Workflow_Execution_Report_Vantek_v_Ostrow_Halcyon_VDI-2025-0503.html))
 - ✅ Improvement recommendations
 - ✅ Automatic tool/connector integration from descriptions
 
@@ -83,16 +83,14 @@ Write your workflow following the natural language patterns from [standard-templ
 Workflow: Process Customer Request
 
 Receive Request
-  Role: Coordinator
-  Do: Create work record and assign initial category
-  Verify: Request has unique ID
-  Next: Review Request
+Do: Create work record and assign initial category
+Verify: Request has unique ID
+Next: Review Request
 
 Review Request
-  Role: Analyst
-  Do: Analyze request and form recommendation
-  Verify: Recommendation addresses all requirements
-  Next: Approve or Reject
+Do: Analyze request and form recommendation
+Verify: Recommendation addresses all requirements
+Next: Approve or Reject
 ```
 
 **Best for:** Simple workflows, quick prototyping, harnesses with built-in workflow understanding
@@ -108,13 +106,13 @@ Workflow: Customer Onboarding
 Version: 1.0
 
 Configuration:
-  Tools:
-    - Salesforce CRM (read customer records)
-    - SendGrid (email notifications)
-    - OneDrive (store evidence at /Workflow-Artifacts/)
-  Settings:
-    - Timeout: 24 hours
-    - Notification email: {user_email}
+Tools:
+  - Salesforce CRM (read customer records)
+  - SendGrid (email notifications)
+  - OneDrive (store evidence at /Workflow-Artifacts/)
+Settings:
+  - Timeout: 24 hours
+  - Notification email: {user_email}
 ```
 
 Agents connect to tools automatically based on good descriptions — no manual wiring needed.
@@ -177,7 +175,6 @@ Configuration:
 3. **For prototyping**: Write plain English workflows and let your harness handle it
 
 **Next steps:**
-- [Your First Workflow](../tutorials/first-workflow.md) — 10-minute tutorial
+- [Your First Workflow](../tutorials/first-workflow.md) — 10-minute tutorial + production patterns
 - [Authoring Template](../../templates/standard-template.md) — Copy and adapt
 - [Examples](../../examples/examples.md) — Real-world workflows
-- [Step-by-Step Guide](../tutorials/step-by-step.md) — Complete learning guide
