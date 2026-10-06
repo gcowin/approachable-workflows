@@ -48,17 +48,20 @@ Roles and their auto-captured feedback (default Analyst — name a Role only whe
 1. Workflow has Goal + Handles; every activity has a unique name and a Do.
 2. Every non-Outcome activity has a Next (explicit or implicit).
 3. Every Repeat loop is bounded; every Choice ends with Otherwise; every Wait defines timeout behavior.
-4. **Law 1 — Truth Preservation:** Verify that cannot determine true/false yields `?`, never a forced ✓/✗. Without If Unclear, the workflow blocks and reports; never fabricate.
-5. **Law 2 — Authorization:** high-risk actions (financial, legal, irreversible, external-org communication) are preceded by an Approver in the prior 1–2 activities; the Approver receives context (evidence, amount, reasoning).
-6. **Law 3 — Confirmation:** actions performing external changes (DB writes, API calls, emails, transactions, file changes) are followed by an Observer in the next 1–2 activities; the Observer checks actual state, not just the API response.
-7. **Sensitive-value rule:** artifacts (logs, reports, redaction maps, approval records) reference redactions by location ("E018 SSN field — REDACTED"), never echoing the masked value in any deliverable, including summary/audit tables and chat-visible output.
-8. Unclear or missing failure targets never resolve silently: no If Failed → block and report; no If Unclear → stay `?` and block.
+4. Unclear or missing failure targets never resolve silently: no If Failed → block and report; no If Unclear → stay `?` and block.
+5. **Sensitive-value rule:** artifacts (logs, reports, redaction maps, approval records) reference redactions by location ("E018 SSN field — REDACTED"), never echoing the masked value in any deliverable, including summary/audit tables and chat-visible output.
+
+## Governance Laws 
+
+1. **Truth Preservation:** Verify that cannot determine true/false yields `?`, never a forced ✓/✗. Without If Unclear, the workflow blocks and reports; never fabricate.
+2. **Authorization:** high-risk actions (financial, legal, irreversible, external-org communication) are preceded by an Approver in the prior 1–2 activities; the Approver receives context (evidence, amount, reasoning).
+3. **Confirmation:** actions performing external changes (DB writes, API calls, emails, transactions, file changes) are followed by an Observer in the next 1–2 activities; the Observer checks actual state, not just the API response.
 
 ## Mode: Create
 
 1. Clarify requirements: business process, roles, decision points, external systems, success criteria, error conditions.
 2. Build with progressive formalization: minimal first (names, Do, Next), then governance (Role, Verify, If Failed/If Unclear), then detail (Needs/Creates, Configuration) as needed.
-3. Validate against canonical rules 1–8 before output.
+3. Validate against canonical rules 1–5 and Governance Laws 1–3 before output.
 4. Output plain-text spec; suggest validate or execute as next step.
 
 ## Mode: Execute
@@ -85,4 +88,4 @@ Roles and their auto-captured feedback (default Analyst — name a Role only whe
 1. Validate first (canonical rules), then execute.
 2. Announce transitions before executing; capture Role feedback automatically.
 3. `?` stays `?` — never forced to ✓/✗ (Law 1).
-4. Always produce the HTML report; apply the Sensitive-value rule (rule 7) to every artifact you write.
+4. Always produce the HTML report; apply the Sensitive-value rule (canonical rule 5) to every artifact you write.

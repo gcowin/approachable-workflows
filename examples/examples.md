@@ -6,6 +6,11 @@ These examples are written to align with the canonical rules in [spec-for-humans
 
 Each example demonstrates Activities in action—no pattern declarations, just clear workflow descriptions.
 
+## Full Worked Examples (workflow + corpus + answer key + evals)
+
+- **[Legal Discovery Review](legal-review-analysis/)** — 25-document legal corpus, 100/100 evaluation, prompt-injection neutralized
+- **[Payer Policy Change Impact Analysis](payer-policy-analysis/)** — healthcare revenue-cycle bulletin → routed, dated action plan — same language, second domain, zero spec changes
+
 ## Example 1: Customer Support Resolution
 
 ```text

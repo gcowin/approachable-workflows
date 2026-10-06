@@ -618,9 +618,9 @@ An Approval Activity succeeds only after an authorized decision is recorded. A W
 - Unclear results need If Unclear paths → route to human review
 
 **Governance:**
+- Never force unclear to clear (Law 1: Truth Preservation)
 - High-risk action → preceded by Approver (Law 2: Authorization)
 - External actions → followed by Observer (Law 3: Confirmation)
-- Never force unclear to clear (Law 1: Truth Preservation)
 
 **Accountability:**
 - Role defaults to Analyst; specify `Approver` for authorization and `Observer` for confirmation

@@ -20,7 +20,7 @@ Provide a beautifully simple and powerful workflow language. Start simple (~10 l
 - `docs/tutorials/first-workflow.md` — 10-minute hands-on tutorial
 - `docs/explanation/why-it-works.md` — Evidence that graph engineering in LLMs works
 - `skills/workflow-runtime/SKILL.md` — Canonical workflow-runtime skill (source of truth; harness-local copies such as `.opencode/skill/workflow-runtime/` mirror it — run `scripts/check-skill-sync.sh` to verify)
-- `examples/` — Real-world workflows (including legal-review-analysis with 100/100 evaluation)
+- `examples/` — Real-world workflows (legal-review-analysis with 100/100 evaluation; payer-policy-analysis as the second-domain example)
 - `templates/` — Workflow templates to copy and adapt
 
 **README.md** — Streamlined entry point, guides users to right resources by intent.

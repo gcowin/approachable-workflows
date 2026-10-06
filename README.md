@@ -169,6 +169,7 @@ Choose your path based on what you need:
 - [All reference docs →](docs/reference/)
 
 **Production example:** [Legal Discovery Review](examples/legal-review-analysis/) — 20+ activities, 100/100 evaluation score  
+**Second domain:** [Payer Policy Change Impact Analysis](examples/payer-policy-analysis/) — healthcare policy bulletin → action plan, same fields, zero spec changes  
 **Templates:** [standard-template.md](templates/standard-template.md) — Copy and adapt  
 **More examples:** [examples/examples.md](examples/examples.md) — Real-world workflows
 

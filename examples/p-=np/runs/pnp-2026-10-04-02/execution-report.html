@@ -1,0 +1,81 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Execution Report: P versus NP Research Program (pnp-2026-10-04-02)</title>
+<style>
+  body{font-family:system-ui,sans-serif;margin:2rem auto;max-width:60rem;padding:0 1rem;line-height:1.45}
+  .ok{background:#90EE90}.fail{background:#FFB6C6}.unclear{background:#FFFFE0}.outcome{background:#87CEEB}
+  table{border-collapse:collapse;width:100%}th,td{border:1px solid #999;padding:.4em .6em;text-align:left;vertical-align:top}
+  legend{margin:.5em 0}
+</style>
+</head><body>
+
+<h1>Execution Report: P versus NP Research Program</h1>
+
+<section><h2>Summary</h2>
+<ul>
+  <li>Workflow: P versus NP Research Program — instance pnp-2026-10-04-02 (cycle 2, workflow v1.1) — outcome ✓ (workflow completed; the mathematical problem itself remains OPEN, recorded honestly per Law 1)</li>
+  <li>Duration: 2026-10-04 11:00 → 2026-10-04 11:40 (≈40 min)</li>
+  <li>Activities: 8 (✓ 8 / ✗ 0 / ? 0)</li>
+  <li>Path: Load Prior Run Memory → Frame the Problem Precisely → Inventory Candidate Strategies → Run Barrier Audit → Formalize What Is Proven → Evaluate and Rank Strategies → Deepen Primary Strategy → Synthesize Research Report → Deliver → Completed</li>
+  <li>Governance: all laws upheld — Truth Preservation kept (open stays open; sub-lemmas remain conjectured); memory rule upheld (prior status carried unchanged); no external/irreversible actions (Law 2/3 not triggered); no sensitive values present</li>
+</ul></section>
+
+<section><h2>Flow</h2><pre class="mermaid">graph TD
+  M[Load Prior Run Memory ✓]:::ok --> A[Frame the Problem Precisely ✓]:::ok
+  A --> B[Inventory Candidate Strategies ✓]:::ok
+  B --> C[Run Barrier Audit ✓ Repeat 6/6]:::ok
+  C --> D[Formalize What Is Proven ✓]:::ok
+  D --> E[Evaluate and Rank Strategies ✓]:::ok
+  E --> F[Deepen Primary Strategy ✓]:::ok
+  F --> G[Synthesize Research Report ✓]:::ok
+  G --> H[Log Run Improvement ✓]:::ok
+  H --> I[Deliver ✓]:::ok
+  I --> J([Completed]):::outcome
+  classDef ok fill:#90EE90
+  classDef outcome fill:#87CEEB</pre>
+<p><span class="ok" style="padding:0 .5em">✓ success</span> <span class="fail" style="padding:0 .5em">✗ failed</span> <span class="unclear" style="padding:0 .5em">? unclear</span> <span class="outcome" style="padding:0 .5em">→ outcome</span></p></section>
+
+<section><h2>Activity Log</h2>
+<table>
+<tr><th>Activity</th><th>Role / Kind</th><th>Role feedback / state / events</th><th>Do</th><th>Verify result</th><th>Outcome</th><th>Next taken</th></tr>
+<tr><td>Load Prior Run Memory</td><td>Analyst / Work</td><td>State: Memory Load In Progress; baseline = cycle 1 (GCT primary; L1–L4)</td><td>Read cycle 1 chat-log; carried ranking + ledger forward</td><td>Prior statuses unchanged ✓</td><td>✓</td><td>Frame the Problem Precisely</td></tr>
+<tr><td>Frame the Problem Precisely</td><td>Analyst / Work</td><td>State: Survey In Progress</td><td>Re-stated exact problem + validity criteria + 3 barriers</td><td>All classified; no `?` items ✓</td><td>✓</td><td>Inventory Candidate Strategies</td></tr>
+<tr><td>Inventory Candidate Strategies</td><td>Analyst / Work</td><td>Registry delta: 6 unchanged, 0 added, 0 retired</td><td>Confirmed registry vs memory</td><td>Delta explained ✓</td><td>✓</td><td>Run Barrier Audit</td></tr>
+<tr><td>Run Barrier Audit</td><td>Analyst / Repeat (max 12)</td><td>6/6 audits carried and re-verified</td><td>Barrier tests per strategy</td><td>Every verdict cited ✓</td><td>✓</td><td>Formalize What Is Proven</td></tr>
+<tr><td>Formalize What Is Proven</td><td>Analyst / Work</td><td>Ledger L1–L4 unchanged, all open</td><td>Lemmas + vacuity + circularity checks</td><td>No circularity ✓</td><td>✓</td><td>Evaluate and Rank Strategies</td></tr>
+<tr><td>Evaluate and Rank Strategies</td><td>Analyst / Work</td><td>Ranking STABLE vs cycle 1; drift: none</td><td>Scored, ranked, compared to memory</td><td>Evidence cited; no-drift explained ✓</td><td>✓</td><td>Deepen Primary Strategy</td></tr>
+<tr><td>Deepen Primary Strategy</td><td>Analyst / Work</td><td>L2 decomposed: L2.1 (restricted-orbit obstructions — actionable), L2.2 (saturation/plethysm), L2.3 (non-vanishing full orbit)</td><td>Decomposed blocking lemma; milestone M1 = formalize restricted-orbit obstruction proof</td><td>Scope reduced without conclusion-assumption ✓</td><td>✓</td><td>Synthesize Research Report</td></tr>
+<tr><td>Synthesize Research Report</td><td>Analyst / Work</td><td>Honesty section included</td><td>Assembled v1.1 report with memory delta + deep dive</td><td>Zero unmarked conjectures ✓</td><td>✓</td><td>Log Run Improvement</td></tr>
+<tr><td>Log Run Improvement</td><td>Analyst / Work</td><td>Improvement entry written (see improvement-log.md)</td><td>Recorded workflow self-critique for next revision</td><td>Entry written ✓</td><td>✓</td><td>Deliver</td></tr>
+<tr><td>Deliver</td><td>Analyst / Work</td><td>State: Delivered; artifacts on disk for next run</td><td>Wrote chat-log, report, improvement log</td><td>Artifacts verified on disk ✓</td><td>✓</td><td>Outcome: Completed</td></tr>
+</table></section>
+
+<section><h2>Research Findings (embedded report)</h2>
+<h3>Ranking (stable across cycles)</h3>
+<ol>
+<li>GCT — primary line</li>
+<li>Meta-complexity — backup</li>
+<li>Circuit lower bounds (TC0) — backup</li>
+<li>Proof complexity · 5. Derandomization↔hardness · 6. Descriptive complexity</li>
+</ol>
+<h3>Open-lemma ledger (unchanged, all open)</h3>
+<ul>
+<li>L1: super-polynomial TC0 lower bound via non-naturalizing property</li>
+<li>L2: non-vanishing GCT obstruction (decomposed into L2.1 ⊂ L2.2 ⊂ L2.3, easiest-first)</li>
+<li>L3: super-polynomial extended-Frege lower bound</li>
+<li>L4: MCSP NP-hardness</li>
+</ul>
+<h3>Actionable milestone M1</h3>
+<p>Formalize into a proof assistant one already-partially-known restricted-orbit obstruction result (moment-polytope membership in PSPACE under GRH — conditional). This is the easiest checkable increment on the primary line. Conjectural items remain marked conjectured.</p>
+<h3>Conclusion (honesty section)</h3>
+<p><strong>P vs NP remains an open problem.</strong> No enumerated strategy currently resolves it. Every claim above is marked proven/conditional/conjectured. Any future resolution claim must pass all three barrier audits against a verified formalized kernel before acceptance.</p>
+</section>
+
+<section><h2>Recommendations</h2>
+<ul>
+  <li>Analysis: 8 activities, 100% verify pass; ranking stability across two cycles is the honest signal that the corpus has not changed, not stagnation.</li>
+  <li>Issues &amp; Fixes: no failures or unclear gates; new activities (memory load, deep dive, improvement log) functioned as specified.</li>
+  <li>Quick Wins: add corpus-triage Choice gate and On New Paper event handling next revision; track milestone M1.</li>
+  <li>Assessment: Strong — Top priority: pursue L2.1 (restricted-orbit obstruction formalization, milestone M1).</li>
+</ul></section>
+
+</body></html>

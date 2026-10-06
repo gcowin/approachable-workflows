@@ -78,8 +78,10 @@ Do:
        (e.g., company newsletters, unrelated correspondence, pure administrative noise)
      - MARGINAL: Low substantive value but may establish timeline or context
 
-     If NOT RELEVANT: Mark document as excluded, skip further analysis,
-     do not include in document inventory or Evidence Log. Continue with next file.
+      If NOT RELEVANT: Exclude at this stage — mark document as excluded,
+      skip further analysis, do not include in document inventory or
+      Evidence Log, and do not carry forward with a "non-relevant"
+      annotation. Continue with next file.
 
   2. For RELEVANT or MARGINAL documents, classify as one of:
      EMAIL | CONTRACT | MEMO | CORRESPONDENCE | DEPOSITION | UNKNOWN
@@ -160,8 +162,12 @@ Needs:
 Do:
   Merge dated events across all documents into a single chronological
   timeline. Each entry: date, event description, source file(s),
-  associated key player(s). Note gaps or undated-but-implied sequencing
-  as "approximate."
+  associated key player(s). For time-sensitive events (e.g., a transfer
+  window), prefer the completion time recorded in the authoritative
+  source (forensic report) over the alert/notice time, and cross-check
+  durations against multiple time sources when both are available.
+  Note gaps or undated-but-implied sequencing as "approximate"; never
+  fabricate precise timings the sources do not support.
 
 
 Creates:
@@ -171,6 +177,9 @@ Creates:
 Verify:
   - Every timeline entry references at least one source file
   - Entries are in chronological order
+  - Event times cite the most authoritative available source
+    (completion time over alert time when a forensic report exists)
+  - Duration/window values match their cited source measurements
 
 
 If Failed:
@@ -262,16 +271,20 @@ Needs:
 
 
 Do:
-  Human Privilege Reviewer confirms/adjusts privilege designations and
-  approves the redaction map before any document leaves attorney
-  control. Auto-apply approved redactions (mask/blackout the tagged
-  spans) to produce the redacted-document set.
+  Present the Approver an explicit per-item checklist — one line per
+  privilege call (file, current designation, reasoning) and one line per
+  redaction map entry (file, span, reason) — each individually
+  approvable. Do NOT accept a single blanket "Approved" as a per-item
+  ruling: any item not explicitly approved stays "Needs Review" and
+  conservatively withheld (never inferred). Auto-apply only the redactions
+  the Approver explicitly approved, item by item (mask/blackout the
+  tagged spans) to produce the redacted-document set.
 
 
 Creates:
   - Approved privilege log
   - Redacted-document set
-  - Approval record (decision, identity, timestamp, comments)
+  - Approval record (per-item decisions, identity, timestamp, comments)
 
 
 Verify:
@@ -279,6 +292,11 @@ Verify:
     set / distribution package
   - Every approved redaction is applied and reversible only by the
     Approver
+  - Redacted values appear only as masked placeholders in every
+    artifact, including the report's redaction summary and the
+    approval record
+  - Every checklist item has an explicit per-item ruling or an explicit
+    "Needs Review" carry-forward — none silently defaulted
 
 
 State Changes:
